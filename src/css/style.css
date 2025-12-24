@@ -10,41 +10,41 @@
     --primary-light: hsl(var(--primary-hue), 100%, 75%);
     --primary-dark: hsl(var(--primary-hue), 100%, 55%);
     --primary-glow: hsla(var(--primary-hue), 100%, 65%, 0.4);
-    
+
     /* Secondary Colors */
     --secondary-hue: 170;
     --secondary: hsl(var(--secondary-hue), 100%, 50%);
     --secondary-light: hsl(var(--secondary-hue), 100%, 60%);
-    
+
     /* Success Colors */
     --success: hsl(145, 80%, 50%);
     --success-light: hsl(145, 80%, 60%);
-    
+
     /* Background Colors */
     --bg-dark: hsl(230, 25%, 8%);
     --bg-card: hsla(230, 25%, 12%, 0.8);
     --bg-card-hover: hsla(230, 25%, 15%, 0.9);
     --bg-input: hsla(230, 25%, 10%, 0.6);
-    
+
     /* Text Colors */
     --text-primary: hsl(0, 0%, 98%);
     --text-secondary: hsl(230, 15%, 70%);
     --text-muted: hsl(230, 15%, 50%);
-    
+
     /* Border Colors */
     --border: hsla(230, 25%, 30%, 0.5);
     --border-light: hsla(230, 25%, 40%, 0.3);
-    
+
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
     --gradient-card: linear-gradient(145deg, hsla(230, 25%, 15%, 0.9), hsla(230, 25%, 10%, 0.9));
-    
+
     /* Shadows */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
     --shadow-glow: 0 0 40px var(--primary-glow);
-    
+
     /* Spacing */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
@@ -52,14 +52,14 @@
     --spacing-lg: 1.5rem;
     --spacing-xl: 2rem;
     --spacing-2xl: 3rem;
-    
+
     /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
     --radius-xl: 24px;
     --radius-full: 9999px;
-    
+
     /* Transitions */
     --transition-fast: 0.15s ease;
     --transition-normal: 0.3s ease;
@@ -69,7 +69,9 @@
 /* ================================
    🔄 Reset & Base Styles
    ================================ */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -140,10 +142,23 @@ body {
 }
 
 @keyframes float {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(30px, -30px) scale(1.05); }
-    50% { transform: translate(-20px, 20px) scale(0.95); }
-    75% { transform: translate(-30px, -20px) scale(1.02); }
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+        transform: translate(30px, -30px) scale(1.05);
+    }
+
+    50% {
+        transform: translate(-20px, 20px) scale(0.95);
+    }
+
+    75% {
+        transform: translate(-30px, -20px) scale(1.02);
+    }
 }
 
 /* ================================
@@ -668,6 +683,30 @@ body {
     font-size: 0.85rem !important;
 }
 
+.footer-link {
+    margin-top: var(--spacing-md);
+}
+
+.footer-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--primary-light);
+    text-decoration: none;
+    font-weight: 500;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    background: hsla(var(--primary-hue), 100%, 65%, 0.1);
+    border: 1px solid var(--primary);
+    transition: var(--transition-normal);
+}
+
+.footer-link a:hover {
+    background: hsla(var(--primary-hue), 100%, 65%, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
 /* ================================
    📱 Responsive Adjustments
    ================================ */
@@ -675,24 +714,24 @@ body {
     .container {
         padding: var(--spacing-md);
     }
-    
+
     .logo h1 {
         font-size: 1.5rem;
     }
-    
+
     .calculator-card,
     .results-card {
         padding: var(--spacing-lg);
     }
-    
+
     .results-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .result-item.highlight {
         grid-column: 1;
     }
-    
+
     .chart-legend {
         flex-direction: column;
         align-items: center;
@@ -708,6 +747,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
