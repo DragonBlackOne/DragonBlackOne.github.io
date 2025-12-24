@@ -4,12 +4,12 @@
 <head>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6306856048899183"
-     crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Calculadora de Juros Simples e Compostos - Calcule o crescimento do seu investimento ao longo do tempo com precisão e facilidade.">
-    <title>Calculadora de Juros</title>
+        content="Super Calculadora - Calculadora padrão, conversor de moedas e calculadora de juros simples e compostos em uma única ferramenta.">
+    <title>Super Calculadora</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -37,159 +37,292 @@
                             stroke-linejoin="round" />
                     </svg>
                 </div>
-                <h1>Calculadora de Juros</h1>
+                <h1>Super Calculadora</h1>
             </div>
-            <p class="subtitle">Calcule juros simples e compostos do seu investimento</p>
+            <p class="subtitle">Calculadora • Conversor de Moedas • Juros</p>
         </header>
 
-        <div class="calculator-wrapper">
-            <section class="calculator-card">
-                <h2 class="section-title">
-                    <span class="icon">💰</span>
-                    Dados do Investimento
-                </h2>
+        <!-- ================================ -->
+        <!-- � SUPER CALCULADORA INTEGRADA -->
+        <!-- ================================ -->
+        <div class="super-calculator">
+            <!-- Navegação por Abas -->
+            <nav class="calc-nav">
+                <button class="nav-tab active" data-tab="standard">
+                    <span class="nav-icon">🔢</span>
+                    <span class="nav-text">Calculadora</span>
+                </button>
+                <button class="nav-tab" data-tab="currency">
+                    <span class="nav-icon">💱</span>
+                    <span class="nav-text">Moedas</span>
+                </button>
+                <button class="nav-tab" data-tab="interest">
+                    <span class="nav-icon">�</span>
+                    <span class="nav-text">Juros</span>
+                </button>
+            </nav>
 
-                <form id="calculator-form" class="form">
-                    <div class="interest-type-selector">
-                        <label class="type-label">Tipo de Juros</label>
-                        <div class="type-toggle">
-                            <button type="button" class="type-btn active" id="type-compound">
-                                <span class="type-icon">📈</span>
-                                <span class="type-name">Compostos</span>
-                                <span class="type-desc">Juros sobre juros</span>
+            <!-- Painéis das Calculadoras -->
+            <div class="calc-panels">
+
+                <!-- ========== PAINEL: CALCULADORA PADRÃO ========== -->
+                <div class="calc-panel active" id="panel-standard">
+                    <div class="panel-content">
+                        <div class="calc-display">
+                            <div class="calc-expression" id="calc-expression"></div>
+                            <div class="calc-result" id="calc-result">0</div>
+                        </div>
+
+                        <div class="calc-buttons">
+                            <button class="calc-btn function" data-action="clear">C</button>
+                            <button class="calc-btn function" data-action="backspace">⌫</button>
+                            <button class="calc-btn function" data-action="percent">%</button>
+                            <button class="calc-btn operator" data-action="divide">÷</button>
+
+                            <button class="calc-btn number" data-value="7">7</button>
+                            <button class="calc-btn number" data-value="8">8</button>
+                            <button class="calc-btn number" data-value="9">9</button>
+                            <button class="calc-btn operator" data-action="multiply">×</button>
+
+                            <button class="calc-btn number" data-value="4">4</button>
+                            <button class="calc-btn number" data-value="5">5</button>
+                            <button class="calc-btn number" data-value="6">6</button>
+                            <button class="calc-btn operator" data-action="subtract">−</button>
+
+                            <button class="calc-btn number" data-value="1">1</button>
+                            <button class="calc-btn number" data-value="2">2</button>
+                            <button class="calc-btn number" data-value="3">3</button>
+                            <button class="calc-btn operator" data-action="add">+</button>
+
+                            <button class="calc-btn number zero" data-value="0">0</button>
+                            <button class="calc-btn number" data-action="decimal">,</button>
+                            <button class="calc-btn equals" data-action="equals">=</button>
+                        </div>
+
+                        <div class="calc-history" id="calc-history">
+                            <h3 class="history-title">📜 Histórico</h3>
+                            <div class="history-list" id="history-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PAINEL: CONVERSOR DE MOEDAS ========== -->
+                <div class="calc-panel" id="panel-currency">
+                    <div class="panel-content currency-panel">
+                        <div class="converter-container">
+                            <div class="currency-input-group">
+                                <label for="amount-from">Valor</label>
+                                <div class="currency-input-wrapper">
+                                    <input type="text" id="amount-from" placeholder="1.000,00" inputmode="decimal">
+                                    <select id="currency-from" class="currency-select">
+                                        <option value="BRL" selected>🇧🇷 BRL</option>
+                                        <option value="USD">🇺🇸 USD</option>
+                                        <option value="EUR">🇪🇺 EUR</option>
+                                        <option value="GBP">🇬🇧 GBP</option>
+                                        <option value="JPY">🇯🇵 JPY</option>
+                                        <option value="CAD">🇨🇦 CAD</option>
+                                        <option value="AUD">🇦🇺 AUD</option>
+                                        <option value="CHF">🇨🇭 CHF</option>
+                                        <option value="CNY">🇨🇳 CNY</option>
+                                        <option value="ARS">🇦🇷 ARS</option>
+                                        <option value="MXN">🇲🇽 MXN</option>
+                                        <option value="KRW">🇰🇷 KRW</option>
+                                        <option value="INR">🇮🇳 INR</option>
+                                        <option value="BTC">₿ BTC</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="button" class="swap-btn" id="swap-currencies" title="Inverter moedas">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 16L3 12M3 12L7 8M3 12H21M17 8L21 12M21 12L17 16M21 12H3"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
                             </button>
-                            <button type="button" class="type-btn" id="type-simple">
-                                <span class="type-icon">📊</span>
-                                <span class="type-name">Simples</span>
-                                <span class="type-desc">Juros fixos</span>
-                            </button>
-                        </div>
-                    </div>
 
-                    <div class="input-group">
-                        <label for="initial-value">Capital Inicial</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">R$</span>
-                            <input type="text" id="initial-value" placeholder="10.000,00" inputmode="decimal" required>
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="monthly-contribution">Aporte Mensal</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">R$</span>
-                            <input type="text" id="monthly-contribution" placeholder="500,00" inputmode="decimal">
-                        </div>
-                    </div>
-
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="interest-rate">Taxa de Juros</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="interest-rate" placeholder="1,00" inputmode="decimal" required>
-                                <span class="input-suffix">%</span>
-                            </div>
-                            <div class="toggle-group">
-                                <button type="button" class="toggle-btn active" data-value="monthly"
-                                    id="rate-monthly">ao mês</button>
-                                <button type="button" class="toggle-btn" data-value="yearly" id="rate-yearly">ao
-                                    ano</button>
+                            <div class="currency-input-group">
+                                <label for="amount-to">Resultado</label>
+                                <div class="currency-input-wrapper">
+                                    <input type="text" id="amount-to" placeholder="0,00" readonly>
+                                    <select id="currency-to" class="currency-select">
+                                        <option value="BRL">🇧🇷 BRL</option>
+                                        <option value="USD" selected>🇺🇸 USD</option>
+                                        <option value="EUR">🇪🇺 EUR</option>
+                                        <option value="GBP">🇬🇧 GBP</option>
+                                        <option value="JPY">🇯🇵 JPY</option>
+                                        <option value="CAD">🇨🇦 CAD</option>
+                                        <option value="AUD">🇦🇺 AUD</option>
+                                        <option value="CHF">🇨🇭 CHF</option>
+                                        <option value="CNY">🇨🇳 CNY</option>
+                                        <option value="ARS">🇦🇷 ARS</option>
+                                        <option value="MXN">🇲🇽 MXN</option>
+                                        <option value="KRW">🇰🇷 KRW</option>
+                                        <option value="INR">🇮🇳 INR</option>
+                                        <option value="BTC">₿ BTC</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="input-group">
-                            <label for="period">Período</label>
-                            <div class="input-wrapper">
-                                <input type="number" id="period" placeholder="24" min="1" max="600" required>
-                            </div>
-                            <div class="toggle-group">
-                                <button type="button" class="toggle-btn active" data-value="months"
-                                    id="period-months">meses</button>
-                                <button type="button" class="toggle-btn" data-value="years"
-                                    id="period-years">anos</button>
-                            </div>
+                        <div class="exchange-rate-info" id="exchange-rate-info">
+                            <span class="rate-label">Taxa de câmbio:</span>
+                            <span class="rate-value" id="exchange-rate-value">1 BRL = 0,00 USD</span>
                         </div>
-                    </div>
 
-                    <button type="submit" class="btn-calculate" id="btn-calculate">
-                        <span class="btn-text">Calcular</span>
-                        <span class="btn-icon">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
-                    </button>
-                </form>
-            </section>
-
-            <section class="results-card" id="results-card">
-                <h2 class="section-title">
-                    <span class="icon">📊</span>
-                    Resultados
-                </h2>
-
-                <div class="results-grid">
-                    <div class="result-item highlight">
-                        <span class="result-label">Montante Final</span>
-                        <span class="result-value" id="final-amount">R$ 0,00</span>
-                    </div>
-
-                    <div class="result-item">
-                        <span class="result-label">Total Investido</span>
-                        <span class="result-value" id="total-invested">R$ 0,00</span>
-                    </div>
-
-                    <div class="result-item">
-                        <span class="result-label">Juros Ganhos</span>
-                        <span class="result-value success" id="interest-earned">R$ 0,00</span>
-                    </div>
-
-                    <div class="result-item">
-                        <span class="result-label">Rendimento Total</span>
-                        <span class="result-value" id="total-return">0,00%</span>
-                    </div>
-                </div>
-
-                <div class="chart-container">
-                    <h3 class="chart-title">Evolução do Patrimônio</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="growth-chart"></canvas>
-                    </div>
-                    <div class="chart-legend">
-                        <div class="legend-item">
-                            <span class="legend-color invested"></span>
-                            <span>Total Investido</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color total"></span>
-                            <span>Montante Total</span>
+                        <div class="converter-footer">
+                            <p class="update-info" id="rate-update-info">
+                                ⏳ Carregando taxas...
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="breakdown-section">
-                    <h3 class="breakdown-title">
-                        <span class="icon">📋</span>
-                        Extrato Detalhado
-                    </h3>
-                    <div class="table-container">
-                        <table class="breakdown-table" id="breakdown-table">
-                            <thead>
-                                <tr>
-                                    <th>Mês</th>
-                                    <th>Aporte</th>
-                                    <th>Juros</th>
-                                    <th>Total Investido</th>
-                                    <th>Montante</th>
-                                </tr>
-                            </thead>
-                            <tbody id="breakdown-body">
-                            </tbody>
-                        </table>
+                <!-- ========== PAINEL: CALCULADORA DE JUROS ========== -->
+                <div class="calc-panel" id="panel-interest">
+                    <div class="panel-content interest-panel">
+                        <div class="interest-wrapper">
+                            <div class="interest-form-section">
+                                <form id="calculator-form" class="form">
+                                    <div class="interest-type-selector">
+                                        <label class="type-label">Tipo de Juros</label>
+                                        <div class="type-toggle">
+                                            <button type="button" class="type-btn active" id="type-compound">
+                                                <span class="type-icon">📈</span>
+                                                <span class="type-name">Compostos</span>
+                                                <span class="type-desc">Juros sobre juros</span>
+                                            </button>
+                                            <button type="button" class="type-btn" id="type-simple">
+                                                <span class="type-icon">📊</span>
+                                                <span class="type-name">Simples</span>
+                                                <span class="type-desc">Juros fixos</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label for="initial-value">Capital Inicial</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-prefix">R$</span>
+                                            <input type="text" id="initial-value" placeholder="10.000,00"
+                                                inputmode="decimal" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label for="monthly-contribution">Aporte Mensal</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-prefix">R$</span>
+                                            <input type="text" id="monthly-contribution" placeholder="500,00"
+                                                inputmode="decimal">
+                                        </div>
+                                    </div>
+
+                                    <div class="input-row">
+                                        <div class="input-group">
+                                            <label for="interest-rate">Taxa de Juros</label>
+                                            <div class="input-wrapper">
+                                                <input type="text" id="interest-rate" placeholder="1,00"
+                                                    inputmode="decimal" required>
+                                                <span class="input-suffix">%</span>
+                                            </div>
+                                            <div class="toggle-group">
+                                                <button type="button" class="toggle-btn active" data-value="monthly"
+                                                    id="rate-monthly">ao mês</button>
+                                                <button type="button" class="toggle-btn" data-value="yearly"
+                                                    id="rate-yearly">ao ano</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group">
+                                            <label for="period">Período</label>
+                                            <div class="input-wrapper">
+                                                <input type="number" id="period" placeholder="24" min="1" max="600"
+                                                    required>
+                                            </div>
+                                            <div class="toggle-group">
+                                                <button type="button" class="toggle-btn active" data-value="months"
+                                                    id="period-months">meses</button>
+                                                <button type="button" class="toggle-btn" data-value="years"
+                                                    id="period-years">anos</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn-calculate" id="btn-calculate">
+                                        <span class="btn-text">Calcular</span>
+                                        <span class="btn-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="interest-results-section" id="results-card">
+                                <h3 class="results-title">📊 Resultados</h3>
+
+                                <div class="results-grid">
+                                    <div class="result-item highlight">
+                                        <span class="result-label">Montante Final</span>
+                                        <span class="result-value" id="final-amount">R$ 0,00</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label">Total Investido</span>
+                                        <span class="result-value" id="total-invested">R$ 0,00</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label">Juros Ganhos</span>
+                                        <span class="result-value success" id="interest-earned">R$ 0,00</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label">Rendimento</span>
+                                        <span class="result-value" id="total-return">0,00%</span>
+                                    </div>
+                                </div>
+
+                                <div class="chart-container">
+                                    <h4 class="chart-title">Evolução do Patrimônio</h4>
+                                    <div class="chart-wrapper">
+                                        <canvas id="growth-chart"></canvas>
+                                    </div>
+                                    <div class="chart-legend">
+                                        <div class="legend-item">
+                                            <span class="legend-color invested"></span>
+                                            <span>Investido</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color total"></span>
+                                            <span>Montante</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <details class="breakdown-details">
+                                    <summary>📋 Extrato Detalhado</summary>
+                                    <div class="table-container">
+                                        <table class="breakdown-table" id="breakdown-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mês</th>
+                                                    <th>Aporte</th>
+                                                    <th>Juros</th>
+                                                    <th>Total</th>
+                                                    <th>Montante</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="breakdown-body">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
 
         <footer class="footer">

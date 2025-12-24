@@ -1,7 +1,492 @@
 /**
- * 🧮 Calculadora de Juros Simples e Compostos
+ * 🧮 Super Calculadora
+ * Calculadora Padrão + Conversor de Moedas + Calculadora de Juros
  * Desenvolvido com ❤️ para ajudar no planejamento financeiro
  */
+
+// ================================
+// 🚀 Tab Navigation
+// ================================
+
+/**
+ * Inicializa navegação por abas
+ */
+function initTabNavigation() {
+    const tabs = document.querySelectorAll('.nav-tab');
+    const panels = document.querySelectorAll('.calc-panel');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const targetTab = tab.dataset.tab;
+
+            // Remove active de todas as abas e painéis
+            tabs.forEach(t => t.classList.remove('active'));
+            panels.forEach(p => p.classList.remove('active'));
+
+            // Adiciona active na aba clicada e painel correspondente
+            tab.classList.add('active');
+            const targetPanel = document.getElementById(`panel-${targetTab}`);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+        });
+    });
+}
+
+// ================================
+// 🔢 Standard Calculator
+// ================================
+
+let calcDisplay = '';
+let calcExpression = '';
+let calcHistory = [];
+let lastResult = null;
+
+/**
+ * Atualiza o display da calculadora
+ */
+function updateCalcDisplay() {
+    const expressionEl = document.getElementById('calc-expression');
+    const resultEl = document.getElementById('calc-result');
+
+    if (expressionEl) {
+        expressionEl.textContent = calcExpression;
+    }
+    if (resultEl) {
+        resultEl.textContent = calcDisplay || '0';
+    }
+}
+
+/**
+ * Adiciona número ao display
+ */
+function appendNumber(number) {
+    // Evita múltiplos zeros no início
+    if (number === '0' && calcDisplay === '0') return;
+
+    // Substitui zero inicial por número
+    if (calcDisplay === '0' && number !== '0') {
+        calcDisplay = number;
+    } else {
+        calcDisplay += number;
+    }
+
+    updateCalcDisplay();
+}
+
+/**
+ * Adiciona decimal
+ */
+function appendDecimal() {
+    if (calcDisplay.includes(',')) return;
+    if (calcDisplay === '' || calcDisplay === '0') {
+        calcDisplay = '0,';
+    } else {
+        calcDisplay += ',';
+    }
+    updateCalcDisplay();
+}
+
+/**
+ * Define operador
+ */
+function setOperator(operator) {
+    if (calcDisplay === '' && lastResult !== null) {
+        calcDisplay = lastResult.toString().replace('.', ',');
+    }
+
+    if (calcDisplay === '') return;
+
+    const operatorSymbols = {
+        'add': ' + ',
+        'subtract': ' − ',
+        'multiply': ' × ',
+        'divide': ' ÷ '
+    };
+
+    calcExpression += calcDisplay + operatorSymbols[operator];
+    calcDisplay = '';
+    updateCalcDisplay();
+}
+
+/**
+ * Calcula porcentagem
+ */
+function calcPercent() {
+    if (calcDisplay === '') return;
+    const value = parseFloat(calcDisplay.replace(',', '.'));
+    calcDisplay = (value / 100).toString().replace('.', ',');
+    updateCalcDisplay();
+}
+
+/**
+ * Limpa calculadora
+ */
+function clearCalc() {
+    calcDisplay = '';
+    calcExpression = '';
+    updateCalcDisplay();
+}
+
+/**
+ * Apaga último caractere
+ */
+function backspace() {
+    calcDisplay = calcDisplay.slice(0, -1);
+    updateCalcDisplay();
+}
+
+/**
+ * Calcula resultado
+ */
+function calculateResult() {
+    if (calcDisplay === '' && calcExpression === '') return;
+
+    const fullExpression = calcExpression + calcDisplay;
+
+    // Converte para expressão matemática avaliável
+    let mathExpression = fullExpression
+        .replace(/,/g, '.')
+        .replace(/×/g, '*')
+        .replace(/÷/g, '/')
+        .replace(/−/g, '-');
+
+    try {
+        // Avalia a expressão de forma segura
+        const result = Function('"use strict"; return (' + mathExpression + ')')();
+
+        if (isNaN(result) || !isFinite(result)) {
+            calcDisplay = 'Erro';
+            calcExpression = '';
+            updateCalcDisplay();
+            return;
+        }
+
+        // Formata resultado
+        const formattedResult = Number(result.toFixed(10)).toString().replace('.', ',');
+
+        // Adiciona ao histórico
+        addToHistory(fullExpression, formattedResult);
+
+        lastResult = result;
+        calcExpression = '';
+        calcDisplay = formattedResult;
+        updateCalcDisplay();
+    } catch (error) {
+        calcDisplay = 'Erro';
+        calcExpression = '';
+        updateCalcDisplay();
+    }
+}
+
+/**
+ * Adiciona item ao histórico
+ */
+function addToHistory(expression, result) {
+    calcHistory.unshift({ expression, result });
+
+    // Mantém apenas os últimos 10 itens
+    if (calcHistory.length > 10) {
+        calcHistory.pop();
+    }
+
+    updateHistoryDisplay();
+}
+
+/**
+ * Atualiza display do histórico
+ */
+function updateHistoryDisplay() {
+    const historyList = document.getElementById('history-list');
+    if (!historyList) return;
+
+    historyList.innerHTML = calcHistory.map(item => `
+        <div class="history-item">
+            <span class="history-expression">${item.expression} =</span>
+            <span class="history-result">${item.result}</span>
+        </div>
+    `).join('');
+}
+
+/**
+ * Inicializa calculadora padrão
+ */
+function initStandardCalculator() {
+    const calcButtons = document.querySelectorAll('.calc-btn');
+
+    calcButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const value = btn.dataset.value;
+            const action = btn.dataset.action;
+
+            if (value !== undefined) {
+                appendNumber(value);
+            } else if (action) {
+                switch (action) {
+                    case 'clear':
+                        clearCalc();
+                        break;
+                    case 'backspace':
+                        backspace();
+                        break;
+                    case 'percent':
+                        calcPercent();
+                        break;
+                    case 'decimal':
+                        appendDecimal();
+                        break;
+                    case 'equals':
+                        calculateResult();
+                        break;
+                    case 'add':
+                    case 'subtract':
+                    case 'multiply':
+                    case 'divide':
+                        setOperator(action);
+                        break;
+                }
+            }
+        });
+    });
+
+    // Suporte a teclado
+    document.addEventListener('keydown', (e) => {
+        // Verifica se o foco está em um input da calculadora de juros
+        if (document.activeElement.tagName === 'INPUT') return;
+
+        const key = e.key;
+
+        if (/^[0-9]$/.test(key)) {
+            appendNumber(key);
+        } else if (key === '.' || key === ',') {
+            appendDecimal();
+        } else if (key === '+') {
+            setOperator('add');
+        } else if (key === '-') {
+            setOperator('subtract');
+        } else if (key === '*') {
+            setOperator('multiply');
+        } else if (key === '/') {
+            e.preventDefault();
+            setOperator('divide');
+        } else if (key === 'Enter' || key === '=') {
+            e.preventDefault();
+            calculateResult();
+        } else if (key === 'Escape') {
+            clearCalc();
+        } else if (key === 'Backspace') {
+            backspace();
+        } else if (key === '%') {
+            calcPercent();
+        }
+    });
+}
+
+// ================================
+// 💱 Currency Converter
+// ================================
+
+let exchangeRates = {};
+let lastRateUpdate = null;
+
+// Taxas de fallback caso a API falhe (aproximadas)
+const fallbackRates = {
+    BRL: 1,
+    USD: 0.17,
+    EUR: 0.16,
+    GBP: 0.13,
+    JPY: 25.5,
+    CAD: 0.23,
+    AUD: 0.26,
+    CHF: 0.15,
+    CNY: 1.22,
+    ARS: 170,
+    MXN: 2.9,
+    KRW: 230,
+    INR: 14.2,
+    BTC: 0.0000028
+};
+
+/**
+ * Busca taxas de câmbio da API
+ */
+async function fetchExchangeRates() {
+    const updateInfo = document.getElementById('rate-update-info');
+
+    try {
+        // Usando API gratuita (sem necessidade de chave)
+        const response = await fetch('https://api.exchangerate-api.com/v4/latest/BRL');
+
+        if (!response.ok) {
+            throw new Error('Falha ao buscar taxas');
+        }
+
+        const data = await response.json();
+        exchangeRates = data.rates;
+        exchangeRates.BRL = 1; // Base
+        lastRateUpdate = new Date();
+
+        if (updateInfo) {
+            updateInfo.textContent = `✅ Taxas atualizadas em ${lastRateUpdate.toLocaleTimeString('pt-BR')}`;
+        }
+
+        // Converte automaticamente após carregar taxas
+        convertCurrency();
+
+    } catch (error) {
+        console.warn('Erro ao buscar taxas de câmbio, usando valores de fallback:', error);
+        exchangeRates = { ...fallbackRates };
+
+        if (updateInfo) {
+            updateInfo.textContent = '⚠️ Usando taxas aproximadas (offline)';
+        }
+
+        convertCurrency();
+    }
+}
+
+/**
+ * Converte moeda
+ */
+function convertCurrency() {
+    const amountFromInput = document.getElementById('amount-from');
+    const amountToInput = document.getElementById('amount-to');
+    const currencyFrom = document.getElementById('currency-from');
+    const currencyTo = document.getElementById('currency-to');
+    const rateValueEl = document.getElementById('exchange-rate-value');
+
+    if (!amountFromInput || !amountToInput || !currencyFrom || !currencyTo) return;
+
+    // Pega valor do input
+    const amountStr = amountFromInput.value;
+    const amount = parseFloat(amountStr.replace(/\./g, '').replace(',', '.')) || 0;
+
+    const from = currencyFrom.value;
+    const to = currencyTo.value;
+
+    if (Object.keys(exchangeRates).length === 0) return;
+
+    // Calcula conversão
+    // Primeiro converte para BRL, depois para moeda destino
+    let amountInBRL = amount;
+    if (from !== 'BRL') {
+        amountInBRL = amount / exchangeRates[from];
+    }
+
+    let result = amountInBRL;
+    if (to !== 'BRL') {
+        result = amountInBRL * exchangeRates[to];
+    }
+
+    // Formata resultado
+    let formattedResult;
+    if (to === 'BTC') {
+        formattedResult = result.toFixed(8).replace('.', ',');
+    } else if (to === 'JPY' || to === 'KRW') {
+        formattedResult = Math.round(result).toLocaleString('pt-BR');
+    } else {
+        formattedResult = result.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    amountToInput.value = formattedResult;
+
+    // Atualiza taxa de câmbio exibida
+    if (rateValueEl) {
+        let rate;
+        if (from === 'BRL') {
+            rate = exchangeRates[to] || 1;
+        } else if (to === 'BRL') {
+            rate = 1 / (exchangeRates[from] || 1);
+        } else {
+            rate = (1 / (exchangeRates[from] || 1)) * (exchangeRates[to] || 1);
+        }
+
+        let rateFormatted;
+        if (to === 'BTC') {
+            rateFormatted = rate.toFixed(8);
+        } else {
+            rateFormatted = rate.toFixed(4);
+        }
+
+        rateValueEl.textContent = `1 ${from} = ${rateFormatted.replace('.', ',')} ${to}`;
+    }
+}
+
+/**
+ * Inverte moedas
+ */
+function swapCurrencies() {
+    const currencyFrom = document.getElementById('currency-from');
+    const currencyTo = document.getElementById('currency-to');
+    const amountFrom = document.getElementById('amount-from');
+    const amountTo = document.getElementById('amount-to');
+
+    if (!currencyFrom || !currencyTo) return;
+
+    // Troca moedas
+    const tempCurrency = currencyFrom.value;
+    currencyFrom.value = currencyTo.value;
+    currencyTo.value = tempCurrency;
+
+    // Troca valores (resultado vira input)
+    if (amountTo.value && amountTo.value !== '0,00') {
+        amountFrom.value = amountTo.value;
+    }
+
+    // Reconverte
+    convertCurrency();
+}
+
+/**
+ * Formata input de moeda do conversor
+ */
+function formatConverterInput(input) {
+    let value = input.value.replace(/[^\d]/g, '');
+    if (value === '') {
+        input.value = '';
+        return;
+    }
+    value = (parseInt(value) / 100).toFixed(2);
+    value = value.replace('.', ',');
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    input.value = value;
+}
+
+/**
+ * Inicializa conversor de moedas
+ */
+function initCurrencyConverter() {
+    const amountFrom = document.getElementById('amount-from');
+    const currencyFrom = document.getElementById('currency-from');
+    const currencyTo = document.getElementById('currency-to');
+    const swapBtn = document.getElementById('swap-currencies');
+
+    // Carregar taxas de câmbio
+    fetchExchangeRates();
+
+    // Event listeners
+    if (amountFrom) {
+        amountFrom.addEventListener('input', function () {
+            formatConverterInput(this);
+            convertCurrency();
+        });
+    }
+
+    if (currencyFrom) {
+        currencyFrom.addEventListener('change', convertCurrency);
+    }
+
+    if (currencyTo) {
+        currencyTo.addEventListener('change', convertCurrency);
+    }
+
+    if (swapBtn) {
+        swapBtn.addEventListener('click', swapCurrencies);
+    }
+
+    // Atualizar taxas a cada 5 minutos
+    setInterval(fetchExchangeRates, 5 * 60 * 1000);
+}
 
 // ================================
 // 📊 Chart.js Configuration
@@ -437,6 +922,15 @@ function calculate() {
 // ================================
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Inicializar navegação por abas
+    initTabNavigation();
+
+    // Inicializar calculadora padrão
+    initStandardCalculator();
+
+    // Inicializar conversor de moedas
+    initCurrencyConverter();
+
     // Form submit
     const form = document.getElementById('calculator-form');
     if (form) {
