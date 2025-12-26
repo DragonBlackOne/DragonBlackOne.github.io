@@ -117,6 +117,19 @@
     --gradient-card: linear-gradient(145deg, #000000 0%, #111111 100%);
 }
 
+[data-theme="high-contrast"] ::-webkit-scrollbar {
+    width: 12px;
+}
+
+[data-theme="high-contrast"] ::-webkit-scrollbar-track {
+    background: #000;
+}
+
+[data-theme="high-contrast"] ::-webkit-scrollbar-thumb {
+    background: #ff0;
+    border: 2px solid #000;
+}
+
 /* 🎨 Theme Selector Styles */
 .theme-selector {
     display: flex;

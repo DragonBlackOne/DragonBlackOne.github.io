@@ -1,7 +1,4 @@
-/**
- * 📅 Date Module
- * Calculadora de diferença e manipulação de datas
- */
+import { getTranslation } from './i18n.js';
 
 export function initDateCalculator() {
     const startInput = document.getElementById('date-start');
@@ -13,7 +10,8 @@ export function initDateCalculator() {
     const today = new Date().toISOString().split('T')[0];
     if (startInput) startInput.value = today;
     if (endInput) endInput.value = today;
-    document.getElementById('date-base').value = today;
+    const baseInput = document.getElementById('date-base');
+    if (baseInput) baseInput.value = today;
 
     // Toggle Modes
     modeDiff.addEventListener('click', () => {
@@ -21,7 +19,7 @@ export function initDateCalculator() {
         modeAdd.classList.remove('active');
         document.getElementById('date-diff-container').style.display = 'block';
         document.getElementById('date-add-container').style.display = 'none';
-        document.getElementById('date-res-label').textContent = 'Diferença';
+        document.getElementById('date-res-label').textContent = getTranslation('diff');
         calculateDiff();
     });
 
@@ -30,33 +28,43 @@ export function initDateCalculator() {
         modeDiff.classList.remove('active');
         document.getElementById('date-diff-container').style.display = 'none';
         document.getElementById('date-add-container').style.display = 'block';
-        document.getElementById('date-res-label').textContent = 'Nova Data';
+        document.getElementById('date-res-label').textContent = getTranslation('result_date');
         calculateAdd();
     });
 
     // Listeners
-    [startInput, endInput].forEach(el => el.addEventListener('change', calculateDiff));
+    if (startInput) startInput.addEventListener('change', calculateDiff);
+    if (endInput) endInput.addEventListener('change', calculateDiff);
+
     ['date-base', 'date-add-days', 'date-add-months'].forEach(id => {
-        document.getElementById(id).addEventListener('input', calculateAdd);
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', calculateAdd);
     });
 
     calculateDiff(); // Initial run
 }
 
 function calculateDiff() {
-    const start = new Date(document.getElementById('date-start').value);
-    const end = new Date(document.getElementById('date-end').value);
+    const startVal = document.getElementById('date-start').value;
+    const endVal = document.getElementById('date-end').value;
+    if (!startVal || !endVal) return;
+
+    const start = new Date(startVal);
+    const end = new Date(endVal);
 
     if (isNaN(start) || isNaN(end)) return;
 
     const diffTime = Math.abs(end - start);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    document.getElementById('date-res-value').textContent = `${diffDays} dias`;
+    document.getElementById('date-res-value').textContent = `${diffDays} ${getTranslation('days')}`;
 }
 
 function calculateAdd() {
-    const base = new Date(document.getElementById('date-base').value);
+    const baseVal = document.getElementById('date-base').value;
+    if (!baseVal) return;
+
+    const base = new Date(baseVal);
     const days = parseInt(document.getElementById('date-add-days').value) || 0;
     const months = parseInt(document.getElementById('date-add-months').value) || 0;
 

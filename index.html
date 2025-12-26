@@ -113,7 +113,7 @@
                             stroke-linejoin="round" />
                     </svg>
                 </div>
-                <h1>Super Calculadora</h1>
+                <h1 data-i18n="title">Super Calculadora</h1>
             </div>
             <div class="header-controls">
                 <div class="lang-selector" id="lang-selector">
@@ -164,7 +164,7 @@
                 <button class="nav-tab" data-tab="tools" type="button" role="tab" aria-selected="false"
                     aria-controls="panel-tools" id="tab-tools">
                     <span class="nav-icon" aria-hidden="true">🛠️</span>
-                    <span class="nav-text">Úteis</span>
+                    <span class="nav-text" data-i18n="tools">Úteis</span>
                 </button>
             </nav>
 
@@ -181,7 +181,7 @@
 
                         <div class="calc-controls">
                             <button class="mode-toggle-btn" id="scientific-toggle" type="button">
-                                <span class="toggle-text">Modo Científico</span>
+                                <span class="toggle-text" data-i18n="scientific_mode">Modo Científico</span>
                                 <div class="toggle-switch"></div>
                             </button>
                         </div>
@@ -239,7 +239,7 @@
                         </div>
 
                         <div class="calc-history" id="calc-history">
-                            <h2 class="history-title">📜 Histórico</h2>
+                            <h2 class="history-title" data-i18n="history">📜 Histórico</h2>
                             <div class="history-list" id="history-list" aria-live="polite"></div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@
                         <h2 class="sr-only">Conversor de Moedas</h2>
                         <div class="converter-container">
                             <div class="currency-input-group">
-                                <label for="amount-from">Valor</label>
+                                <label for="amount-from" data-i18n="amount_label">Valor</label>
                                 <div class="currency-input-wrapper">
                                     <input type="text" id="amount-from" placeholder="1.000,00" inputmode="decimal"
                                         aria-describedby="rate-update-info">
@@ -284,7 +284,7 @@
                             </button>
 
                             <div class="currency-input-group">
-                                <label for="amount-to">Resultado</label>
+                                <label for="amount-to" data-i18n="result_label">Resultado</label>
                                 <div class="currency-input-wrapper">
                                     <input type="text" id="amount-to" placeholder="0,00" readonly aria-live="polite">
                                     <select id="currency-to" class="currency-select" aria-label="Moeda de destino">
@@ -308,7 +308,7 @@
                         </div>
 
                         <div class="exchange-rate-info" id="exchange-rate-info" aria-live="polite">
-                            <span class="rate-label">Taxa de câmbio:</span>
+                            <span class="rate-label" data-i18n="exchange_rate">Taxa de câmbio:</span>
                             <span class="rate-value" id="exchange-rate-value">1 BRL = 0,00 USD</span>
                         </div>
 
@@ -328,7 +328,7 @@
                                 <h2 class="sr-only">Calculadora de Juros</h2>
                                 <form id="calculator-form" class="form">
                                     <div class="interest-type-selector">
-                                        <label class="type-label">Tipo de Juros</label>
+                                        <label class="type-label" data-i18n="interest_type">Tipo de Juros</label>
                                         <div class="type-toggle" role="radiogroup" aria-label="Tipo de juros">
                                             <button type="button" class="type-btn active" id="type-compound"
                                                 role="radio" aria-checked="true">
@@ -346,7 +346,7 @@
                                     </div>
 
                                     <div class="input-group">
-                                        <label for="initial-value">Capital Inicial</label>
+                                        <label for="initial-value" data-i18n="initial_value">Capital Inicial</label>
                                         <div class="input-wrapper">
                                             <span class="input-prefix" aria-hidden="true">R$</span>
                                             <input type="text" id="initial-value" placeholder="10.000,00"
@@ -355,7 +355,8 @@
                                     </div>
 
                                     <div class="input-group">
-                                        <label for="monthly-contribution">Aporte Mensal</label>
+                                        <label for="monthly-contribution" data-i18n="monthly_contribution_label">Aporte
+                                            Mensal</label>
                                         <div class="input-wrapper">
                                             <span class="input-prefix" aria-hidden="true">R$</span>
                                             <input type="text" id="monthly-contribution" placeholder="500,00"
@@ -365,7 +366,8 @@
 
                                     <div class="input-row">
                                         <div class="input-group">
-                                            <label for="interest-rate">Taxa de Juros</label>
+                                            <label for="interest-rate" data-i18n="interest_rate_label">Taxa de
+                                                Juros</label>
                                             <div class="input-wrapper">
                                                 <input type="text" id="interest-rate" placeholder="1,00"
                                                     inputmode="decimal" required aria-label="Taxa de juros">
@@ -380,7 +382,7 @@
                                         </div>
 
                                         <div class="input-group">
-                                            <label for="period">Período</label>
+                                            <label for="period" data-i18n="period_label">Período</label>
                                             <div class="input-wrapper">
                                                 <input type="number" id="period" placeholder="24" min="1" max="600"
                                                     required aria-label="Período de investimento">
@@ -395,7 +397,7 @@
                                     </div>
 
                                     <button type="submit" class="btn-calculate" id="btn-calculate">
-                                        <span class="btn-text">Calcular</span>
+                                        <span class="btn-text" data-i18n="calculate">Calcular</span>
                                         <span class="btn-icon" aria-hidden="true">
                                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor"
@@ -407,7 +409,7 @@
                             </div>
 
                             <div class="interest-results-section" id="results-card" aria-live="polite">
-                                <h3 class="results-title">📊 Resultados</h3>
+                                <h3 class="results-title" data-i18n="results_title">📊 Resultados</h3>
 
                                 <div class="results-grid">
                                     <div class="result-item highlight">
@@ -472,16 +474,16 @@
                     <div class="panel-content units-panel">
                         <div class="units-header">
                             <select id="unit-category" class="category-select">
-                                <option value="length">📏 Comprimento</option>
-                                <option value="mass">⚖️ Peso / Massa</option>
-                                <option value="temperature">🌡️ Temperatura</option>
-                                <option value="area">📐 Área</option>
-                                <option value="volume">🧪 Volume</option>
+                                <option value="length" data-i18n="length">📏 Comprimento</option>
+                                <option value="mass" data-i18n="mass">⚖️ Peso / Massa</option>
+                                <option value="temperature" data-i18n="temperature">🌡️ Temperatura</option>
+                                <option value="area" data-i18n="area">📐 Área</option>
+                                <option value="volume" data-i18n="volume">🧪 Volume</option>
                             </select>
                         </div>
                         <div class="converter-container">
                             <div class="currency-input-group">
-                                <label for="unit-from-value">De</label>
+                                <label for="unit-from-value" data-i18n="from_label">De</label>
                                 <div class="currency-input-wrapper">
                                     <input type="number" id="unit-from-value" placeholder="0">
                                     <select id="unit-from-select" class="currency-select"></select>
@@ -489,7 +491,7 @@
                             </div>
                             <div class="unit-swap-icon" aria-hidden="true">➡️</div>
                             <div class="currency-input-group">
-                                <label for="unit-to-value">Para</label>
+                                <label for="unit-to-value" data-i18n="to_label">Para</label>
                                 <div class="currency-input-wrapper">
                                     <input type="number" id="unit-to-value" placeholder="0" readonly>
                                     <select id="unit-to-select" class="currency-select"></select>
@@ -522,7 +524,8 @@
                                     </div>
 
                                     <div class="input-group">
-                                        <label for="fin-total-value">Valor do Imóvel/Bem</label>
+                                        <label for="fin-total-value" data-i18n="property_value">Valor do
+                                            Imóvel/Bem</label>
                                         <div class="input-wrapper">
                                             <span class="input-prefix">R$</span>
                                             <input type="text" id="fin-total-value" placeholder="300.000,00">
@@ -530,7 +533,7 @@
                                     </div>
 
                                     <div class="input-group">
-                                        <label for="fin-down-payment">Entrada</label>
+                                        <label for="fin-down-payment" data-i18n="down_payment">Entrada</label>
                                         <div class="input-wrapper">
                                             <span class="input-prefix">R$</span>
                                             <input type="text" id="fin-down-payment" placeholder="60.000,00">
@@ -558,7 +561,7 @@
                             </div>
 
                             <div class="interest-results-section" id="fin-results-card">
-                                <h3 class="results-title">🏠 Resumo do Financiamento</h3>
+                                <h3 class="results-title" data-i18n="financing_summary">🏠 Resumo do Financiamento</h3>
                                 <div class="results-grid">
                                     <div class="result-item highlight">
                                         <span class="result-label" id="first-parcel-label">Primeira Parcela</span>
@@ -579,7 +582,7 @@
                                 </div>
                                 <button type="button" class="btn-calculate" id="export-financing-csv"
                                     style="margin-top: 1.5rem; background: var(--bg-card-hover);">
-                                    📥 Exportar Resumo para CSV
+                                    <span data-i18n="export_csv">📥 Exportar Resumo para CSV</span>
                                 </button>
 
                                 <!-- Container para o Gráfico de Amortização -->
@@ -597,10 +600,10 @@
                         <div class="interest-type-selector">
                             <div class="type-toggle">
                                 <button type="button" class="type-btn active" id="date-mode-diff">
-                                    <span class="type-name">Diferença</span>
+                                    <span class="type-name" data-i18n="diff">Diferença</span>
                                 </button>
                                 <button type="button" class="type-btn" id="date-mode-add">
-                                    <span class="type-name">Adicionar/Subtrair</span>
+                                    <span class="type-name" data-i18n="add_subtract">Adicionar/Subtrair</span>
                                 </button>
                             </div>
                         </div>
@@ -647,7 +650,7 @@
 
                         <div class="results-grid" style="margin-top: 1.5rem;">
                             <div class="result-item highlight">
-                                <span class="result-label" id="date-res-label">Diferença</span>
+                                <span class="result-label" id="date-res-label" data-i18n="diff">Diferença</span>
                                 <span class="result-value" id="date-res-value">---</span>
                             </div>
                         </div>
@@ -660,7 +663,7 @@
                         <div class="tools-grid">
                             <!-- Calculadora de Desconto -->
                             <div class="tool-card">
-                                <h3>🏷️ Desconto</h3>
+                                <h3 data-i18n="discount">🏷️ Desconto</h3>
                                 <div class="input-group">
                                     <label>Preço Original</label>
                                     <div class="input-wrapper">
@@ -681,7 +684,7 @@
 
                             <!-- Calculadora de Gorjeta -->
                             <div class="tool-card">
-                                <h3>🍕 Gorjeta / Divisão</h3>
+                                <h3 data-i18n="tip_split">🍕 Gorjeta / Divisão</h3>
                                 <div class="input-group">
                                     <label>Valor da Conta</label>
                                     <div class="input-wrapper">
@@ -711,8 +714,8 @@
 
         <footer class="footer">
             <p class="footer-main">
-                🧪 Esta calculadora é uma <strong>prova de conceito</strong> gerada por <strong>Inteligência
-                    Artificial</strong>
+                <span data-i18n="footer_proof">🧪 Esta calculadora é uma <strong>prova de conceito</strong> gerada por
+                    <strong>Inteligência Artificial</strong></span>
             </p>
             <p class="footer-dev">
                 💻 Desenvolvido por <strong>DragonBlackOne</strong>

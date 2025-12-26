@@ -50,7 +50,7 @@ function setupExportButton() {
             if (lastBreakdownData.length === 0) return;
             import('./utils.js').then(utils => {
                 const rows = [
-                    ["Mes", "Contribuicao", "Juros", "Investido", "Total"],
+                    [getTranslation('month'), getTranslation('contribution'), getTranslation('interest'), getTranslation('invested_total'), getTranslation('total')],
                     ...lastBreakdownData.map(d => [d.month, d.contribution, d.interest, d.totalInvested, d.balance])
                 ];
                 utils.exportToCSV("simulacao_juros.csv", rows);
@@ -75,7 +75,7 @@ function calculateInterest() {
     const periodInput = parseInt(document.getElementById('period').value) || 0;
 
     if (initialValue <= 0 || !interestRateInput || periodInput <= 0) {
-        alert('Por favor, preencha todos os campos corretamente.');
+        alert(getTranslation('fill_correctly'));
         return;
     }
 
@@ -102,6 +102,8 @@ function calculateInterest() {
     document.getElementById('results-card').classList.add('active');
     updateChart(data);
     updateBreakdownTable(data);
+
+    document.getElementById('aria-announce').textContent = `${getTranslation('calc_interest_done')}. ${getTranslation('net_worth')}: ${formatCurrency(finalData.balance)}`;
 
     // Ultimate Effects
     playSuccess();

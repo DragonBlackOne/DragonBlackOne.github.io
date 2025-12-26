@@ -1,11 +1,4 @@
-/**
- * 🏢 Financing Module
- * Simula financiamentos bancários pelos sistemas SAC e PRICE
- */
-
-import { formatCurrency, parseCurrency } from './utils.js';
-import { playSuccess } from './audio.js';
-import { launchConfetti } from './confetti.js';
+import { getTranslation } from './i18n.js';
 
 export function initFinancingCalculator() {
     const form = document.getElementById('financing-form');
@@ -45,11 +38,11 @@ export function initFinancingCalculator() {
 
             import('./utils.js').then(utils => {
                 const rows = [
-                    ["Campo", "Valor"],
-                    ["Primeira/Fixa Parcela", data.first],
-                    ["Ultima Parcela", data.last],
-                    ["Total de Juros", data.interest],
-                    ["Custo Total", data.cost]
+                    [getTranslation('field'), getTranslation('value')],
+                    [getTranslation('first_parcel'), data.first],
+                    [getTranslation('last_parcel'), data.last],
+                    [getTranslation('total_interest'), data.interest],
+                    [getTranslation('total_cost'), data.cost]
                 ];
                 utils.exportToCSV("simulacao_financiamento.csv", rows);
             });
@@ -78,11 +71,12 @@ function formatCurrencyInput(input) {
 function calculateFinancing() {
     const totalValue = parseCurrency(document.getElementById('fin-total-value').value);
     const downPayment = parseCurrency(document.getElementById('fin-down-payment').value);
-    const annualRate = parseFloat(document.getElementById('fin-interest-rate').value.replace(',', '.')) / 100;
+    const annualRateInput = document.getElementById('fin-interest-rate').value.replace(',', '.');
+    const annualRate = parseFloat(annualRateInput) / 100;
     const years = parseInt(document.getElementById('fin-period').value);
 
     if (totalValue <= 0 || years <= 0 || annualRate <= 0) {
-        alert('Por favor, preencha os dados corretamente.');
+        alert(getTranslation('fill_correctly'));
         return;
     }
 
@@ -159,13 +153,13 @@ function renderResults(res) {
     // Atualiza label caso seja PRICE (mesmo valor)
     const firstLabel = document.getElementById('first-parcel-label');
     const isSac = document.getElementById('type-sac').classList.contains('active');
-    firstLabel.textContent = isSac ? 'Primeira Parcela' : 'Parcela Fixa';
+    firstLabel.textContent = isSac ? getTranslation('first_parcel') : getTranslation('fixed_parcel');
 
     if (window.innerWidth < 992) {
         document.getElementById('fin-results-card').scrollIntoView({ behavior: 'smooth' });
     }
 
-    document.getElementById('aria-announce').textContent = `Simulação de financiamento concluída. Primeira parcela: ${formatCurrency(res.firstParcel)}`;
+    document.getElementById('aria-announce').textContent = `${getTranslation('financing_summary')}. ${getTranslation('first_parcel')}: ${formatCurrency(res.firstParcel)}`;
 
     updateFinancingChart(res.chartData);
 }
