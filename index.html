@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 
 <head>
-    
+
     <!-- Meta Tags Básicas -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -137,6 +137,16 @@
                     <span class="nav-icon" aria-hidden="true">💰</span>
                     <span class="nav-text">Juros</span>
                 </button>
+                <button class="nav-tab" data-tab="units" type="button" role="tab" aria-selected="false"
+                    aria-controls="panel-units" id="tab-units">
+                    <span class="nav-icon" aria-hidden="true">📏</span>
+                    <span class="nav-text">Unidades</span>
+                </button>
+                <button class="nav-tab" data-tab="financing" type="button" role="tab" aria-selected="false"
+                    aria-controls="panel-financing" id="tab-financing">
+                    <span class="nav-icon" aria-hidden="true">🏢</span>
+                    <span class="nav-text">Financiar</span>
+                </button>
             </nav>
 
             <!-- Painéis das Calculadoras -->
@@ -150,7 +160,31 @@
                             <div class="calc-result" id="calc-result">0</div>
                         </div>
 
-                        <div class="calc-buttons" role="group" aria-label="Botões da calculadora">
+                        <div class="calc-controls">
+                            <button class="mode-toggle-btn" id="scientific-toggle" type="button">
+                                <span class="toggle-text">Modo Científico</span>
+                                <div class="toggle-switch"></div>
+                            </button>
+                        </div>
+
+                        <div class="calc-buttons" id="standard-buttons" role="group" aria-label="Botões da calculadora">
+                            <!-- Botões Científicos (Ocultos por padrão) -->
+                            <div class="scientific-grid" id="scientific-grid">
+                                <button class="calc-btn sci" data-action="sin" type="button">sin</button>
+                                <button class="calc-btn sci" data-action="cos" type="button">cos</button>
+                                <button class="calc-btn sci" data-action="tan" type="button">tan</button>
+                                <button class="calc-btn sci" data-action="log" type="button">log</button>
+                                <button class="calc-btn sci" data-action="ln" type="button">ln</button>
+                                <button class="calc-btn sci" data-action="pi" type="button">π</button>
+                                <button class="calc-btn sci" data-action="e" type="button">e</button>
+                                <button class="calc-btn sci" data-action="pow" type="button">xʸ</button>
+                                <button class="calc-btn sci" data-action="sqrt" type="button">√</button>
+                                <button class="calc-btn sci" data-action="open-paren" type="button">(</button>
+                                <button class="calc-btn sci" data-action="close-paren" type="button">)</button>
+                                <button class="calc-btn sci" data-action="rand" type="button"
+                                    title="Número Aleatório">RND</button>
+                            </div>
+
                             <button class="calc-btn function" data-action="clear" type="button"
                                 aria-label="Limpar">C</button>
                             <button class="calc-btn function" data-action="backspace" type="button"
@@ -414,6 +448,124 @@
                         </div>
                     </div>
                 </section>
+                <!-- PAINEL: CONVERSOR DE UNIDADES -->
+                <section class="calc-panel" id="panel-units" role="tabpanel" aria-labelledby="tab-units">
+                    <div class="panel-content units-panel">
+                        <div class="units-header">
+                            <select id="unit-category" class="category-select">
+                                <option value="length">📏 Comprimento</option>
+                                <option value="mass">⚖️ Peso / Massa</option>
+                                <option value="temperature">🌡️ Temperatura</option>
+                                <option value="area">📐 Área</option>
+                                <option value="volume">🧪 Volume</option>
+                            </select>
+                        </div>
+                        <div class="converter-container">
+                            <div class="currency-input-group">
+                                <label for="unit-from-value">De</label>
+                                <div class="currency-input-wrapper">
+                                    <input type="number" id="unit-from-value" placeholder="0">
+                                    <select id="unit-from-select" class="currency-select"></select>
+                                </div>
+                            </div>
+                            <div class="unit-swap-icon" aria-hidden="true">➡️</div>
+                            <div class="currency-input-group">
+                                <label for="unit-to-value">Para</label>
+                                <div class="currency-input-wrapper">
+                                    <input type="number" id="unit-to-value" placeholder="0" readonly>
+                                    <select id="unit-to-select" class="currency-select"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PAINEL: FINANCIAMENTO -->
+                <section class="calc-panel" id="panel-financing" role="tabpanel" aria-labelledby="tab-financing">
+                    <div class="panel-content financing-panel">
+                        <div class="interest-wrapper">
+                            <div class="interest-form-section">
+                                <form id="financing-form" class="form">
+                                    <div class="interest-type-selector">
+                                        <label class="type-label">Sistema de Amortização</label>
+                                        <div class="type-toggle" role="radiogroup">
+                                            <button type="button" class="type-btn active" id="type-sac" role="radio"
+                                                aria-checked="true">
+                                                <span class="type-name">SAC</span>
+                                                <span class="type-desc">Parcelas Decrescentes</span>
+                                            </button>
+                                            <button type="button" class="type-btn" id="type-price" role="radio"
+                                                aria-checked="false">
+                                                <span class="type-name">PRICE</span>
+                                                <span class="type-desc">Parcelas Fixas</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label for="fin-total-value">Valor do Imóvel/Bem</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-prefix">R$</span>
+                                            <input type="text" id="fin-total-value" placeholder="300.000,00">
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <label for="fin-down-payment">Entrada</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-prefix">R$</span>
+                                            <input type="text" id="fin-down-payment" placeholder="60.000,00">
+                                        </div>
+                                    </div>
+
+                                    <div class="input-row">
+                                        <div class="input-group">
+                                            <label for="fin-interest-rate">Taxa Anual</label>
+                                            <div class="input-wrapper">
+                                                <input type="text" id="fin-interest-rate" placeholder="10,5">
+                                                <span class="input-suffix">%</span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="fin-period">Prazo (Anos)</label>
+                                            <div class="input-wrapper">
+                                                <input type="number" id="fin-period" placeholder="30">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn-calculate">Simular Financiamento</button>
+                                </form>
+                            </div>
+
+                            <div class="interest-results-section" id="fin-results-card">
+                                <h3 class="results-title">🏠 Resumo do Financiamento</h3>
+                                <div class="results-grid">
+                                    <div class="result-item highlight">
+                                        <span class="result-label" id="first-parcel-label">Primeira Parcela</span>
+                                        <span class="result-value" id="fin-first-parcel">R$ 0,00</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label">Última Parcela</span>
+                                        <span class="result-value" id="fin-last-parcel">R$ 0,00</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label">Total de Juros</span>
+                                        <span class="result-value success" id="fin-total-interest">R$ 0,00</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label">Custo Total</span>
+                                        <span class="result-value" id="fin-total-cost">R$ 0,00</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-calculate" id="export-financing-csv"
+                                    style="margin-top: 1.5rem; background: var(--bg-card-hover);">
+                                    📥 Exportar Resumo para CSV
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </article>
 
@@ -433,7 +585,7 @@
         </footer>
     </main>
 
-    <script src="src/js/main.js"></script>
+    <script type="module" src="src/js/main.js"></script>
 </body>
 
 </html>
