@@ -187,6 +187,10 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--spacing-xl) 0;
 }
 
 /* ================================
@@ -263,9 +267,10 @@ body {
    📦 Container & Layout
    ================================ */
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
+    width: 95%;
     margin: 0 auto;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
 }
 
 /* ================================
@@ -276,9 +281,22 @@ body {
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
     backdrop-filter: blur(20px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), var(--shadow-glow);
     overflow: hidden;
     margin-bottom: var(--spacing-xl);
+    animation: entranceFade 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes entranceFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* Navigation Tabs */
@@ -1459,8 +1477,14 @@ body {
    📱 Responsive Adjustments
    ================================ */
 @media (max-width: 768px) {
+    body {
+        justify-content: flex-start;
+        padding: var(--spacing-md) 0;
+    }
+
     .container {
-        padding: var(--spacing-md);
+        padding: var(--spacing-sm);
+        width: 100%;
     }
 
     .logo h1 {
