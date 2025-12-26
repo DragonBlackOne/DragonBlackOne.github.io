@@ -11,6 +11,10 @@ import { initUnitConverter } from './modules/units.js';
 import { initFinancingCalculator } from './modules/financing.js';
 import { initDateCalculator } from './modules/dates.js';
 import { initQuickTools } from './modules/tools.js';
+import { initFireCalculator } from './modules/fire.js';
+import { initSalaryCalculator } from './modules/salary.js';
+import { initInflationCalculator } from './modules/inflation.js';
+import { initPrepaymentCalculator } from './modules/prepayment.js';
 import { initI18n } from './modules/i18n.js';
 import { initSharing } from './modules/sharing.js';
 import { playClick } from './modules/audio.js';
@@ -31,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initFinancingCalculator();
     initDateCalculator();
     initQuickTools();
+    initFireCalculator();
+    initSalaryCalculator();
+    initInflationCalculator();
+    initPrepaymentCalculator();
     initI18n();
     initSharing();
 

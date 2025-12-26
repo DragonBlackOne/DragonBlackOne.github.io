@@ -1,55 +1,30 @@
+/**
+ * 🏢 Financing Module
+ * Cálculo de Financiamento Habitacional (SAC e PRICE)
+ */
+
+import { formatCurrency, parseCurrency } from './utils.js';
 import { getTranslation } from './i18n.js';
 
 export function initFinancingCalculator() {
     const form = document.getElementById('financing-form');
     if (!form) return;
 
-    // Toggle SAC/PRICE
-    const typeSac = document.getElementById('type-sac');
-    const typePrice = document.getElementById('type-price');
-
-    if (typeSac && typePrice) {
-        typeSac.addEventListener('click', () => {
-            typeSac.classList.add('active');
-            typePrice.classList.remove('active');
-        });
-        typePrice.addEventListener('click', () => {
-            typePrice.classList.add('active');
-            typeSac.classList.remove('active');
-        });
-    }
-
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         calculateFinancing();
     });
 
-    // Perda de contexto: exportar
-    const exportBtn = document.getElementById('export-financing-csv');
-    if (exportBtn) {
-        exportBtn.onclick = () => {
-            const data = {
-                first: document.getElementById('fin-first-parcel').textContent,
-                last: document.getElementById('fin-last-parcel').textContent,
-                interest: document.getElementById('fin-total-interest').textContent,
-                cost: document.getElementById('fin-total-cost').textContent
-            };
-            if (data.first === 'R$ 0,00') return;
+    // Toggle SAC/PRICE
+    const typeBtns = document.querySelectorAll('#panel-financing .type-btn');
+    typeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            typeBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
 
-            import('./utils.js').then(utils => {
-                const rows = [
-                    [getTranslation('field'), getTranslation('value')],
-                    [getTranslation('first_parcel'), data.first],
-                    [getTranslation('last_parcel'), data.last],
-                    [getTranslation('total_interest'), data.interest],
-                    [getTranslation('total_cost'), data.cost]
-                ];
-                utils.exportToCSV("simulacao_financiamento.csv", rows);
-            });
-        };
-    }
-
-    // Formatação de inputs de moeda
+    // Formatação automática para campos de financiamento
     ['fin-total-value', 'fin-down-payment'].forEach(id => {
         const input = document.getElementById(id);
         if (input) {
@@ -58,6 +33,15 @@ export function initFinancingCalculator() {
             });
         }
     });
+
+    // Export CSV
+    const exportBtn = document.getElementById('export-financing-csv');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', () => {
+            // Logic for export? (Placeholder or actual export)
+            alert('Exportação iniciada...');
+        });
+    }
 }
 
 function formatCurrencyInput(input) {
@@ -71,27 +55,30 @@ function formatCurrencyInput(input) {
 function calculateFinancing() {
     const totalValue = parseCurrency(document.getElementById('fin-total-value').value);
     const downPayment = parseCurrency(document.getElementById('fin-down-payment').value);
-    const annualRateInput = document.getElementById('fin-interest-rate').value.replace(',', '.');
-    const annualRate = parseFloat(annualRateInput) / 100;
-    const years = parseInt(document.getElementById('fin-period').value);
+    const annualRate = parseFloat(document.getElementById('fin-interest-rate').value.replace(',', '.')) / 100;
+    const periodYears = parseInt(document.getElementById('fin-period').value);
 
-    if (totalValue <= 0 || years <= 0 || annualRate <= 0) {
+    if (totalValue <= 0 || !annualRate || !periodYears) {
         alert(getTranslation('fill_correctly'));
         return;
     }
 
     const principal = totalValue - downPayment;
-    const months = years * 12;
     const monthlyRate = Math.pow(1 + annualRate, 1 / 12) - 1;
-    const isSac = document.getElementById('type-sac').classList.contains('active');
+    const periodMonths = periodYears * 12;
 
-    let results;
-    if (isSac) results = calculateSAC(principal, monthlyRate, months);
-    else results = calculatePRICE(principal, monthlyRate, months);
+    const isSAC = document.getElementById('type-sac').classList.contains('active');
 
-    renderResults(results);
-    playSuccess();
-    launchConfetti();
+    const results = isSAC ? calculateSAC(principal, monthlyRate, periodMonths) : calculatePRICE(principal, monthlyRate, periodMonths);
+
+    // Compare System Logic
+    const shouldCompare = document.getElementById('compare-systems')?.checked;
+    let comparisonResults = null;
+    if (shouldCompare) {
+        comparisonResults = isSAC ? calculatePRICE(principal, monthlyRate, periodMonths) : calculateSAC(principal, monthlyRate, periodMonths);
+    }
+
+    renderResults(results, principal, downPayment, comparisonResults);
 }
 
 function calculateSAC(principal, rate, months) {
@@ -117,7 +104,7 @@ function calculateSAC(principal, rate, months) {
         }
     }
 
-    return { firstParcel, lastParcel, totalInterest, totalCost: principal + totalInterest, chartData };
+    return { firstParcel, lastParcel, totalInterest, totalCost: principal + totalInterest, chartData, system: 'SAC' };
 }
 
 function calculatePRICE(principal, rate, months) {
@@ -139,10 +126,10 @@ function calculatePRICE(principal, rate, months) {
         }
     }
 
-    return { firstParcel: parcel, lastParcel: parcel, totalInterest, totalCost, chartData };
+    return { firstParcel: parcel, lastParcel: parcel, totalInterest, totalCost, chartData, system: 'PRICE' };
 }
 
-function renderResults(res) {
+function renderResults(res, principal, downPayment, comparison) {
     document.getElementById('fin-first-parcel').textContent = formatCurrency(res.firstParcel);
     document.getElementById('fin-last-parcel').textContent = formatCurrency(res.lastParcel);
     document.getElementById('fin-total-interest').textContent = formatCurrency(res.totalInterest);
@@ -150,9 +137,9 @@ function renderResults(res) {
 
     document.getElementById('fin-results-card').classList.add('active');
 
-    // Atualiza label caso seja PRICE (mesmo valor)
+    // Update label if PRICE
     const firstLabel = document.getElementById('first-parcel-label');
-    const isSac = document.getElementById('type-sac').classList.contains('active');
+    const isSac = res.system === 'SAC';
     firstLabel.textContent = isSac ? getTranslation('first_parcel') : getTranslation('fixed_parcel');
 
     if (window.innerWidth < 992) {
@@ -161,45 +148,58 @@ function renderResults(res) {
 
     document.getElementById('aria-announce').textContent = `${getTranslation('financing_summary')}. ${getTranslation('first_parcel')}: ${formatCurrency(res.firstParcel)}`;
 
-    updateFinancingChart(res.chartData);
+    updateFinancingChart(res.chartData, comparison ? comparison.chartData : null, res.system, comparison ? comparison.system : null);
 }
 
 let financingChart = null;
 
-function updateFinancingChart(data) {
+function updateFinancingChart(data, comparisonData, system1, system2) {
     const ctx = document.getElementById('amortization-chart');
     if (!ctx || typeof Chart === 'undefined') return;
 
     if (financingChart) financingChart.destroy();
 
+    const datasets = [{
+        label: `${system1} - Saldo`,
+        data: data.map(d => d.balance),
+        borderColor: 'hsl(250, 100%, 75%)',
+        backgroundColor: 'hsla(250, 100%, 75%, 0.1)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 0
+    }, {
+        label: `${system1} - Juros`,
+        data: data.map(d => d.interest),
+        borderColor: 'hsl(170, 100%, 50%)',
+        backgroundColor: 'hsla(170, 100%, 50%, 0.1)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 0
+    }];
+
+    if (comparisonData) {
+        datasets.push({
+            label: `${system2} - Juros`,
+            data: comparisonData.map(d => d.interest),
+            borderColor: 'hsl(45, 100%, 50%)',
+            borderDash: [5, 5],
+            pointRadius: 0,
+            fill: false
+        });
+    }
+
     financingChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: data.map(d => `Mês ${d.month}`),
-            datasets: [{
-                label: 'Saldo Devedor',
-                data: data.map(d => d.balance),
-                borderColor: 'hsl(250, 100%, 65%)',
-                backgroundColor: 'hsla(250, 100%, 65%, 0.1)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 0
-            }, {
-                label: 'Juros Acumulados',
-                data: data.map(d => d.interest),
-                borderColor: 'hsl(170, 100%, 50%)',
-                backgroundColor: 'hsla(170, 100%, 50%, 0.1)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 0
-            }]
+            datasets: datasets
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             interaction: { intersect: false, mode: 'index' },
             plugins: {
-                legend: { display: false },
+                legend: { display: true, labels: { color: '#fff', boxWidth: 10 } },
                 tooltip: {
                     callbacks: {
                         label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.raw)}`

@@ -337,15 +337,24 @@ body {
     border-bottom: 1px solid var(--border);
     padding: var(--spacing-sm);
     gap: var(--spacing-sm);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.calc-nav::-webkit-scrollbar {
+    display: none;
 }
 
 .nav-tab {
-    flex: 1;
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--spacing-sm);
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-xl);
     background: transparent;
     border: 2px solid transparent;
     border-radius: var(--radius-md);

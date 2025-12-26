@@ -161,6 +161,26 @@
                     <span class="nav-icon" aria-hidden="true">📅</span>
                     <span class="nav-text">Datas</span>
                 </button>
+                <button class="nav-tab" data-tab="fire" type="button" role="tab" aria-selected="false"
+                    aria-controls="panel-fire" id="tab-fire">
+                    <span class="nav-icon" aria-hidden="true">🔥</span>
+                    <span class="nav-text" data-i18n="fire">FIRE</span>
+                </button>
+                <button class="nav-tab" data-tab="salary" type="button" role="tab" aria-selected="false"
+                    aria-controls="panel-salary" id="tab-salary">
+                    <span class="nav-icon" aria-hidden="true">💼</span>
+                    <span class="nav-text" data-i18n="salary">Salário</span>
+                </button>
+                <button class="nav-tab" data-tab="inflation" type="button" role="tab" aria-selected="false"
+                    aria-controls="panel-inflation" id="tab-inflation">
+                    <span class="nav-icon" aria-hidden="true">📉</span>
+                    <span class="nav-text" data-i18n="inflation">Inflação</span>
+                </button>
+                <button class="nav-tab" data-tab="prepayment" type="button" role="tab" aria-selected="false"
+                    aria-controls="panel-prepayment" id="tab-prepayment">
+                    <span class="nav-icon" aria-hidden="true">💰</span>
+                    <span class="nav-text" data-i18n="prepayment">Antecipação</span>
+                </button>
                 <button class="nav-tab" data-tab="tools" type="button" role="tab" aria-selected="false"
                     aria-controls="panel-tools" id="tab-tools">
                     <span class="nav-icon" aria-hidden="true">🛠️</span>
@@ -396,6 +416,17 @@
                                         </div>
                                     </div>
 
+                                    <div class="input-group">
+                                        <div class="checkbox-group" style="margin-top: 1rem;">
+                                            <label class="checkbox-container">
+                                                <input type="checkbox" id="include-ir">
+                                                <span class="checkmark"></span>
+                                                <span data-i18n="simulate_ir">Simular Imposto de Renda
+                                                    (Regressivo)</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     <button type="submit" class="btn-calculate" id="btn-calculate">
                                         <span class="btn-text" data-i18n="calculate">Calcular</span>
                                         <span class="btn-icon" aria-hidden="true">
@@ -556,6 +587,16 @@
                                         </div>
                                     </div>
 
+                                    <div class="input-group">
+                                        <div class="checkbox-group" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+                                            <label class="checkbox-container">
+                                                <input type="checkbox" id="compare-systems" checked>
+                                                <span class="checkmark"></span>
+                                                <span data-i18n="compare_sac_price">Comparar SAC vs PRICE no
+                                                    gráfico</span>
+                                            </label>
+                                        </div>
+                                    </div>
                                     <button type="submit" class="btn-calculate">Simular Financiamento</button>
                                 </form>
                             </div>
@@ -657,6 +698,129 @@
                     </div>
                 </section>
 
+                <!-- PAINEL: FIRE (INDEPENDÊNCIA FINANCEIRA) -->
+                <section class="calc-panel" id="panel-fire" role="tabpanel" aria-labelledby="tab-fire">
+                    <div class="panel-content fire-panel">
+                        <div class="interest-wrapper">
+                            <div class="interest-form-section">
+                                <h2 class="sr-only">Calculadora FIRE</h2>
+                                <form id="fire-form" class="form">
+                                    <div class="input-group">
+                                        <label for="fire-monthly-spend" data-i18n="monthly_spend">Gasto Mensal
+                                            Desejado</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-prefix">R$</span>
+                                            <input type="text" id="fire-monthly-spend" placeholder="5.000,00"
+                                                class="money-input">
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="fire-current-wealth" data-i18n="current_wealth">Patrimônio
+                                            Atual</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-prefix">R$</span>
+                                            <input type="text" id="fire-current-wealth" placeholder="10.000,00"
+                                                class="money-input">
+                                        </div>
+                                    </div>
+                                    <div class="input-row">
+                                        <div class="input-group">
+                                            <label for="fire-monthly-invest" data-i18n="monthly_invest">Aporte
+                                                Mensal</label>
+                                            <div class="input-wrapper">
+                                                <span class="input-prefix">R$</span>
+                                                <input type="text" id="fire-monthly-invest" placeholder="1.000,00"
+                                                    class="money-input">
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="fire-real-return" data-i18n="real_return">Rentabilidade Real
+                                                Anual (%)</label>
+                                            <div class="input-wrapper">
+                                                <input type="text" id="fire-real-return" placeholder="6,0"
+                                                    inputmode="decimal">
+                                                <span class="input-suffix">%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn-calculate" data-i18n="calculate">Calcular</button>
+                                </form>
+                            </div>
+                            <div class="interest-results-section" id="fire-results-card">
+                                <h3 class="results-title">🔥 Rumo à Liberdade</h3>
+                                <div class="results-grid">
+                                    <div class="result-item highlight">
+                                        <span class="result-label" data-i18n="fire_target_amount">Montante Alvo</span>
+                                        <span class="result-value" id="fire-target-amount">R$ 0,00</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label" data-i18n="time_to_fire">Tempo Restante</span>
+                                        <span class="result-value" id="time-to-fire">---</span>
+                                    </div>
+                                </div>
+                                <div class="chart-container" style="margin-top: 1.5rem; height: 200px;">
+                                    <canvas id="fire-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PAINEL: SALÁRIO (CLT vs PJ) -->
+                <section class="calc-panel" id="panel-salary" role="tabpanel" aria-labelledby="tab-salary">
+                    <div class="panel-content salary-panel">
+                        <div class="interest-wrapper">
+                            <div class="interest-form-section">
+                                <h2 class="sr-only">Comparativo de Salários</h2>
+                                <div class="interest-type-selector">
+                                    <label class="type-label" data-i18n="contract_type">Tipo de Contrato</label>
+                                    <div class="type-toggle">
+                                        <button type="button" class="type-btn active" id="salary-type-clt">CLT</button>
+                                        <button type="button" class="type-btn" id="salary-type-pj">PJ</button>
+                                    </div>
+                                </div>
+                                <!-- CLT Inputs -->
+                                <div id="clt-container">
+                                    <div class="input-group">
+                                        <label for="clt-gross" data-i18n="gross_salary">Salário Bruto</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-prefix">R$</span>
+                                            <input type="text" id="clt-gross" placeholder="5.000,00"
+                                                class="money-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- PJ Inputs -->
+                                <div id="pj-container" style="display: none;">
+                                    <div class="input-group">
+                                        <label for="pj-gross" data-i18n="pj_revenue">Faturamento Mensal</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-prefix">R$</span>
+                                            <input type="text" id="pj-gross" placeholder="10.000,00"
+                                                class="money-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-calculate" id="btn-calc-salary"
+                                    data-i18n="calculate">Calcular</button>
+                            </div>
+                            <div class="interest-results-section" id="salary-results-card">
+                                <h3 class="results-title">💼 Salário Líquido</h3>
+                                <div class="results-grid">
+                                    <div class="result-item highlight">
+                                        <span class="result-label" data-i18n="net_salary">Líquido Real</span>
+                                        <span class="result-value" id="salary-net-value">R$ 0,00</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label" data-i18n="total_discounts">Total Descontos</span>
+                                        <span class="result-value danger" id="salary-discounts">R$ 0,00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- PAINEL: FERRAMENTAS ÚTEIS -->
                 <section class="calc-panel" id="panel-tools" role="tabpanel" aria-labelledby="tab-tools">
                     <div class="panel-content tools-panel">
@@ -704,6 +868,112 @@
                                 <div class="result-item">
                                     <span class="result-label">Por Pessoa</span>
                                     <span class="result-value" id="tip-res">R$ 0,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- PAINEL: INFLAÇÃO (PODER DE COMPRA) -->
+                <section class="calc-panel" id="panel-inflation" role="tabpanel" aria-labelledby="tab-inflation">
+                    <div class="panel-content inflation-panel">
+                        <div class="interest-wrapper">
+                            <div class="interest-form-section">
+                                <h2 class="sr-only">Calculadora de Inflação</h2>
+                                <form id="inflation-form" class="form">
+                                    <div class="input-group">
+                                        <label for="inflation-value" data-i18n="original_amount">Valor Original</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-prefix">R$</span>
+                                            <input type="text" id="inflation-value" placeholder="100,00"
+                                                class="money-input">
+                                        </div>
+                                    </div>
+                                    <div class="input-row">
+                                        <div class="input-group">
+                                            <label for="inflation-rate" data-i18n="annual_inflation">Inflação Anual
+                                                Média (%)</label>
+                                            <div class="input-wrapper">
+                                                <input type="text" id="inflation-rate" placeholder="5,0"
+                                                    inputmode="decimal">
+                                                <span class="input-suffix">%</span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="inflation-period" data-i18n="period_years">Período
+                                                (Anos)</label>
+                                            <div class="input-wrapper">
+                                                <input type="number" id="inflation-period" placeholder="10">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn-calculate" data-i18n="calculate">Calcular</button>
+                                </form>
+                            </div>
+                            <div class="interest-results-section" id="inflation-results-card">
+                                <h3 class="results-title" data-i18n="purchasing_power">📉 Poder de Compra</h3>
+                                <div class="results-grid">
+                                    <div class="result-item highlight">
+                                        <span class="result-label" data-i18n="adjusted_value">Valor Corrigido</span>
+                                        <span class="result-value" id="inflation-adjusted-value">R$ 0,00</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label" data-i18n="power_loss">Perda de Poder</span>
+                                        <span class="result-value danger" id="inflation-loss-perc">0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PAINEL: ANTECIPAÇÃO DE PARCELAS -->
+                <section class="calc-panel" id="panel-prepayment" role="tabpanel" aria-labelledby="tab-prepayment">
+                    <div class="panel-content prepayment-panel">
+                        <div class="interest-wrapper">
+                            <div class="interest-form-section">
+                                <h2 class="sr-only">Calculadora de Antecipação</h2>
+                                <form id="prepayment-form" class="form">
+                                    <div class="input-group">
+                                        <label for="prep-balance" data-i18n="current_balance">Saldo Devedor
+                                            Atual</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-prefix">R$</span>
+                                            <input type="text" id="prep-balance" placeholder="200.000,00"
+                                                class="money-input">
+                                        </div>
+                                    </div>
+                                    <div class="input-row">
+                                        <div class="input-group">
+                                            <label for="prep-rate" data-i18n="monthly_rate">Taxa Mensal (%)</label>
+                                            <div class="input-wrapper">
+                                                <input type="text" id="prep-rate" placeholder="0,9" inputmode="decimal">
+                                                <span class="input-suffix">%</span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="prep-extra" data-i18n="extra_payment">Aporte Extra</label>
+                                            <div class="input-wrapper">
+                                                <span class="input-prefix">R$</span>
+                                                <input type="text" id="prep-extra" placeholder="1.000,00"
+                                                    class="money-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn-calculate" data-i18n="calculate">Simular
+                                        Economia</button>
+                                </form>
+                            </div>
+                            <div class="interest-results-section" id="prepayment-results-card">
+                                <h3 class="results-title" data-i18n="prepayment_summary">💰 Resumo da Antecipação</h3>
+                                <div class="results-grid">
+                                    <div class="result-item highlight">
+                                        <span class="result-label" data-i18n="interest_saved">Juros Economizados</span>
+                                        <span class="result-value success" id="prep-saved-value">R$ 0,00</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label" data-i18n="months_reduced">Meses Reduzidos</span>
+                                        <span class="result-value" id="prep-reduced-months">0</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

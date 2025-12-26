@@ -1,80 +1,79 @@
 /**
- * 💰 Interest Module
- * Gerencia a calculadora de juros e gráficos
+ * 📈 Interest Module
+ * Cálculo de Juros Simples e Compostos com Projeção e IR
  */
 
 import { formatCurrency, parseCurrency } from './utils.js';
+import { getTranslation } from './i18n.js';
 import { playSuccess } from './audio.js';
 import { launchConfetti } from './confetti.js';
+import { saveSimulation } from './sharing.js';
 
 let growthChart = null;
+let lastBreakdownData = null;
 
 export function initInterestCalculator() {
-    const form = document.getElementById('calculator-form');
-    if (form) {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            calculateInterest();
+    const form = document.getElementById('interest-form');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        calculateInterest();
+    });
+
+    // Toggle Juros Simples/Compostos
+    const typeBtns = document.querySelectorAll('#panel-interest .type-btn');
+    typeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            typeBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
         });
-    }
+    });
 
-    // Toggle de Tipos
-    const typeCompound = document.getElementById('type-compound');
-    const typeSimple = document.getElementById('type-simple');
-
-    if (typeCompound && typeSimple) {
-        typeCompound.addEventListener('click', () => {
-            typeCompound.classList.add('active');
-            typeSimple.classList.remove('active');
+    // Toggle Taxa Mensal/Anual
+    const rateBtns = document.querySelectorAll('#panel-interest .rate-btn');
+    rateBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            rateBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
         });
-        typeSimple.addEventListener('click', () => {
-            typeSimple.classList.add('active');
-            typeCompound.classList.remove('active');
+    });
+
+    // Toggle Período Meses/Anos
+    const periodBtns = document.querySelectorAll('#panel-interest .period-btn');
+    periodBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            periodBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
         });
-    }
+    });
 
-    // Toggle de Taxas e Período
-    setupToggle('rate-monthly', 'rate-yearly');
-    setupToggle('period-months', 'period-years');
-
-    // Exportar
-    setupExportButton();
-}
-
-let lastBreakdownData = [];
-
-function setupExportButton() {
-    const btn = document.getElementById('export-interest-csv');
-    if (btn) {
-        btn.onclick = () => {
-            if (lastBreakdownData.length === 0) return;
-            import('./utils.js').then(utils => {
-                const rows = [
-                    [getTranslation('month'), getTranslation('contribution'), getTranslation('interest'), getTranslation('invested_total'), getTranslation('total')],
-                    ...lastBreakdownData.map(d => [d.month, d.contribution, d.interest, d.totalInvested, d.balance])
-                ];
-                utils.exportToCSV("simulacao_juros.csv", rows);
+    // Formatação automática para campos de juros
+    ['initial-value', 'monthly-contribution'].forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', function () {
+                formatCurrencyInput(this);
             });
-        };
-    }
+        }
+    });
 }
 
-function setupToggle(id1, id2) {
-    const btn1 = document.getElementById(id1);
-    const btn2 = document.getElementById(id2);
-    if (btn1 && btn2) {
-        btn1.addEventListener('click', () => { btn1.classList.add('active'); btn2.classList.remove('active'); });
-        btn2.addEventListener('click', () => { btn2.classList.add('active'); btn1.classList.remove('active'); });
-    }
+function formatCurrencyInput(input) {
+    let value = input.value.replace(/\D/g, '');
+    if (value === '') return;
+    value = (parseInt(value) / 100).toFixed(2).replace('.', ',');
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    input.value = value;
 }
 
 function calculateInterest() {
     const initialValue = parseCurrency(document.getElementById('initial-value').value);
     const monthlyContribution = parseCurrency(document.getElementById('monthly-contribution').value);
-    const interestRateInput = document.getElementById('interest-rate').value;
-    const periodInput = parseInt(document.getElementById('period').value) || 0;
+    const interestRateInput = document.getElementById('interest-rate-input').value;
+    const periodInput = parseInt(document.getElementById('period-input').value);
 
-    if (initialValue <= 0 || !interestRateInput || periodInput <= 0) {
+    if (isNaN(initialValue) || !interestRateInput || isNaN(periodInput)) {
         alert(getTranslation('fill_correctly'));
         return;
     }
@@ -90,11 +89,28 @@ function calculateInterest() {
     let data = isCompound ? calculateCompound(initialValue, monthlyRate, months, monthlyContribution) : calculateSimple(initialValue, monthlyRate, months, monthlyContribution);
 
     const finalData = data[data.length - 1];
-    const totalInvested = finalData.totalInvested;
-    const interestEarned = finalData.balance - totalInvested;
-    const totalReturn = ((finalData.balance - totalInvested) / totalInvested) * 100;
+    let netBalance = finalData.balance;
+    let interestEarned = finalData.balance - finalData.totalInvested;
 
-    document.getElementById('final-amount').textContent = formatCurrency(finalData.balance);
+    // Simulate IR (Regressive Income Tax)
+    const includeIR = document.getElementById('include-ir')?.checked;
+    if (includeIR) {
+        if (interestEarned > 0) {
+            let taxRate = 0.15;
+            if (months <= 6) taxRate = 0.225;
+            else if (months <= 12) taxRate = 0.20;
+            else if (months <= 24) taxRate = 0.175;
+
+            const taxAmount = interestEarned * taxRate;
+            netBalance = finalData.balance - taxAmount;
+            interestEarned = interestEarned - taxAmount;
+        }
+    }
+
+    const totalInvested = finalData.totalInvested;
+    const totalReturn = ((netBalance / totalInvested) - 1) * 100;
+
+    document.getElementById('final-amount').textContent = formatCurrency(netBalance);
     document.getElementById('total-invested').textContent = formatCurrency(totalInvested);
     document.getElementById('interest-earned').textContent = formatCurrency(interestEarned);
     document.getElementById('total-return').textContent = totalReturn.toFixed(2).replace('.', ',') + '%';
@@ -103,9 +119,8 @@ function calculateInterest() {
     updateChart(data);
     updateBreakdownTable(data);
 
-    document.getElementById('aria-announce').textContent = `${getTranslation('calc_interest_done')}. ${getTranslation('net_worth')}: ${formatCurrency(finalData.balance)}`;
+    document.getElementById('aria-announce').textContent = `${getTranslation('calc_interest_done')}. ${getTranslation('net_worth')}: ${formatCurrency(netBalance)}`;
 
-    // Ultimate Effects
     playSuccess();
     launchConfetti();
 }
@@ -148,13 +163,13 @@ function updateChart(data) {
         data: {
             labels: data.map(d => `Mês ${d.month}`),
             datasets: [{
-                label: 'Investido',
+                label: getTranslation('invested_total'),
                 data: data.map(d => d.totalInvested),
                 borderColor: 'hsl(170, 100%, 50%)',
                 backgroundColor: 'hsla(170, 100%, 50%, 0.1)',
                 fill: true, tension: 0.4, pointRadius: 0
             }, {
-                label: 'Montante',
+                label: getTranslation('net_worth'),
                 data: data.map(d => d.balance),
                 borderColor: 'hsl(250, 100%, 65%)',
                 backgroundColor: 'hsla(250, 100%, 65%, 0.1)',
