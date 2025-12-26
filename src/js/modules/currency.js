@@ -26,9 +26,21 @@ export function initCurrencyConverter() {
         });
     }
 
-    if (currencyFrom) currencyFrom.addEventListener('change', convertCurrency);
-    if (currencyTo) currencyTo.addEventListener('change', convertCurrency);
-    if (swapBtn) swapBtn.addEventListener('click', swapCurrencies);
+    if (currencyFrom) currencyFrom.addEventListener('change', () => {
+        convertCurrency();
+        fetchCurrencyHistory(currencyFrom.value, currencyTo.value);
+    });
+    if (currencyTo) currencyTo.addEventListener('change', () => {
+        convertCurrency();
+        fetchCurrencyHistory(currencyFrom.value, currencyTo.value);
+    });
+    if (swapBtn) swapBtn.addEventListener('click', () => {
+        swapCurrencies();
+        fetchCurrencyHistory(currencyFrom.value, currencyTo.value);
+    });
+
+    // Initial history
+    fetchCurrencyHistory(currencyFrom.value, currencyTo.value);
 
     setInterval(fetchExchangeRates, 5 * 60 * 1000);
 }
@@ -106,4 +118,74 @@ function formatConverterInput(input) {
     value = (parseInt(value) / 100).toFixed(2);
     value = value.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     input.value = value;
+}
+let historyChart = null;
+
+async function fetchCurrencyHistory(from, to) {
+    // Frankfurter API só suporta certas moedas. Se não suportada, usamos mock.
+    const supported = ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'CHF', 'CNY'];
+    if (!supported.includes(from) && from !== 'BRL') return renderMockHistory(from, to);
+
+    const end = new Date().toISOString().split('T')[0];
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 7);
+    const start = startDate.toISOString().split('T')[0];
+
+    try {
+        const res = await fetch(`https://api.frankfurter.app/${start}..${end}?from=${from}&to=${to}`);
+        if (!res.ok) throw new Error('History error');
+        const data = await res.json();
+
+        const labels = Object.keys(data.rates).map(d => d.split('-').slice(1).reverse().join('/'));
+        const values = Object.values(data.rates).map(v => v[to]);
+
+        renderHistoryChart(labels, values, `${from}/${to}`);
+    } catch (e) {
+        renderMockHistory(from, to);
+    }
+}
+
+function renderMockHistory(from, to) {
+    const labels = ['20/12', '21/12', '22/12', '23/12', '24/12', '25/12', '26/12'];
+    const base = from === 'USD' ? 4.9 : (from === 'EUR' ? 5.3 : 1);
+    const values = labels.map(() => base + (Math.random() * 0.2 - 0.1));
+    renderHistoryChart(labels, values, `${from}/${to} (Simulado)`);
+}
+
+function renderHistoryChart(labels, values, title) {
+    const ctx = document.getElementById('currency-history-chart');
+    if (!ctx || typeof Chart === 'undefined') return;
+
+    if (historyChart) historyChart.destroy();
+
+    historyChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: title,
+                data: values,
+                borderColor: 'hsl(170, 100%, 50%)',
+                backgroundColor: 'hsla(170, 100%, 50%, 0.1)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 3,
+                pointBackgroundColor: 'white'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: { label: (c) => `1 ${title.split('/')[0]} = ${c.raw.toFixed(4)} ${title.split('/')[1]}` }
+                }
+            },
+            scales: {
+                y: { ticks: { count: 3 } },
+                x: { ticks: { font: { size: 10 } } }
+            }
+        }
+    });
 }

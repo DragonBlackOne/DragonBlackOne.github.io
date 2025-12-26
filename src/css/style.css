@@ -99,6 +99,24 @@
     --border-light: hsla(230, 15%, 90%, 0.5);
 }
 
+/* 👁️ High Contrast Theme */
+[data-theme="high-contrast"] {
+    --bg-dark: #000000;
+    --bg-card: #000000;
+    --bg-card-hover: #111111;
+    --bg-input: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #ffff00;
+    --text-muted: #00ffff;
+    --border: #ffffff;
+    --border-light: #ffffff;
+    --primary: #ffff00;
+    --secondary: #00ffff;
+    --primary-glow: #ffffff;
+    --gradient-primary: linear-gradient(135deg, #ffff00 0%, #00ffff 100%);
+    --gradient-card: linear-gradient(145deg, #000000 0%, #111111 100%);
+}
+
 /* 🎨 Theme Selector Styles */
 .theme-selector {
     display: flex;
@@ -470,17 +488,69 @@ body {
    🔝 Header
    ================================ */
 .header {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: var(--spacing-2xl);
     padding: var(--spacing-xl) 0;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.lang-selector {
+    display: flex;
+    gap: var(--spacing-xs);
+    background: var(--bg-input);
+    padding: 4px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border);
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.lang-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-share {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.btn-share:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
 }
 
 .logo-icon {
@@ -1533,6 +1603,62 @@ body {
 .results-card {
     animation: fadeInUp 0.6s ease forwards;
     animation-delay: 0.2s;
+}
+
+/* ================================
+   🛠️ Quick Tools & Dates
+   ================================ */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}
+
+.tool-card {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    transition: var(--transition-normal);
+}
+
+.tool-card:hover {
+    border-color: var(--primary-light);
+    transform: translateY(-5px);
+}
+
+.tool-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.dates-panel .input-row {
+    margin-top: var(--spacing-lg);
+}
+
+.fin-chart {
+    background: hsla(230, 25%, 5%, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .header-controls {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* Smooth number transitions */

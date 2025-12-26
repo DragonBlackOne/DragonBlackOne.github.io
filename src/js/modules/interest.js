@@ -4,6 +4,8 @@
  */
 
 import { formatCurrency, parseCurrency } from './utils.js';
+import { playSuccess } from './audio.js';
+import { launchConfetti } from './confetti.js';
 
 let growthChart = null;
 
@@ -100,6 +102,10 @@ function calculateInterest() {
     document.getElementById('results-card').classList.add('active');
     updateChart(data);
     updateBreakdownTable(data);
+
+    // Ultimate Effects
+    playSuccess();
+    launchConfetti();
 }
 
 function calculateCompound(principal, rate, months, contribution) {

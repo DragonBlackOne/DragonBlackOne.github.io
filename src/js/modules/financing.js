@@ -4,6 +4,8 @@
  */
 
 import { formatCurrency, parseCurrency } from './utils.js';
+import { playSuccess } from './audio.js';
+import { launchConfetti } from './confetti.js';
 
 export function initFinancingCalculator() {
     const form = document.getElementById('financing-form');
@@ -94,6 +96,8 @@ function calculateFinancing() {
     else results = calculatePRICE(principal, monthlyRate, months);
 
     renderResults(results);
+    playSuccess();
+    launchConfetti();
 }
 
 function calculateSAC(principal, rate, months) {
@@ -102,6 +106,7 @@ function calculateSAC(principal, rate, months) {
     let totalInterest = 0;
     let firstParcel = 0;
     let lastParcel = 0;
+    const chartData = [{ month: 0, balance: principal, interest: 0 }];
 
     for (let m = 1; m <= months; m++) {
         const interest = balance * rate;
@@ -112,18 +117,35 @@ function calculateSAC(principal, rate, months) {
 
         totalInterest += interest;
         balance -= amortization;
+
+        if (m % Math.max(1, Math.floor(months / 20)) === 0 || m === months) {
+            chartData.push({ month: m, balance: Math.max(0, balance), interest: totalInterest });
+        }
     }
 
-    return { firstParcel, lastParcel, totalInterest, totalCost: principal + totalInterest };
+    return { firstParcel, lastParcel, totalInterest, totalCost: principal + totalInterest, chartData };
 }
 
 function calculatePRICE(principal, rate, months) {
-    // Parcela PRICE: P = (PV * i) / (1 - (1 + i)^-n)
     const parcel = (principal * rate) / (1 - Math.pow(1 + rate, -months));
     const totalCost = parcel * months;
     const totalInterest = totalCost - principal;
+    const chartData = [{ month: 0, balance: principal, interest: 0 }];
 
-    return { firstParcel: parcel, lastParcel: parcel, totalInterest, totalCost };
+    let balance = principal;
+    let accumulatedInterest = 0;
+    for (let m = 1; m <= months; m++) {
+        const interest = balance * rate;
+        const amortization = parcel - interest;
+        balance -= amortization;
+        accumulatedInterest += interest;
+
+        if (m % Math.max(1, Math.floor(months / 20)) === 0 || m === months) {
+            chartData.push({ month: m, balance: Math.max(0, balance), interest: accumulatedInterest });
+        }
+    }
+
+    return { firstParcel: parcel, lastParcel: parcel, totalInterest, totalCost, chartData };
 }
 
 function renderResults(res) {
@@ -142,4 +164,58 @@ function renderResults(res) {
     if (window.innerWidth < 992) {
         document.getElementById('fin-results-card').scrollIntoView({ behavior: 'smooth' });
     }
+
+    document.getElementById('aria-announce').textContent = `Simulação de financiamento concluída. Primeira parcela: ${formatCurrency(res.firstParcel)}`;
+
+    updateFinancingChart(res.chartData);
+}
+
+let financingChart = null;
+
+function updateFinancingChart(data) {
+    const ctx = document.getElementById('amortization-chart');
+    if (!ctx || typeof Chart === 'undefined') return;
+
+    if (financingChart) financingChart.destroy();
+
+    financingChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: data.map(d => `Mês ${d.month}`),
+            datasets: [{
+                label: 'Saldo Devedor',
+                data: data.map(d => d.balance),
+                borderColor: 'hsl(250, 100%, 65%)',
+                backgroundColor: 'hsla(250, 100%, 65%, 0.1)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0
+            }, {
+                label: 'Juros Acumulados',
+                data: data.map(d => d.interest),
+                borderColor: 'hsl(170, 100%, 50%)',
+                backgroundColor: 'hsla(170, 100%, 50%, 0.1)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { intersect: false, mode: 'index' },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.raw)}`
+                    }
+                }
+            },
+            scales: {
+                y: { stacked: false, ticks: { callback: v => formatCurrency(v).split(',')[0] } },
+                x: { ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 10 } }
+            }
+        }
+    });
 }

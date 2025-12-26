@@ -115,7 +115,16 @@
                 </div>
                 <h1>Super Calculadora</h1>
             </div>
-            <p class="subtitle">Calculadora • Conversor de Moedas • Juros</p>
+            <div class="header-controls">
+                <div class="lang-selector" id="lang-selector">
+                    <button class="lang-btn active" data-lang="pt">PT</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="es">ES</button>
+                </div>
+                <button class="btn-share" id="global-share-btn" title="Compartilhar Simulação">
+                    <span>🔗</span>
+                </button>
+            </div>
         </header>
 
         <!-- SUPER CALCULADORA INTEGRADA -->
@@ -146,6 +155,16 @@
                     aria-controls="panel-financing" id="tab-financing">
                     <span class="nav-icon" aria-hidden="true">🏢</span>
                     <span class="nav-text">Financiar</span>
+                </button>
+                <button class="nav-tab" data-tab="dates" type="button" role="tab" aria-selected="false"
+                    aria-controls="panel-dates" id="tab-dates">
+                    <span class="nav-icon" aria-hidden="true">📅</span>
+                    <span class="nav-text">Datas</span>
+                </button>
+                <button class="nav-tab" data-tab="tools" type="button" role="tab" aria-selected="false"
+                    aria-controls="panel-tools" id="tab-tools">
+                    <span class="nav-icon" aria-hidden="true">🛠️</span>
+                    <span class="nav-text">Úteis</span>
                 </button>
             </nav>
 
@@ -562,6 +581,127 @@
                                     style="margin-top: 1.5rem; background: var(--bg-card-hover);">
                                     📥 Exportar Resumo para CSV
                                 </button>
+
+                                <!-- Container para o Gráfico de Amortização -->
+                                <div class="chart-container fin-chart" style="margin-top: 1.5rem; height: 250px;">
+                                    <canvas id="amortization-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PAINEL: CALCULADORA DE DATAS -->
+                <section class="calc-panel" id="panel-dates" role="tabpanel" aria-labelledby="tab-dates">
+                    <div class="panel-content dates-panel">
+                        <div class="interest-type-selector">
+                            <div class="type-toggle">
+                                <button type="button" class="type-btn active" id="date-mode-diff">
+                                    <span class="type-name">Diferença</span>
+                                </button>
+                                <button type="button" class="type-btn" id="date-mode-add">
+                                    <span class="type-name">Adicionar/Subtrair</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="date-diff-container">
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label for="date-start">Data Inicial</label>
+                                    <div class="input-wrapper">
+                                        <input type="date" id="date-start">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="date-end">Data Final</label>
+                                    <div class="input-wrapper">
+                                        <input type="date" id="date-end">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="date-add-container" style="display: none;">
+                            <div class="input-group">
+                                <label for="date-base">Data Base</label>
+                                <div class="input-wrapper">
+                                    <input type="date" id="date-base">
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label for="date-add-days">Dias</label>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="date-add-days" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="date-add-months">Meses</label>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="date-add-months" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="results-grid" style="margin-top: 1.5rem;">
+                            <div class="result-item highlight">
+                                <span class="result-label" id="date-res-label">Diferença</span>
+                                <span class="result-value" id="date-res-value">---</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PAINEL: FERRAMENTAS ÚTEIS -->
+                <section class="calc-panel" id="panel-tools" role="tabpanel" aria-labelledby="tab-tools">
+                    <div class="panel-content tools-panel">
+                        <div class="tools-grid">
+                            <!-- Calculadora de Desconto -->
+                            <div class="tool-card">
+                                <h3>🏷️ Desconto</h3>
+                                <div class="input-group">
+                                    <label>Preço Original</label>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="discount-price" placeholder="0,00" class="money-input">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label>Desconto (%)</label>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="discount-perc" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Preço Final</span>
+                                    <span class="result-value" id="discount-res">R$ 0,00</span>
+                                </div>
+                            </div>
+
+                            <!-- Calculadora de Gorjeta -->
+                            <div class="tool-card">
+                                <h3>🍕 Gorjeta / Divisão</h3>
+                                <div class="input-group">
+                                    <label>Valor da Conta</label>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="tip-total" placeholder="0,00" class="money-input">
+                                    </div>
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-group">
+                                        <label>Gorjeta (%)</label>
+                                        <input type="number" id="tip-perc" value="10">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Pessoas</label>
+                                        <input type="number" id="tip-people" value="1">
+                                    </div>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Por Pessoa</span>
+                                    <span class="result-value" id="tip-res">R$ 0,00</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -584,6 +724,9 @@
             </p>
         </footer>
     </main>
+
+    <!-- Alertas de acessibilidade (leitor de tela) -->
+    <div id="aria-announce" class="sr-only" aria-live="polite"></div>
 
     <script type="module" src="src/js/main.js"></script>
 </body>

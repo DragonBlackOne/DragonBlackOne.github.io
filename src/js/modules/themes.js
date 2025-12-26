@@ -7,7 +7,8 @@ const THEMES = {
     DARK: 'dark',
     MIDNIGHT: 'midnight',
     EMERALD: 'emerald',
-    LIGHT: 'light'
+    LIGHT: 'light',
+    CONTRAST: 'high-contrast'
 };
 
 export function initThemeSystem() {
@@ -36,6 +37,7 @@ export function createThemeSelector() {
             <button class="theme-btn midnight" data-theme="midnight" title="Midnight Blue"></button>
             <button class="theme-btn emerald" data-theme="emerald" title="Emerald Green"></button>
             <button class="theme-btn light" data-theme="light" title="Light Mode"></button>
+            <button class="theme-btn contrast" data-theme="high-contrast" title="Alto Contraste"></button>
         </div>
     `;
 
