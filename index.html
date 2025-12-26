@@ -2,23 +2,102 @@
 <html lang="pt-BR">
 
 <head>
-
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6306856048899183"
         crossorigin="anonymous"></script>
+
+    <!-- Meta Tags Básicas -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta Tags -->
+    <title>Super Calculadora Online Grátis | Calculadora, Conversor de Moedas e Juros</title>
     <meta name="description"
-        content="Super Calculadora - Calculadora padrão, conversor de moedas e calculadora de juros simples e compostos em uma única ferramenta.">
-    <title>Super Calculadora</title>
+        content="Super Calculadora online grátis: calculadora padrão com histórico, conversor de moedas em tempo real (14 moedas + Bitcoin), e calculadora de juros simples e compostos com gráficos. Ferramenta completa para suas finanças.">
+    <meta name="keywords"
+        content="calculadora online, conversor de moedas, calculadora de juros, juros compostos, juros simples, calculadora financeira, conversor dólar real, calculadora grátis, super calculadora">
+    <meta name="author" content="DragonBlackOne">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://dragonblackone.github.io/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dragonblackone.github.io/">
+    <meta property="og:title" content="Super Calculadora Online Grátis | Calculadora, Conversor e Juros">
+    <meta property="og:description"
+        content="Calculadora online completa: calculadora padrão, conversor de moedas em tempo real e calculadora de juros compostos com gráficos. Tudo em uma ferramenta!">
+    <meta property="og:image" content="https://dragonblackone.github.io/og-image.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Super Calculadora">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://dragonblackone.github.io/">
+    <meta name="twitter:title" content="Super Calculadora Online Grátis">
+    <meta name="twitter:description"
+        content="Calculadora, conversor de moedas e juros compostos em uma única ferramenta online grátis.">
+    <meta name="twitter:image" content="https://dragonblackone.github.io/og-image.png">
+
+    <!-- Tema e Cores -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="msapplication-TileColor" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Super Calc">
+
+    <!-- Manifest e Favicon -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Preconnect para Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://api.exchangerate-api.com">
+
+    <!-- Fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="src/css/style.css">
+
+    <!-- Dados Estruturados (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Super Calculadora",
+        "description": "Calculadora online grátis com calculadora padrão, conversor de moedas em tempo real e calculadora de juros simples e compostos.",
+        "url": "https://dragonblackone.github.io/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "DragonBlackOne",
+            "url": "https://www.youtube.com/@0mortes"
+        },
+        "featureList": [
+            "Calculadora padrão com histórico",
+            "Conversor de moedas em tempo real",
+            "14 moedas internacionais + Bitcoin",
+            "Calculadora de juros simples",
+            "Calculadora de juros compostos",
+            "Gráficos de evolução patrimonial",
+            "Interface responsiva"
+        ],
+        "inLanguage": "pt-BR"
+    }
+    </script>
 </head>
 
 <body>
-    <div class="background-effects">
+    <div class="background-effects" aria-hidden="true">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
         <div class="gradient-orb orb-3"></div>
@@ -27,7 +106,7 @@
     <main class="container">
         <header class="header">
             <div class="logo">
-                <div class="logo-icon">
+                <div class="logo-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" />
@@ -42,22 +121,23 @@
             <p class="subtitle">Calculadora • Conversor de Moedas • Juros</p>
         </header>
 
-        <!-- ================================ -->
-        <!-- � SUPER CALCULADORA INTEGRADA -->
-        <!-- ================================ -->
-        <div class="super-calculator">
+        <!-- SUPER CALCULADORA INTEGRADA -->
+        <article class="super-calculator" role="application" aria-label="Super Calculadora">
             <!-- Navegação por Abas -->
-            <nav class="calc-nav">
-                <button class="nav-tab active" data-tab="standard">
-                    <span class="nav-icon">🔢</span>
+            <nav class="calc-nav" role="tablist" aria-label="Ferramentas da calculadora">
+                <button class="nav-tab active" data-tab="standard" type="button" role="tab" aria-selected="true"
+                    aria-controls="panel-standard" id="tab-standard">
+                    <span class="nav-icon" aria-hidden="true">🔢</span>
                     <span class="nav-text">Calculadora</span>
                 </button>
-                <button class="nav-tab" data-tab="currency">
-                    <span class="nav-icon">💱</span>
+                <button class="nav-tab" data-tab="currency" type="button" role="tab" aria-selected="false"
+                    aria-controls="panel-currency" id="tab-currency">
+                    <span class="nav-icon" aria-hidden="true">💱</span>
                     <span class="nav-text">Moedas</span>
                 </button>
-                <button class="nav-tab" data-tab="interest">
-                    <span class="nav-icon">�</span>
+                <button class="nav-tab" data-tab="interest" type="button" role="tab" aria-selected="false"
+                    aria-controls="panel-interest" id="tab-interest">
+                    <span class="nav-icon" aria-hidden="true">💰</span>
                     <span class="nav-text">Juros</span>
                 </button>
             </nav>
@@ -65,56 +145,67 @@
             <!-- Painéis das Calculadoras -->
             <div class="calc-panels">
 
-                <!-- ========== PAINEL: CALCULADORA PADRÃO ========== -->
-                <div class="calc-panel active" id="panel-standard">
+                <!-- PAINEL: CALCULADORA PADRÃO -->
+                <section class="calc-panel active" id="panel-standard" role="tabpanel" aria-labelledby="tab-standard">
                     <div class="panel-content">
-                        <div class="calc-display">
+                        <div class="calc-display" aria-live="polite">
                             <div class="calc-expression" id="calc-expression"></div>
                             <div class="calc-result" id="calc-result">0</div>
                         </div>
 
-                        <div class="calc-buttons">
-                            <button class="calc-btn function" data-action="clear">C</button>
-                            <button class="calc-btn function" data-action="backspace">⌫</button>
-                            <button class="calc-btn function" data-action="percent">%</button>
-                            <button class="calc-btn operator" data-action="divide">÷</button>
+                        <div class="calc-buttons" role="group" aria-label="Botões da calculadora">
+                            <button class="calc-btn function" data-action="clear" type="button"
+                                aria-label="Limpar">C</button>
+                            <button class="calc-btn function" data-action="backspace" type="button"
+                                aria-label="Apagar">⌫</button>
+                            <button class="calc-btn function" data-action="percent" type="button"
+                                aria-label="Porcentagem">%</button>
+                            <button class="calc-btn operator" data-action="divide" type="button"
+                                aria-label="Dividir">÷</button>
 
-                            <button class="calc-btn number" data-value="7">7</button>
-                            <button class="calc-btn number" data-value="8">8</button>
-                            <button class="calc-btn number" data-value="9">9</button>
-                            <button class="calc-btn operator" data-action="multiply">×</button>
+                            <button class="calc-btn number" data-value="7" type="button">7</button>
+                            <button class="calc-btn number" data-value="8" type="button">8</button>
+                            <button class="calc-btn number" data-value="9" type="button">9</button>
+                            <button class="calc-btn operator" data-action="multiply" type="button"
+                                aria-label="Multiplicar">×</button>
 
-                            <button class="calc-btn number" data-value="4">4</button>
-                            <button class="calc-btn number" data-value="5">5</button>
-                            <button class="calc-btn number" data-value="6">6</button>
-                            <button class="calc-btn operator" data-action="subtract">−</button>
+                            <button class="calc-btn number" data-value="4" type="button">4</button>
+                            <button class="calc-btn number" data-value="5" type="button">5</button>
+                            <button class="calc-btn number" data-value="6" type="button">6</button>
+                            <button class="calc-btn operator" data-action="subtract" type="button"
+                                aria-label="Subtrair">−</button>
 
-                            <button class="calc-btn number" data-value="1">1</button>
-                            <button class="calc-btn number" data-value="2">2</button>
-                            <button class="calc-btn number" data-value="3">3</button>
-                            <button class="calc-btn operator" data-action="add">+</button>
+                            <button class="calc-btn number" data-value="1" type="button">1</button>
+                            <button class="calc-btn number" data-value="2" type="button">2</button>
+                            <button class="calc-btn number" data-value="3" type="button">3</button>
+                            <button class="calc-btn operator" data-action="add" type="button"
+                                aria-label="Somar">+</button>
 
-                            <button class="calc-btn number zero" data-value="0">0</button>
-                            <button class="calc-btn number" data-action="decimal">,</button>
-                            <button class="calc-btn equals" data-action="equals">=</button>
+                            <button class="calc-btn number zero" data-value="0" type="button">0</button>
+                            <button class="calc-btn number" data-action="decimal" type="button"
+                                aria-label="Vírgula">,</button>
+                            <button class="calc-btn equals" data-action="equals" type="button"
+                                aria-label="Igual">=</button>
                         </div>
 
                         <div class="calc-history" id="calc-history">
-                            <h3 class="history-title">📜 Histórico</h3>
-                            <div class="history-list" id="history-list"></div>
+                            <h2 class="history-title">📜 Histórico</h2>
+                            <div class="history-list" id="history-list" aria-live="polite"></div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- ========== PAINEL: CONVERSOR DE MOEDAS ========== -->
-                <div class="calc-panel" id="panel-currency">
+                <!-- PAINEL: CONVERSOR DE MOEDAS -->
+                <section class="calc-panel" id="panel-currency" role="tabpanel" aria-labelledby="tab-currency">
                     <div class="panel-content currency-panel">
+                        <h2 class="sr-only">Conversor de Moedas</h2>
                         <div class="converter-container">
                             <div class="currency-input-group">
                                 <label for="amount-from">Valor</label>
                                 <div class="currency-input-wrapper">
-                                    <input type="text" id="amount-from" placeholder="1.000,00" inputmode="decimal">
-                                    <select id="currency-from" class="currency-select">
+                                    <input type="text" id="amount-from" placeholder="1.000,00" inputmode="decimal"
+                                        aria-describedby="rate-update-info">
+                                    <select id="currency-from" class="currency-select" aria-label="Moeda de origem">
                                         <option value="BRL" selected>🇧🇷 BRL</option>
                                         <option value="USD">🇺🇸 USD</option>
                                         <option value="EUR">🇪🇺 EUR</option>
@@ -133,8 +224,9 @@
                                 </div>
                             </div>
 
-                            <button type="button" class="swap-btn" id="swap-currencies" title="Inverter moedas">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <button type="button" class="swap-btn" id="swap-currencies" aria-label="Inverter moedas">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true">
                                     <path d="M7 16L3 12M3 12L7 8M3 12H21M17 8L21 12M21 12L17 16M21 12H3"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" />
@@ -144,8 +236,8 @@
                             <div class="currency-input-group">
                                 <label for="amount-to">Resultado</label>
                                 <div class="currency-input-wrapper">
-                                    <input type="text" id="amount-to" placeholder="0,00" readonly>
-                                    <select id="currency-to" class="currency-select">
+                                    <input type="text" id="amount-to" placeholder="0,00" readonly aria-live="polite">
+                                    <select id="currency-to" class="currency-select" aria-label="Moeda de destino">
                                         <option value="BRL">🇧🇷 BRL</option>
                                         <option value="USD" selected>🇺🇸 USD</option>
                                         <option value="EUR">🇪🇺 EUR</option>
@@ -165,35 +257,38 @@
                             </div>
                         </div>
 
-                        <div class="exchange-rate-info" id="exchange-rate-info">
+                        <div class="exchange-rate-info" id="exchange-rate-info" aria-live="polite">
                             <span class="rate-label">Taxa de câmbio:</span>
                             <span class="rate-value" id="exchange-rate-value">1 BRL = 0,00 USD</span>
                         </div>
 
                         <div class="converter-footer">
-                            <p class="update-info" id="rate-update-info">
+                            <p class="update-info" id="rate-update-info" aria-live="polite">
                                 ⏳ Carregando taxas...
                             </p>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- ========== PAINEL: CALCULADORA DE JUROS ========== -->
-                <div class="calc-panel" id="panel-interest">
+                <!-- PAINEL: CALCULADORA DE JUROS -->
+                <section class="calc-panel" id="panel-interest" role="tabpanel" aria-labelledby="tab-interest">
                     <div class="panel-content interest-panel">
                         <div class="interest-wrapper">
                             <div class="interest-form-section">
+                                <h2 class="sr-only">Calculadora de Juros</h2>
                                 <form id="calculator-form" class="form">
                                     <div class="interest-type-selector">
                                         <label class="type-label">Tipo de Juros</label>
-                                        <div class="type-toggle">
-                                            <button type="button" class="type-btn active" id="type-compound">
-                                                <span class="type-icon">📈</span>
+                                        <div class="type-toggle" role="radiogroup" aria-label="Tipo de juros">
+                                            <button type="button" class="type-btn active" id="type-compound"
+                                                role="radio" aria-checked="true">
+                                                <span class="type-icon" aria-hidden="true">📈</span>
                                                 <span class="type-name">Compostos</span>
                                                 <span class="type-desc">Juros sobre juros</span>
                                             </button>
-                                            <button type="button" class="type-btn" id="type-simple">
-                                                <span class="type-icon">📊</span>
+                                            <button type="button" class="type-btn" id="type-simple" role="radio"
+                                                aria-checked="false">
+                                                <span class="type-icon" aria-hidden="true">📊</span>
                                                 <span class="type-name">Simples</span>
                                                 <span class="type-desc">Juros fixos</span>
                                             </button>
@@ -203,18 +298,18 @@
                                     <div class="input-group">
                                         <label for="initial-value">Capital Inicial</label>
                                         <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
+                                            <span class="input-prefix" aria-hidden="true">R$</span>
                                             <input type="text" id="initial-value" placeholder="10.000,00"
-                                                inputmode="decimal" required>
+                                                inputmode="decimal" required aria-label="Capital inicial em reais">
                                         </div>
                                     </div>
 
                                     <div class="input-group">
                                         <label for="monthly-contribution">Aporte Mensal</label>
                                         <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
+                                            <span class="input-prefix" aria-hidden="true">R$</span>
                                             <input type="text" id="monthly-contribution" placeholder="500,00"
-                                                inputmode="decimal">
+                                                inputmode="decimal" aria-label="Aporte mensal em reais">
                                         </div>
                                     </div>
 
@@ -223,14 +318,14 @@
                                             <label for="interest-rate">Taxa de Juros</label>
                                             <div class="input-wrapper">
                                                 <input type="text" id="interest-rate" placeholder="1,00"
-                                                    inputmode="decimal" required>
-                                                <span class="input-suffix">%</span>
+                                                    inputmode="decimal" required aria-label="Taxa de juros">
+                                                <span class="input-suffix" aria-hidden="true">%</span>
                                             </div>
-                                            <div class="toggle-group">
+                                            <div class="toggle-group" role="radiogroup" aria-label="Período da taxa">
                                                 <button type="button" class="toggle-btn active" data-value="monthly"
-                                                    id="rate-monthly">ao mês</button>
+                                                    id="rate-monthly" role="radio" aria-checked="true">ao mês</button>
                                                 <button type="button" class="toggle-btn" data-value="yearly"
-                                                    id="rate-yearly">ao ano</button>
+                                                    id="rate-yearly" role="radio" aria-checked="false">ao ano</button>
                                             </div>
                                         </div>
 
@@ -238,20 +333,20 @@
                                             <label for="period">Período</label>
                                             <div class="input-wrapper">
                                                 <input type="number" id="period" placeholder="24" min="1" max="600"
-                                                    required>
+                                                    required aria-label="Período de investimento">
                                             </div>
-                                            <div class="toggle-group">
+                                            <div class="toggle-group" role="radiogroup" aria-label="Unidade do período">
                                                 <button type="button" class="toggle-btn active" data-value="months"
-                                                    id="period-months">meses</button>
+                                                    id="period-months" role="radio" aria-checked="true">meses</button>
                                                 <button type="button" class="toggle-btn" data-value="years"
-                                                    id="period-years">anos</button>
+                                                    id="period-years" role="radio" aria-checked="false">anos</button>
                                             </div>
                                         </div>
                                     </div>
 
                                     <button type="submit" class="btn-calculate" id="btn-calculate">
                                         <span class="btn-text">Calcular</span>
-                                        <span class="btn-icon">
+                                        <span class="btn-icon" aria-hidden="true">
                                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -261,7 +356,7 @@
                                 </form>
                             </div>
 
-                            <div class="interest-results-section" id="results-card">
+                            <div class="interest-results-section" id="results-card" aria-live="polite">
                                 <h3 class="results-title">📊 Resultados</h3>
 
                                 <div class="results-grid">
@@ -286,15 +381,15 @@
                                 <div class="chart-container">
                                     <h4 class="chart-title">Evolução do Patrimônio</h4>
                                     <div class="chart-wrapper">
-                                        <canvas id="growth-chart"></canvas>
+                                        <canvas id="growth-chart" aria-label="Gráfico de evolução patrimonial"></canvas>
                                     </div>
                                     <div class="chart-legend">
                                         <div class="legend-item">
-                                            <span class="legend-color invested"></span>
+                                            <span class="legend-color invested" aria-hidden="true"></span>
                                             <span>Investido</span>
                                         </div>
                                         <div class="legend-item">
-                                            <span class="legend-color total"></span>
+                                            <span class="legend-color total" aria-hidden="true"></span>
                                             <span>Montante</span>
                                         </div>
                                     </div>
@@ -306,11 +401,11 @@
                                         <table class="breakdown-table" id="breakdown-table">
                                             <thead>
                                                 <tr>
-                                                    <th>Mês</th>
-                                                    <th>Aporte</th>
-                                                    <th>Juros</th>
-                                                    <th>Total</th>
-                                                    <th>Montante</th>
+                                                    <th scope="col">Mês</th>
+                                                    <th scope="col">Aporte</th>
+                                                    <th scope="col">Juros</th>
+                                                    <th scope="col">Total</th>
+                                                    <th scope="col">Montante</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="breakdown-body">
@@ -321,9 +416,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
-        </div>
+        </article>
 
         <footer class="footer">
             <p class="footer-main">
