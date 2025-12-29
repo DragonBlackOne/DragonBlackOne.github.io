@@ -3,8 +3,18 @@
 */
 
 /* --- Container --- */
-position: relative;
-z-index: 10;
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Header --- */
+.app-header {
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
 }
 
 .app-header .container {
