@@ -15,6 +15,8 @@
     inset: 0;
     z-index: -1;
     overflow: hidden;
+    pointer-events: none;
+    /* Critical: Allows clicks to pass through */
 }
 
 .orb {
@@ -22,6 +24,7 @@
     border-radius: 50%;
     filter: blur(80px);
     opacity: 0.5;
+    pointer-events: none;
 }
 
 .orb-1 {
@@ -58,6 +61,8 @@
 .app-header {
     padding: 2rem 0;
     margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
 }
 
 .app-header .container {
