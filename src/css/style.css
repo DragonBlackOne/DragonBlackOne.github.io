@@ -333,20 +333,16 @@ body {
 /* Navigation Tabs */
 .calc-nav {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     background: hsla(230, 25%, 8%, 0.5);
     border-bottom: 1px solid var(--border);
     padding: var(--spacing-sm);
     gap: var(--spacing-sm);
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
+    /* Removing scroll-based overflow to show all tabs */
 }
 
-.calc-nav::-webkit-scrollbar {
-    display: none;
-}
+/* Scrollbar styles removed as we are now wrapping */
 
 .nav-tab {
     flex: 0 0 auto;
