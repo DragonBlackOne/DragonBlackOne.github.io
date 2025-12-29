@@ -14,6 +14,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/main.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -129,62 +132,29 @@
             <!-- Interest Calculator -->
             <article id="tab-interest" class="tool-view">
                 <h2>Calculadora de Juros</h2>
-                <div class="converter-box">
+                <option value="compound">Juros Compostos</option>
+                <div class="input-row">
                     <div class="input-group">
-                        <label>Valor Principal (R$)</label>
-                        <input type="number" id="interest-principal" value="1000">
+                        <label>Taxa Mensal (%)</label>
+                        <input type="number" id="finance-rate" value="1.5" step="0.1">
                     </div>
-
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label>Taxa (%)</label>
-                            <input type="number" id="interest-rate" value="10">
-                        </div>
-                        <div class="input-group">
-                            <label>Tempo (Anos)</label>
-                            <input type="number" id="interest-time" value="1">
-                        </div>
-                    </div>
-
                     <div class="input-group">
-                        <label>Tipo</label>
-                        <select id="interest-type">
-                            <option value="compound">Juros Compostos</option>
-                            <option value="simple">Juros Simples</option>
-                        </select>
-                    </div>
-
-                    <button id="btn-calc-interest" class="action-btn">Calcular</button>
-
-                    <div class="result-display">
-                        <span id="interest-result">R$ 0,00</span>
+                        <label>Prazo (Meses)</label>
+                        <input type="number" id="finance-months" value="48">
                     </div>
                 </div>
-            </article>
 
-            <!-- Financing Calculator -->
-            <article id="tab-financing" class="tool-view">
-                <h2>Simulador de Financiamento (Price)</h2>
-                <div class="converter-box">
-                    <div class="input-group">
-                        <label>Valor Financiado (R$)</label>
-                        <input type="number" id="finance-amount" value="50000">
-                    </div>
+                <div class="input-group">
+                    <label>Sistema de Amortização</label>
+                    <select id="finance-type">
+                        <option value="price">Tabela PRICE (Parcelas Fixas)</option>
+                        <option value="sac">Tabela SAC (Parcelas Decrescentes)</option>
+                    </select>
+                </div>
 
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label>Taxa Mensal (%)</label>
-                            <input type="number" id="finance-rate" value="1.5" step="0.1">
-                        </div>
-                        <div class="input-group">
-                            <label>Prazo (Meses)</label>
-                            <input type="number" id="finance-months" value="48">
-                        </div>
-                    </div>
+                <button id="btn-calc-finance" class="action-btn">Simular Financiamento</button>
 
-                    <button id="btn-calc-finance" class="action-btn">Simular</button>
-
-                    <div id="finance-result" class="result-display" style="font-size: 1rem; text-align: left;"></div>
+                <div id="finance-result" class="result-display" style="font-size: 1rem; text-align: left;"></div>
                 </div>
 
                 <div class="finance-table-container">
@@ -240,26 +210,6 @@
             </article>
 
             <!-- Salary Calculator -->
-            <article id="tab-salary" class="tool-view">
-                <h2>Calculadora Salário Líquido & Inflação</h2>
-                <div class="converter-box">
-                    <div class="input-group">
-                        <label>Salário Bruto (R$)</label>
-                        <input type="number" id="salary-gross" value="3000">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Inflação Projetada a.a (%)</label>
-                        <input type="number" id="inflation-rate" value="4.5">
-                    </div>
-
-                    <button id="btn-calc-salary" class="action-btn">Calcular Líquido</button>
-
-                    <div id="salary-result" class="result-display" style="font-size: 1rem; text-align: left;"></div>
-                </div>
-            </article>
-
-            <!-- Video Player -->
             <article id="tab-video" class="tool-view">
                 <h2>Canal @0mortes</h2>
                 <div class="player-container">
