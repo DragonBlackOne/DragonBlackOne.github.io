@@ -7,63 +7,69 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Super Calculadora 2.0</title>
 
-    <!-- Fonts -->
+    <title>Super Calculadora 3.0</title>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Courier+New&display=swap"
+        rel="stylesheet">
 
-    <!-- CSS -->
+    <!-- Styles -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/main.css">
 
-    <!-- Chart.js -->
+    <!-- Libs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-    <!-- Background Effects: Removed as per user request to fix click issues -->
-    <!-- <div class="bg-effects"></div> -->
+    <!-- Ambient Background (Non-Blocking) -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
 
     <!-- Header -->
     <header class="app-header">
-        <div class="container">
+        <div class="container header-content">
             <div class="logo">
-                <div class="logo-icon">🧮</div>
-                <h1>Super Calculadora</h1>
+                <div class="icon">🚀</div>
+                <h1>Super <span>Calculadora</span></h1>
             </div>
-            <nav class="theme-nav">
-                <!-- Theme Toggles will go here -->
-            </nav>
+            <!-- Future: Theme Toggle -->
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="app-main container">
+    <!-- Main App -->
+    <main class="container">
 
         <!-- Navigation Tabs -->
-        <nav class="tool-nav">
-            <button class="nav-btn active" data-tab="standard">Calculadora</button>
-            <button class="nav-btn" data-tab="currency">Moedas</button>
-            <button class="nav-btn" data-tab="interest">Juros</button>
-            <button class="nav-btn" data-tab="financing">Financiamento</button>
-            <button class="nav-btn" data-tab="fire">FIRE</button>
-            <button class="nav-btn" data-tab="salary">Salário/Inflação</button>
+        <nav class="nav-scroll">
+            <div class="tool-nav">
+                <button class="nav-btn active" data-tab="standard">Padrão</button>
+                <button class="nav-btn" data-tab="currency">Moedas</button>
+                <button class="nav-btn" data-tab="interest">Juros Composto</button>
+                <button class="nav-btn" data-tab="financing">Financiamento</button>
+                <button class="nav-btn" data-tab="salary">Salário 2025</button>
+                <button class="nav-btn" data-tab="fire">FIRE (Aposentadoria)</button>
+            </div>
         </nav>
 
-        <!-- Tools Container -->
-        <section class="tools-container">
+        <!-- Tool Views -->
+        <section id="tools-wrapper">
 
-            <!-- Standard Calculator -->
+            <!-- 1. STANDARD CALCULATOR -->
             <article id="tab-standard" class="tool-view active">
-                <h2>Calculadora Padrão</h2>
-                <div class="calculator-container" style="display:flex; gap:1rem; flex-wrap:wrap;">
-                    <div class="calculator-grid" style="flex:1;">
+                <h2>Calculadora & Histórico</h2>
+                <div class="calc-wrapper">
+                    <!-- Keypad -->
+                    <div class="calc-keypad">
                         <div class="display" id="calc-display">0</div>
 
-                        <button class="calc-btn op" data-action="clear">C</button>
+                        <button class="calc-btn op" data-action="clear">AC</button>
                         <button class="calc-btn op">(</button>
                         <button class="calc-btn op">)</button>
                         <button class="calc-btn op">/</button>
@@ -89,233 +95,209 @@
                     </div>
 
                     <!-- History Tape -->
-                    <div class="calc-history"
-                        style="flex:1; min-width:200px; background:rgba(0,0,0,0.2); border-radius:1rem; padding:1rem; max-height:400px; overflow-y:auto; border:1px solid rgba(255,255,255,0.1);">
-                        <h3
-                            style="font-size:1rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.5rem; margin-bottom:0.5rem;">
-                            Histórico</h3>
-                        <div id="calc-history-list"
-                            style="font-family:'Courier New', monospace; font-size:0.9rem; color:#cbd5e1;">
-                            <p style="opacity:0.5; font-size:0.8rem;">Nenhum cálculo...</p>
+                    <div class="calc-history">
+                        <h3>Fita de Histórico</h3>
+                        <div id="calc-history-list" class="history-list">
+                            <p style="opacity:0.5; font-size:0.8rem;">Histórico vazio...</p>
                         </div>
-                        <button id="btn-clear-history"
-                            style="width:100%; margin-top:1rem; background:rgba(255,255,255,0.1); border:none; color:white; padding:0.5rem; border-radius:0.5rem; cursor:pointer;">Limpar
-                            Histórico</button>
+                        <button id="btn-clear-history" class="nav-btn" style="width:100%; font-size:0.8rem;">🗑️
+                            Limpar</button>
                     </div>
                 </div>
             </article>
 
-            <!-- Currency Converter -->
+            <!-- 2. CURRENCY CONVERTER -->
             <article id="tab-currency" class="tool-view">
-                <h2>Conversor de Moedas</h2>
-                <div class="converter-box">
+                <h2>Conversor de Moedas (Offline)</h2>
+                <div class="form-grid">
                     <div class="input-group">
                         <label>Valor</label>
                         <input type="number" id="currency-amount" value="1" min="0" step="0.01">
                     </div>
-
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label>De</label>
-                            <select id="currency-from">
-                                <option value="USD" selected>USD (Dólar)</option>
-                                <option value="BRL">BRL (Real)</option>
-                                <option value="EUR">EUR (Euro)</option>
-                                <option value="GBP">GBP (Libra)</option>
-                                <option value="JPY">JPY (Iene)</option>
-                                <option value="BTC">BTC (Bitcoin)</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label>Para</label>
-                            <select id="currency-to">
-                                <option value="BRL" selected>BRL (Real)</option>
-                                <option value="USD">USD (Dólar)</option>
-                                <option value="EUR">EUR (Euro)</option>
-                                <option value="GBP">GBP (Libra)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button id="btn-convert" class="action-btn">Converter</button>
-
-                    <div class="result-display">
-                        <span id="currency-result">R$ 5,00</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Interest Calculator -->
-            <article id="tab-interest" class="tool-view">
-                <h2>Calculadora de Juros</h2>
-                <div class="converter-box">
                     <div class="input-group">
-                        <label>Valor Inicial (R$)</label>
-                        <input type="number" id="interest-principal" value="1000">
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label>Aporte Mensal (R$)</label>
-                            <input type="number" id="interest-monthly" value="100">
-                        </div>
-                        <div class="input-group">
-                            <label>Taxa Anual (%)</label>
-                            <input type="number" id="interest-rate" value="10">
-                        </div>
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label>Tempo (Anos)</label>
-                            <input type="number" id="interest-time" value="5">
-                        </div>
-                        <div class="input-group">
-                            <label>Tipo</label>
-                            <select id="interest-type">
-                                <option value="compound">Compostos</option>
-                                <option value="simple">Simples</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button id="btn-calc-interest" class="action-btn">Calcular</button>
-
-                    <div id="interest-result" class="result-display"></div>
-
-                    <div style="height:300px; margin-top:2rem;">
-                        <canvas id="interestChart"></canvas>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Financing Calculator -->
-            <article id="tab-financing" class="tool-view">
-                <h2>Simulador de Financiamento</h2>
-                <div class="converter-box">
-                    <div class="input-group">
-                        <label>Valor do Imóvel/Veículo (R$)</label>
-                        <input type="number" id="finance-amount" value="200000">
-                    </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label>Taxa Mensal (%)</label>
-                            <input type="number" id="finance-rate" value="0.8" step="0.01">
-                        </div>
-                        <div class="input-group">
-                            <label>Prazo (Meses)</label>
-                            <input type="number" id="finance-months" value="360">
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label>Sistema de Amortização</label>
-                        <select id="finance-type">
-                            <option value="price">Tabela PRICE (Parcelas Fixas)</option>
-                            <option value="sac">Tabela SAC (Parcelas Decrescentes)</option>
+                        <label>De</label>
+                        <select id="currency-from">
+                            <option value="USD" selected>USD (Dólar Americano)</option>
+                            <option value="BRL">BRL (Real Brasileiro)</option>
+                            <option value="EUR">EUR (Euro)</option>
+                            <option value="GBP">GBP (Libra)</option>
+                            <option value="BTC">BTC (Bitcoin)</option>
                         </select>
                     </div>
-
-                    <div class="action-buttons" style="display:flex; gap:1rem; margin-top:1rem;">
-                        <button id="btn-calc-finance" class="action-btn" style="flex:1;">Simular Financiamento</button>
-                        <button id="btn-share-finance" class="action-btn"
-                            style="flex:0 0 auto; background:#25D366; width:50px; display:flex; align-items:center; justify-content:center; font-size:1.2rem;"
-                            title="Enviar no WhatsApp">📱</button>
+                    <div class="input-group">
+                        <label>Para</label>
+                        <select id="currency-to">
+                            <option value="BRL" selected>BRL (Real Brasileiro)</option>
+                            <option value="USD">USD (Dólar Americano)</option>
+                            <option value="EUR">EUR (Euro)</option>
+                            <option value="JPY">JPY (Iene)</option>
+                        </select>
                     </div>
-
-                    <div id="finance-result" class="result-display"></div>
                 </div>
+                <button id="btn-convert" class="action-btn">🔄 Atualizar Cotação & Converter</button>
 
-                <div class="finance-table-container">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-                        <h3>Tabela de Amortização</h3>
-                        <button onclick="window.print()"
-                            style="background:none; border:1px solid rgba(255,255,255,0.2); color:white; padding:0.3rem 0.8rem; border-radius:1rem; cursor:pointer;">🖨️
-                            PDF</button>
-                    </div>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Mês</th>
-                                    <th>Parcela</th>
-                                    <th>Juros</th>
-                                    <th>Amortização</th>
-                                    <th>Saldo</th>
-                                </tr>
-                            </thead>
-                            <tbody id="finance-table-body">
-                                <!-- Generated Rows -->
-                            </tbody>
-                        </table>
-                    </div>
+                <div id="currency-result" class="result-box"
+                    style="text-align:center; font-size:2rem; font-weight:700; color:var(--success);">
+                    R$ 0,00
                 </div>
             </article>
 
-            <!-- FIRE Calculator -->
+            <!-- 3. INTEREST CALCULATOR -->
+            <article id="tab-interest" class="tool-view">
+                <h2>Calculadora de Juros Compostos</h2>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Valor Inicial (R$)</label>
+                        <input type="number" id="interest-principal" value="5000">
+                    </div>
+                    <div class="input-group">
+                        <label>Aporte Mensal (R$)</label>
+                        <input type="number" id="interest-monthly" value="500">
+                    </div>
+                    <div class="input-group">
+                        <label>Taxa de Juros (% a.a)</label>
+                        <input type="number" id="interest-rate" value="11.75">
+                    </div>
+                    <div class="input-group">
+                        <label>Período (Anos)</label>
+                        <input type="number" id="interest-time" value="10">
+                    </div>
+                    <div class="input-group">
+                        <label>Tipo</label>
+                        <select id="interest-type">
+                            <option value="compound">Juros Compostos (Recomendado)</option>
+                            <option value="simple">Juros Simples</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="btn-calc-interest" class="action-btn">📊 Simular Investimento</button>
+
+                <div id="interest-result" class="result-box"></div>
+
+                <div style="height:350px; margin-top:2rem;">
+                    <canvas id="interestChart"></canvas>
+                </div>
+            </article>
+
+            <!-- 4. FINANCING CALCULATOR -->
+            <article id="tab-financing" class="tool-view">
+                <h2>Simulador de Financiamento</h2>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Valor do Veículo/Imóvel (R$)</label>
+                        <input type="number" id="finance-amount" value="300000">
+                    </div>
+                    <div class="input-group">
+                        <label>Taxa de Juros Mensal (%)</label>
+                        <input type="number" id="finance-rate" value="0.9" step="0.01">
+                    </div>
+                    <div class="input-group">
+                        <label>Prazo (Meses)</label>
+                        <input type="number" id="finance-months" value="360">
+                    </div>
+                    <div class="input-group">
+                        <label>Tabela de Amortização</label>
+                        <select id="finance-type">
+                            <option value="sac">SAC (Parcelas Decrescentes - Mais Comum)</option>
+                            <option value="price">PRICE (Parcelas Fixas)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:1rem; margin-top:1rem;">
+                    <button id="btn-calc-finance" class="action-btn" style="flex:2;">🏦 Simular Agora</button>
+                    <button id="btn-share-finance" class="action-btn" style="flex:1; background:#25D366;"
+                        title="Enviar no WhatsApp">
+                        💬 WhatsApp
+                    </button>
+                </div>
+
+                <div id="finance-result" class="result-box"></div>
+
+                <div class="finance-table-container table-container" style="display:none;">
+                    <div
+                        style="display:flex; justify-content:space-between; align-items:center; padding:1rem; border-bottom:1px solid var(--border-color);">
+                        <h3>Detalhamento das Parcelas</h3>
+                        <button onclick="window.print()" class="nav-btn">🖨️ Salvar PDF</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mês</th>
+                                <th>Parcela</th>
+                                <th>Juros</th>
+                                <th>Amortização</th>
+                                <th>Saldo Devedor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="finance-table-body"></tbody>
+                    </table>
+                </div>
+            </article>
+
+            <!-- 5. FIRE CALCULATOR -->
             <article id="tab-fire" class="tool-view">
-                <h2>Calculadora FIRE (Independência Financeira)</h2>
-                <div class="converter-box">
+                <h2>FIRE: Independência Financeira</h2>
+                <div class="form-grid">
                     <div class="input-group">
                         <label>Patrimônio Atual (R$)</label>
-                        <input type="number" id="fire-current" value="10000">
+                        <input type="number" id="fire-current" value="20000">
                     </div>
-
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label>Aporte Mensal (R$)</label>
-                            <input type="number" id="fire-monthly" value="2000">
-                        </div>
-                        <div class="input-group">
-                            <label>Rentabilidade Anual (%)</label>
-                            <input type="number" id="fire-rate" value="10">
-                        </div>
+                    <div class="input-group">
+                        <label>Aporte Mensal (R$)</label>
+                        <input type="number" id="fire-monthly" value="3000">
                     </div>
-
+                    <div class="input-group">
+                        <label>Rentabilidade (% a.a acm. inflação)</label>
+                        <input type="number" id="fire-rate" value="6" placeholder="Ex: 6% acima da inflação">
+                    </div>
                     <div class="input-group">
                         <label>Gasto Mensal na Aposentadoria (R$)</label>
-                        <input type="number" id="fire-expense" value="5000">
+                        <input type="number" id="fire-expense" value="7000">
                     </div>
-
-                    <button id="btn-calc-fire" class="action-btn">Calcular Independência</button>
-
-                    <div id="fire-result" class="result-display"></div>
                 </div>
+
+                <button id="btn-calc-fire" class="action-btn">🔥 Calcular Liberdade</button>
+
+                <div id="fire-result" class="result-box"></div>
             </article>
 
-            <!-- Salary Calculator -->
+            <!-- 6. SALARY CALCULATOR -->
             <article id="tab-salary" class="tool-view">
-                <h2>Calculadora de Salário Líquido (2025)</h2>
-                <div class="converter-box">
+                <h2>Salário Líquido (Regras 2025)</h2>
+                <div class="form-grid">
                     <div class="input-group">
                         <label>Salário Bruto (R$)</label>
-                        <input type="number" id="salary-gross" placeholder="Ex: 3000">
+                        <input type="number" id="salary-gross" value="5000">
                     </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label>Dependentes</label>
-                            <input type="number" id="salary-dependents" value="0">
-                        </div>
-                        <div class="input-group">
-                            <label>Outros Descontos</label>
-                            <input type="number" id="salary-discounts" value="0">
-                        </div>
-                    </div>
-                    <!-- Inflation rate hidden/optional if module handles it, or add input if salary.js uses it -->
-                    <!-- salary.js uses: salary-gross, salary-dependents, salary-discounts, inflation-rate, btn-calc-salary, salary-result -->
                     <div class="input-group">
-                        <label>Taxa de Inflação Estimada (% Anual)</label>
+                        <label>Número de Dependentes</label>
+                        <input type="number" id="salary-dependents" value="0">
+                    </div>
+                    <div class="input-group">
+                        <label>Outros Descontos (R$)</label>
+                        <input type="number" id="salary-discounts" value="0">
+                    </div>
+                    <div class="input-group">
+                        <label>Inflação Estimada (% a.a)</label>
                         <input type="number" id="inflation-rate" value="4.5">
                     </div>
-
-                    <button id="btn-calc-salary" class="action-btn">Calcular Salário Líquido</button>
-                    <div id="salary-result" class="result-display"></div>
                 </div>
+
+                <button id="btn-calc-salary" class="action-btn">💰 Calcular Descontos</button>
+
+                <div id="salary-result" class="result-box"></div>
             </article>
 
         </section>
 
-        <!-- Persistent Video Section -->
-        <section class="video-section container" style="margin-top: 3rem; margin-bottom: 2rem;">
-            <h2>Último Vídeo do Canal</h2>
-            <div class="player-container">
+        <!-- Video Section (Persistent) -->
+        <section class="video-section" style="margin-top:4rem;">
+            <h2 style="font-size:1.2rem; color:var(--text-muted); margin-bottom:1rem; text-align:center;">
+                📺 Último Vídeo do Canal
+            </h2>
+            <div class="video-frame">
                 <iframe width="100%" height="100%"
                     src="https://www.youtube.com/embed/videoseries?list=UUipaetWc3-bmoUmzag5a5pA"
                     title="YouTube video player" frameborder="0"
@@ -324,15 +306,13 @@
                 </iframe>
             </div>
         </section>
+
     </main>
 
     <!-- Footer -->
-    <footer class="app-footer">
-        <div class="container">
-            <p>&copy; 2025 Super Calculadora. <strong>Prova de Conceito</strong>.</p>
-            <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">Calculadoras e código gerados por Inteligência
-                Artificial.</p>
-        </div>
+    <footer class="app-footer container">
+        <p>&copy; 2025 Super Calculadora 3.0</p>
+        <p style="opacity:0.6; margin-top:0.5rem;">Desenvolvido com IA • Prova de Conceito</p>
     </footer>
 
     <!-- Scripts -->

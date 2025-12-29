@@ -8,6 +8,7 @@ export function initTabs() {
 
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
+            console.log('Tab Clicked:', btn.dataset.tab);
             const targetId = btn.dataset.tab;
 
             // Toggle Buttons
