@@ -5,7 +5,9 @@
 */
 
 export function initVideoPlayer() {
-    if (document.getElementById('video-container')) {
+    // Only init Starlight Custom Player if the video element exists
+    // (If using YouTube Iframe, we skip this to avoid errors)
+    if (document.getElementById('video-container') && document.getElementById('main-video')) {
         window.player = new StarlightPlayer();
     }
 }
