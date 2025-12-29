@@ -20,6 +20,7 @@ import { initSharing } from './modules/sharing.js';
 import { playClick } from './modules/audio.js';
 import { formatCurrencyInput } from './modules/utils.js';
 import { initThemeSystem, createThemeSelector } from './modules/themes.js';
+import { initVideoPlayer } from './modules/player.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Inicialização de Módulos de Infra
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPrepaymentCalculator();
     initI18n();
     initSharing();
+    initVideoPlayer();
 
     // Global Audio Feedback
     document.addEventListener('click', (e) => {
