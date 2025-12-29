@@ -51,19 +51,28 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Fetch: Network First for HTML, Cache First for assets, or Stale-While-Revalidate
-// Simple implementation: Cache First, falling back to network
+// Fetch: Network First for HTML to ensure updates are seen
 self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request).then((response) => {
-            if (response) {
-                return response;
-            }
-            return fetch(event.request).then((response) => {
-                // Determine if we should cache new requests dynamically
-                // For now, strict static caching is safer for version control
-                return response;
-            });
-        })
-    );
+    // For HTML, go to network first, fall back to cache
+    if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+        event.respondWith(
+            fetch(event.request)
+                .then(response => {
+                    return caches.open(CACHE_NAME).then(cache => {
+                        cache.put(event.request, response.clone());
+                        return response;
+                    });
+                })
+                .catch(() => {
+                    return caches.match(event.request);
+                })
+        );
+    } else {
+        // For assets (CSS, JS, Images), go to Cache first, then Network
+        event.respondWith(
+            caches.match(event.request).then((response) => {
+                return response || fetch(event.request);
+            })
+        );
+    }
 });
