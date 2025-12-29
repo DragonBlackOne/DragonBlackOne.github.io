@@ -146,6 +146,115 @@
                         <span id="currency-result">R$ 5,00</span>
                     </div>
                 </div>
+            </article>
+
+            <!-- Interest Calculator -->
+            <article id="tab-interest" class="tool-view">
+                <h2>Calculadora de Juros</h2>
+                <div class="converter-box">
+                    <div class="input-group">
+                        <label>Valor Inicial (R$)</label>
+                        <input type="number" id="interest-principal" value="1000">
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Aporte Mensal (R$)</label>
+                            <input type="number" id="interest-monthly" value="100">
+                        </div>
+                        <div class="input-group">
+                            <label>Taxa Anual (%)</label>
+                            <input type="number" id="interest-rate" value="10">
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Tempo (Anos)</label>
+                            <input type="number" id="interest-time" value="5">
+                        </div>
+                        <div class="input-group">
+                            <label>Tipo</label>
+                            <select id="interest-type">
+                                <option value="compound">Compostos</option>
+                                <option value="simple">Simples</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="btn-calc-interest" class="action-btn">Calcular</button>
+
+                    <div id="interest-result" class="result-display"></div>
+
+                    <div style="height:300px; margin-top:2rem;">
+                        <canvas id="interestChart"></canvas>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Financing Calculator -->
+            <article id="tab-financing" class="tool-view">
+                <h2>Simulador de Financiamento</h2>
+                <div class="converter-box">
+                    <div class="input-group">
+                        <label>Valor do Imóvel/Veículo (R$)</label>
+                        <input type="number" id="finance-amount" value="200000">
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Taxa Mensal (%)</label>
+                            <input type="number" id="finance-rate" value="0.8" step="0.01">
+                        </div>
+                        <div class="input-group">
+                            <label>Prazo (Meses)</label>
+                            <input type="number" id="finance-months" value="360">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Sistema de Amortização</label>
+                        <select id="finance-type">
+                            <option value="price">Tabela PRICE (Parcelas Fixas)</option>
+                            <option value="sac">Tabela SAC (Parcelas Decrescentes)</option>
+                        </select>
+                    </div>
+
+                    <div class="action-buttons" style="display:flex; gap:1rem; margin-top:1rem;">
+                        <button id="btn-calc-finance" class="action-btn" style="flex:1;">Simular Financiamento</button>
+                        <button id="btn-share-finance" class="action-btn"
+                            style="flex:0 0 auto; background:#25D366; width:50px; display:flex; align-items:center; justify-content:center; font-size:1.2rem;"
+                            title="Enviar no WhatsApp">📱</button>
+                    </div>
+
+                    <div id="finance-result" class="result-display"></div>
+                </div>
+
+                <div class="finance-table-container">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <h3>Tabela de Amortização</h3>
+                        <button onclick="window.print()"
+                            style="background:none; border:1px solid rgba(255,255,255,0.2); color:white; padding:0.3rem 0.8rem; border-radius:1rem; cursor:pointer;">🖨️
+                            PDF</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mês</th>
+                                    <th>Parcela</th>
+                                    <th>Juros</th>
+                                    <th>Amortização</th>
+                                    <th>Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="finance-table-body">
+                                <!-- Generated Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </article>
+
+            <!-- FIRE Calculator -->
+            <article id="tab-fire" class="tool-view">
+                <h2>Calculadora FIRE (Independência Financeira)</h2>
                 <div class="converter-box">
                     <div class="input-group">
                         <label>Patrimônio Atual (R$)</label>
@@ -168,12 +277,39 @@
                         <input type="number" id="fire-expense" value="5000">
                     </div>
 
-                    <div class="action-buttons" style="display:flex; gap:1rem; margin-top:1rem;">
-                        <button id="btn-calc-fire" class="action-btn" style="flex:1;">Calcular Independência</button>
-                        <!-- Future: Add Share for FIRE too if needed, keeping it simple for now as requested for Financing primarily -->
+                    <button id="btn-calc-fire" class="action-btn">Calcular Independência</button>
+
+                    <div id="fire-result" class="result-display"></div>
+                </div>
+            </article>
+
+            <!-- Salary Calculator -->
+            <article id="tab-salary" class="tool-view">
+                <h2>Calculadora de Salário Líquido (2025)</h2>
+                <div class="converter-box">
+                    <div class="input-group">
+                        <label>Salário Bruto (R$)</label>
+                        <input type="number" id="salary-gross" placeholder="Ex: 3000">
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Dependentes</label>
+                            <input type="number" id="salary-dependents" value="0">
+                        </div>
+                        <div class="input-group">
+                            <label>Outros Descontos</label>
+                            <input type="number" id="salary-discounts" value="0">
+                        </div>
+                    </div>
+                    <!-- Inflation rate hidden/optional if module handles it, or add input if salary.js uses it -->
+                    <!-- salary.js uses: salary-gross, salary-dependents, salary-discounts, inflation-rate, btn-calc-salary, salary-result -->
+                    <div class="input-group">
+                        <label>Taxa de Inflação Estimada (% Anual)</label>
+                        <input type="number" id="inflation-rate" value="4.5">
                     </div>
 
-                    <div id="fire-result" class="result-display" style="font-size: 1rem; text-align: left;"></div>
+                    <button id="btn-calc-salary" class="action-btn">Calcular Salário Líquido</button>
+                    <div id="salary-result" class="result-display"></div>
                 </div>
             </article>
 
