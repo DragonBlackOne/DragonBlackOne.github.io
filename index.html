@@ -146,30 +146,6 @@
                         <span id="currency-result">R$ 5,00</span>
                     </div>
                 </div>
-            </article>
-
-            <!-- Interest Calculator -->
-            <article id="tab-interest" class="tool-view">
-                <h2>Calculadora de Juros</h2>
-                <option value="compound">Juros Compostos</option>
-                <div class="input-row">
-                    <div class="input-group">
-                        <label>Taxa Mensal (%)</label>
-                        <input type="number" id="finance-rate" value="1.5" step="0.1">
-                    </div>
-                    </tr>
-                    </thead>
-                    <tbody id="finance-table-body">
-                        <!-- Generated Rows -->
-                    </tbody>
-                    </table>
-                </div>
-                </div>
-            </article>
-
-            <!-- FIRE Calculator -->
-            <article id="tab-fire" class="tool-view">
-                <h2>Calculadora FIRE (Independência Financeira)</h2>
                 <div class="converter-box">
                     <div class="input-group">
                         <label>Patrimônio Atual (R$)</label>
@@ -192,7 +168,10 @@
                         <input type="number" id="fire-expense" value="5000">
                     </div>
 
-                    <button id="btn-calc-fire" class="action-btn">Calcular Independência</button>
+                    <div class="action-buttons" style="display:flex; gap:1rem; margin-top:1rem;">
+                        <button id="btn-calc-fire" class="action-btn" style="flex:1;">Calcular Independência</button>
+                        <!-- Future: Add Share for FIRE too if needed, keeping it simple for now as requested for Financing primarily -->
+                    </div>
 
                     <div id="fire-result" class="result-display" style="font-size: 1rem; text-align: left;"></div>
                 </div>
