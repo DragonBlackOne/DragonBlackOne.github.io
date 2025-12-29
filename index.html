@@ -62,32 +62,49 @@
             <!-- Standard Calculator -->
             <article id="tab-standard" class="tool-view active">
                 <h2>Calculadora Padrão</h2>
-                <div class="calculator-grid">
-                    <div class="display" id="calc-display">0</div>
+                <div class="calculator-container" style="display:flex; gap:1rem; flex-wrap:wrap;">
+                    <div class="calculator-grid" style="flex:1;">
+                        <div class="display" id="calc-display">0</div>
 
-                    <button class="calc-btn op" data-action="clear">C</button>
-                    <button class="calc-btn op">(</button>
-                    <button class="calc-btn op">)</button>
-                    <button class="calc-btn op">/</button>
+                        <button class="calc-btn op" data-action="clear">C</button>
+                        <button class="calc-btn op">(</button>
+                        <button class="calc-btn op">)</button>
+                        <button class="calc-btn op">/</button>
 
-                    <button class="calc-btn">7</button>
-                    <button class="calc-btn">8</button>
-                    <button class="calc-btn">9</button>
-                    <button class="calc-btn op">*</button>
+                        <button class="calc-btn">7</button>
+                        <button class="calc-btn">8</button>
+                        <button class="calc-btn">9</button>
+                        <button class="calc-btn op">*</button>
 
-                    <button class="calc-btn">4</button>
-                    <button class="calc-btn">5</button>
-                    <button class="calc-btn">6</button>
-                    <button class="calc-btn op">-</button>
+                        <button class="calc-btn">4</button>
+                        <button class="calc-btn">5</button>
+                        <button class="calc-btn">6</button>
+                        <button class="calc-btn op">-</button>
 
-                    <button class="calc-btn">1</button>
-                    <button class="calc-btn">2</button>
-                    <button class="calc-btn">3</button>
-                    <button class="calc-btn op">+</button>
+                        <button class="calc-btn">1</button>
+                        <button class="calc-btn">2</button>
+                        <button class="calc-btn">3</button>
+                        <button class="calc-btn op">+</button>
 
-                    <button class="calc-btn zero">0</button>
-                    <button class="calc-btn">.</button>
-                    <button class="calc-btn action" data-action="eval">=</button>
+                        <button class="calc-btn zero">0</button>
+                        <button class="calc-btn">.</button>
+                        <button class="calc-btn action" data-action="eval">=</button>
+                    </div>
+
+                    <!-- History Tape -->
+                    <div class="calc-history"
+                        style="flex:1; min-width:200px; background:rgba(0,0,0,0.2); border-radius:1rem; padding:1rem; max-height:400px; overflow-y:auto; border:1px solid rgba(255,255,255,0.1);">
+                        <h3
+                            style="font-size:1rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.5rem; margin-bottom:0.5rem;">
+                            Histórico</h3>
+                        <div id="calc-history-list"
+                            style="font-family:'Courier New', monospace; font-size:0.9rem; color:#cbd5e1;">
+                            <p style="opacity:0.5; font-size:0.8rem;">Nenhum cálculo...</p>
+                        </div>
+                        <button id="btn-clear-history"
+                            style="width:100%; margin-top:1rem; background:rgba(255,255,255,0.1); border:none; color:white; padding:0.5rem; border-radius:0.5rem; cursor:pointer;">Limpar
+                            Histórico</button>
+                    </div>
                 </div>
             </article>
 
@@ -140,43 +157,13 @@
                         <label>Taxa Mensal (%)</label>
                         <input type="number" id="finance-rate" value="1.5" step="0.1">
                     </div>
-                    <div class="input-group">
-                        <label>Prazo (Meses)</label>
-                        <input type="number" id="finance-months" value="48">
-                    </div>
+                    </tr>
+                    </thead>
+                    <tbody id="finance-table-body">
+                        <!-- Generated Rows -->
+                    </tbody>
+                    </table>
                 </div>
-
-                <div class="input-group">
-                    <label>Sistema de Amortização</label>
-                    <select id="finance-type">
-                        <option value="price">Tabela PRICE (Parcelas Fixas)</option>
-                        <option value="sac">Tabela SAC (Parcelas Decrescentes)</option>
-                    </select>
-                </div>
-
-                <button id="btn-calc-finance" class="action-btn">Simular Financiamento</button>
-
-                <div id="finance-result" class="result-display" style="font-size: 1rem; text-align: left;"></div>
-                </div>
-
-                <div class="finance-table-container">
-                    <h3>Tabela de Amortização</h3>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Mês</th>
-                                    <th>Parcela</th>
-                                    <th>Juros</th>
-                                    <th>Amortização</th>
-                                    <th>Saldo</th>
-                                </tr>
-                            </thead>
-                            <tbody id="finance-table-body">
-                                <!-- Generated Rows -->
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </article>
 

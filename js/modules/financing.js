@@ -1,18 +1,22 @@
 /**
  * Financing Calculator Module
  * Supports Price (Fixed PMT) and SAC (Fixed Amortization)
+ * With WhatsApp Share
  */
 
 export function initFinancing() {
     const amountInput = document.getElementById('finance-amount');
     const rateInput = document.getElementById('finance-rate');
     const monthsInput = document.getElementById('finance-months');
-    const typeSelect = document.getElementById('finance-type'); // NEW
+    const typeSelect = document.getElementById('finance-type');
     const calcBtn = document.getElementById('btn-calc-finance');
     const resultEl = document.getElementById('finance-result');
     const tableBody = document.getElementById('finance-table-body');
+    const shareBtn = document.getElementById('btn-share-finance'); // New
 
     if (!amountInput) return;
+
+    let lastResult = null;
 
     const calculate = () => {
         const P = parseFloat(amountInput.value);
@@ -47,7 +51,7 @@ export function initFinancing() {
             }
 
             balance -= amortization;
-            if (balance < 0.01) balance = 0; // Floating point fix
+            if (balance < 0.01) balance = 0;
 
             totalPaid += pmt;
             totalInterest += interest;
@@ -81,9 +85,27 @@ export function initFinancing() {
             </div>
         `;
 
+        lastResult = {
+            parcela: installmentText,
+            total: formatCurrency(totalPaid),
+            juros: formatCurrency(totalInterest)
+        };
+
         if (tableBody) tableBody.innerHTML = html;
         document.querySelector('.finance-table-container').classList.add('visible');
     };
+
+    if (shareBtn) {
+        shareBtn.addEventListener('click', () => {
+            if (!lastResult) {
+                alert('Faça uma simulação antes de compartilhar!');
+                return;
+            }
+            const text = `🏠 *Simulação de Financiamento*\n\n💰 *Parcela:* ${lastResult.parcela}\n📊 *Total Juros:* ${lastResult.juros}\n💸 *Total Pago:* ${lastResult.total}\n\nGerado por: Super Calculadora 2.0`;
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        });
+    }
 
     const formatCurrency = (val) => val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
