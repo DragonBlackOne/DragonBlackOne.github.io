@@ -1,0 +1,68 @@
+/* 
+  🎨 Super Calculadora Design System
+  Variables & Reset
+*/
+
+:root {
+    /* Brand Colors */
+    --primary-hue: 250;
+    --primary: hsl(var(--primary-hue), 100%, 65%);
+    --primary-dark: hsl(var(--primary-hue), 100%, 55%);
+    --primary-glow: hsla(var(--primary-hue), 100%, 65%, 0.4);
+
+    --secondary-hue: 170;
+    --secondary: hsl(var(--secondary-hue), 100%, 50%);
+
+    /* UI Colors */
+    --bg-body: hsl(230, 25%, 8%);
+    --bg-card: hsla(230, 25%, 12%, 0.9);
+    --bg-input: hsla(230, 25%, 16%, 0.6);
+
+    --text-primary: hsl(230, 15%, 98%);
+    --text-secondary: hsl(230, 15%, 70%);
+    --text-muted: hsl(230, 15%, 50%);
+
+    --border: hsla(230, 25%, 30%, 0.5);
+
+    /* Spacing & Radius */
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 9999px;
+
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
+
+    /* Transitions */
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+input {
+    font-family: inherit;
+}

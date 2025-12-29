@@ -2,1084 +2,289 @@
 <html lang="pt-BR">
 
 <head>
-
-    <!-- Meta Tags Básicas -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Super Calculadora 2.0</title>
 
-    <!-- SEO Meta Tags -->
-    <title>Super Calculadora Online Grátis | Calculadora, Conversor de Moedas e Juros</title>
-    <meta name="description"
-        content="Super Calculadora online grátis: calculadora padrão com histórico, conversor de moedas em tempo real (14 moedas + Bitcoin), e calculadora de juros simples e compostos com gráficos. Ferramenta completa para suas finanças.">
-    <meta name="keywords"
-        content="calculadora online, conversor de moedas, calculadora de juros, juros compostos, juros simples, calculadora financeira, conversor dólar real, calculadora grátis, super calculadora">
-    <meta name="author" content="DragonBlackOne">
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://dragonblackone.github.io/">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dragonblackone.github.io/">
-    <meta property="og:title" content="Super Calculadora Online Grátis | Calculadora, Conversor e Juros">
-    <meta property="og:description"
-        content="Calculadora online completa: calculadora padrão, conversor de moedas em tempo real e calculadora de juros compostos com gráficos. Tudo em uma ferramenta!">
-    <meta property="og:image" content="https://dragonblackone.github.io/og-image.png">
-    <meta property="og:locale" content="pt_BR">
-    <meta property="og:site_name" content="Super Calculadora">
-
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://dragonblackone.github.io/">
-    <meta name="twitter:title" content="Super Calculadora Online Grátis">
-    <meta name="twitter:description"
-        content="Calculadora, conversor de moedas e juros compostos em uma única ferramenta online grátis.">
-    <meta name="twitter:image" content="https://dragonblackone.github.io/og-image.png">
-
-    <!-- Tema e Cores -->
-    <meta name="theme-color" content="#6366f1">
-    <meta name="msapplication-TileColor" content="#6366f1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Super Calc">
-
-    <!-- Manifest e Favicon -->
-    <link rel="manifest" href="manifest.json">
-
-    <!-- Preconnect para Performance -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://api.exchangerate-api.com">
-
-    <!-- Fontes -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/player.css">
-
-    <!-- External Libs -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-    <!-- Dados Estruturados (Schema.org) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Super Calculadora",
-        "description": "Calculadora online grátis com calculadora padrão, conversor de moedas em tempo real e calculadora de juros simples e compostos.",
-        "url": "https://dragonblackone.github.io/",
-        "applicationCategory": "FinanceApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "BRL"
-        },
-        "author": {
-            "@type": "Person",
-            "name": "DragonBlackOne",
-            "url": "https://www.youtube.com/@0mortes"
-        },
-        "featureList": [
-            "Calculadora padrão com histórico",
-            "Conversor de moedas em tempo real",
-            "14 moedas internacionais + Bitcoin",
-            "Calculadora de juros simples",
-            "Calculadora de juros compostos",
-            "Gráficos de evolução patrimonial",
-            "Interface responsiva"
-        ],
-        "inLanguage": "pt-BR"
-    }
-    </script>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-    <div class="background-effects" aria-hidden="true">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
+
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
     </div>
 
-    <main class="container">
-        <header class="header">
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container">
             <div class="logo">
-                <div class="logo-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </div>
-                <h1 data-i18n="title">Super Calculadora</h1>
+                <div class="logo-icon">🧮</div>
+                <h1>Super Calculadora</h1>
             </div>
-            <div class="header-controls">
-                <div class="lang-selector" id="lang-selector">
-                    <button class="lang-btn active" data-lang="pt">PT</button>
-                    <button class="lang-btn" data-lang="en">EN</button>
-                    <button class="lang-btn" data-lang="es">ES</button>
-                </div>
-                <button class="btn-share" id="global-share-btn" title="Compartilhar Simulação">
-                    <span>🔗</span>
-                </button>
-            </div>
-        </header>
-
-        <!-- SUPER CALCULADORA INTEGRADA -->
-        <article class="super-calculator" role="application" aria-label="Super Calculadora">
-            <!-- Navegação por Abas -->
-            <nav class="calc-nav" role="tablist" aria-label="Ferramentas da calculadora">
-                <button class="nav-tab active" data-tab="standard" type="button" role="tab" aria-selected="true"
-                    aria-controls="panel-standard" id="tab-standard">
-                    <span class="nav-icon" aria-hidden="true">🔢</span>
-                    <span class="nav-text">Calculadora</span>
-                </button>
-                <button class="nav-tab" data-tab="currency" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-currency" id="tab-currency">
-                    <span class="nav-icon" aria-hidden="true">💱</span>
-                    <span class="nav-text">Moedas</span>
-                </button>
-                <button class="nav-tab" data-tab="interest" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-interest" id="tab-interest">
-                    <span class="nav-icon" aria-hidden="true">💰</span>
-                    <span class="nav-text">Juros</span>
-                </button>
-                <button class="nav-tab" data-tab="units" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-units" id="tab-units">
-                    <span class="nav-icon" aria-hidden="true">📏</span>
-                    <span class="nav-text">Unidades</span>
-                </button>
-                <button class="nav-tab" data-tab="financing" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-financing" id="tab-financing">
-                    <span class="nav-icon" aria-hidden="true">🏢</span>
-                    <span class="nav-text">Financiar</span>
-                </button>
-                <button class="nav-tab" data-tab="dates" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-dates" id="tab-dates">
-                    <span class="nav-icon" aria-hidden="true">📅</span>
-                    <span class="nav-text">Datas</span>
-                </button>
-                <button class="nav-tab" data-tab="fire" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-fire" id="tab-fire">
-                    <span class="nav-icon" aria-hidden="true">🔥</span>
-                    <span class="nav-text" data-i18n="fire">FIRE</span>
-                </button>
-                <button class="nav-tab" data-tab="salary" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-salary" id="tab-salary">
-                    <span class="nav-icon" aria-hidden="true">💼</span>
-                    <span class="nav-text" data-i18n="salary">Salário</span>
-                </button>
-                <button class="nav-tab" data-tab="inflation" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-inflation" id="tab-inflation">
-                    <span class="nav-icon" aria-hidden="true">📉</span>
-                    <span class="nav-text" data-i18n="inflation">Inflação</span>
-                </button>
-                <button class="nav-tab" data-tab="prepayment" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-prepayment" id="tab-prepayment">
-                    <span class="nav-icon" aria-hidden="true">💰</span>
-                    <span class="nav-text" data-i18n="prepayment">Antecipação</span>
-                </button>
-                <button class="nav-tab" data-tab="tools" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-tools" id="tab-tools">
-                    <span class="nav-icon" aria-hidden="true">🛠️</span>
-                    <span class="nav-text" data-i18n="tools">Úteis</span>
-                </button>
-                <button class="nav-tab" data-tab="video" type="button" role="tab" aria-selected="false"
-                    aria-controls="panel-video" id="tab-video">
-                    <span class="nav-icon" aria-hidden="true">🎬</span>
-                    <span class="nav-text">Vídeo</span>
-                </button>
+            <nav class="theme-nav">
+                <!-- Theme Toggles will go here -->
             </nav>
+        </div>
+    </header>
 
-            <!-- Painéis das Calculadoras -->
-            <div class="calc-panels">
+    <!-- Main Content -->
+    <main class="app-main container">
 
-                <!-- PAINEL: CALCULADORA PADRÃO -->
-                <section class="calc-panel active" id="panel-standard" role="tabpanel" aria-labelledby="tab-standard">
-                    <div class="panel-content">
-                        <div class="calc-display" aria-live="polite">
-                            <div class="calc-expression" id="calc-expression"></div>
-                            <div class="calc-result" id="calc-result">0</div>
-                        </div>
+        <!-- Navigation Tabs -->
+        <nav class="tool-nav">
+            <button class="nav-btn active" data-tab="standard">Calculadora</button>
+            <button class="nav-btn" data-tab="currency">Moedas</button>
+            <button class="nav-btn" data-tab="interest">Juros</button>
+            <button class="nav-btn" data-tab="financing">Financiamento</button>
+            <button class="nav-btn" data-tab="fire">FIRE</button>
+            <button class="nav-btn" data-tab="salary">Salário</button>
+            <button class="nav-btn" data-tab="video">Vídeo</button>
+        </nav>
 
-                        <div class="calc-controls">
-                            <button class="mode-toggle-btn" id="scientific-toggle" type="button">
-                                <span class="toggle-text" data-i18n="scientific_mode">Modo Científico</span>
-                                <div class="toggle-switch"></div>
-                            </button>
-                        </div>
+        <!-- Tools Container -->
+        <section class="tools-container">
 
-                        <div class="calc-buttons" id="standard-buttons" role="group" aria-label="Botões da calculadora">
-                            <!-- Botões Científicos (Ocultos por padrão) -->
-                            <div class="scientific-grid" id="scientific-grid">
-                                <button class="calc-btn sci" data-action="sin" type="button">sin</button>
-                                <button class="calc-btn sci" data-action="cos" type="button">cos</button>
-                                <button class="calc-btn sci" data-action="tan" type="button">tan</button>
-                                <button class="calc-btn sci" data-action="log" type="button">log</button>
-                                <button class="calc-btn sci" data-action="ln" type="button">ln</button>
-                                <button class="calc-btn sci" data-action="pi" type="button">π</button>
-                                <button class="calc-btn sci" data-action="e" type="button">e</button>
-                                <button class="calc-btn sci" data-action="pow" type="button">xʸ</button>
-                                <button class="calc-btn sci" data-action="sqrt" type="button">√</button>
-                                <button class="calc-btn sci" data-action="open-paren" type="button">(</button>
-                                <button class="calc-btn sci" data-action="close-paren" type="button">)</button>
-                                <button class="calc-btn sci" data-action="rand" type="button"
-                                    title="Número Aleatório">RND</button>
-                            </div>
+            <!-- Standard Calculator -->
+            <article id="tab-standard" class="tool-view active">
+                <h2>Calculadora Padrão</h2>
+                <div class="calculator-grid">
+                    <div class="display" id="calc-display">0</div>
 
-                            <button class="calc-btn function" data-action="clear" type="button"
-                                aria-label="Limpar">C</button>
-                            <button class="calc-btn function" data-action="backspace" type="button"
-                                aria-label="Apagar">⌫</button>
-                            <button class="calc-btn function" data-action="percent" type="button"
-                                aria-label="Porcentagem">%</button>
-                            <button class="calc-btn operator" data-action="divide" type="button"
-                                aria-label="Dividir">÷</button>
+                    <button class="calc-btn op" data-action="clear">C</button>
+                    <button class="calc-btn op">(</button>
+                    <button class="calc-btn op">)</button>
+                    <button class="calc-btn op">/</button>
 
-                            <button class="calc-btn number" data-value="7" type="button">7</button>
-                            <button class="calc-btn number" data-value="8" type="button">8</button>
-                            <button class="calc-btn number" data-value="9" type="button">9</button>
-                            <button class="calc-btn operator" data-action="multiply" type="button"
-                                aria-label="Multiplicar">×</button>
+                    <button class="calc-btn">7</button>
+                    <button class="calc-btn">8</button>
+                    <button class="calc-btn">9</button>
+                    <button class="calc-btn op">*</button>
 
-                            <button class="calc-btn number" data-value="4" type="button">4</button>
-                            <button class="calc-btn number" data-value="5" type="button">5</button>
-                            <button class="calc-btn number" data-value="6" type="button">6</button>
-                            <button class="calc-btn operator" data-action="subtract" type="button"
-                                aria-label="Subtrair">−</button>
+                    <button class="calc-btn">4</button>
+                    <button class="calc-btn">5</button>
+                    <button class="calc-btn">6</button>
+                    <button class="calc-btn op">-</button>
 
-                            <button class="calc-btn number" data-value="1" type="button">1</button>
-                            <button class="calc-btn number" data-value="2" type="button">2</button>
-                            <button class="calc-btn number" data-value="3" type="button">3</button>
-                            <button class="calc-btn operator" data-action="add" type="button"
-                                aria-label="Somar">+</button>
+                    <button class="calc-btn">1</button>
+                    <button class="calc-btn">2</button>
+                    <button class="calc-btn">3</button>
+                    <button class="calc-btn op">+</button>
 
-                            <button class="calc-btn number zero" data-value="0" type="button">0</button>
-                            <button class="calc-btn number" data-action="decimal" type="button"
-                                aria-label="Vírgula">,</button>
-                            <button class="calc-btn equals" data-action="equals" type="button"
-                                aria-label="Igual">=</button>
-                        </div>
+                    <button class="calc-btn zero">0</button>
+                    <button class="calc-btn">.</button>
+                    <button class="calc-btn action" data-action="eval">=</button>
+                </div>
+            </article>
 
-                        <div class="calc-history" id="calc-history">
-                            <h2 class="history-title" data-i18n="history">📜 Histórico</h2>
-                            <div class="history-list" id="history-list" aria-live="polite"></div>
-                        </div>
+            <!-- Currency Converter -->
+            <article id="tab-currency" class="tool-view">
+                <h2>Conversor de Moedas</h2>
+                <div class="converter-box">
+                    <div class="input-group">
+                        <label>Valor</label>
+                        <input type="number" id="currency-amount" value="1" min="0" step="0.01">
                     </div>
-                </section>
 
-                <!-- PAINEL: CONVERSOR DE MOEDAS -->
-                <section class="calc-panel" id="panel-currency" role="tabpanel" aria-labelledby="tab-currency">
-                    <div class="panel-content currency-panel">
-                        <h2 class="sr-only">Conversor de Moedas</h2>
-                        <div class="converter-container">
-                            <div class="currency-input-group">
-                                <label for="amount-from" data-i18n="amount_label">Valor</label>
-                                <div class="currency-input-wrapper">
-                                    <input type="text" id="amount-from" placeholder="1.000,00" inputmode="decimal"
-                                        aria-describedby="rate-update-info">
-                                    <select id="currency-from" class="currency-select" aria-label="Moeda de origem">
-                                        <option value="BRL" selected>🇧🇷 BRL</option>
-                                        <option value="USD">🇺🇸 USD</option>
-                                        <option value="EUR">🇪🇺 EUR</option>
-                                        <option value="GBP">🇬🇧 GBP</option>
-                                        <option value="JPY">🇯🇵 JPY</option>
-                                        <option value="CAD">🇨🇦 CAD</option>
-                                        <option value="AUD">🇦🇺 AUD</option>
-                                        <option value="CHF">🇨🇭 CHF</option>
-                                        <option value="CNY">🇨🇳 CNY</option>
-                                        <option value="ARS">🇦🇷 ARS</option>
-                                        <option value="MXN">🇲🇽 MXN</option>
-                                        <option value="KRW">🇰🇷 KRW</option>
-                                        <option value="INR">🇮🇳 INR</option>
-                                        <option value="BTC">₿ BTC</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <button type="button" class="swap-btn" id="swap-currencies" aria-label="Inverter moedas">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                    aria-hidden="true">
-                                    <path d="M7 16L3 12M3 12L7 8M3 12H21M17 8L21 12M21 12L17 16M21 12H3"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </button>
-
-                            <div class="currency-input-group">
-                                <label for="amount-to" data-i18n="result_label">Resultado</label>
-                                <div class="currency-input-wrapper">
-                                    <input type="text" id="amount-to" placeholder="0,00" readonly aria-live="polite">
-                                    <select id="currency-to" class="currency-select" aria-label="Moeda de destino">
-                                        <option value="BRL">🇧🇷 BRL</option>
-                                        <option value="USD" selected>🇺🇸 USD</option>
-                                        <option value="EUR">🇪🇺 EUR</option>
-                                        <option value="GBP">🇬🇧 GBP</option>
-                                        <option value="JPY">🇯🇵 JPY</option>
-                                        <option value="CAD">🇨🇦 CAD</option>
-                                        <option value="AUD">🇦🇺 AUD</option>
-                                        <option value="CHF">🇨🇭 CHF</option>
-                                        <option value="CNY">🇨🇳 CNY</option>
-                                        <option value="ARS">🇦🇷 ARS</option>
-                                        <option value="MXN">🇲🇽 MXN</option>
-                                        <option value="KRW">🇰🇷 KRW</option>
-                                        <option value="INR">🇮🇳 INR</option>
-                                        <option value="BTC">₿ BTC</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="exchange-rate-info" id="exchange-rate-info" aria-live="polite">
-                            <span class="rate-label" data-i18n="exchange_rate">Taxa de câmbio:</span>
-                            <span class="rate-value" id="exchange-rate-value">1 BRL = 0,00 USD</span>
-                        </div>
-
-                        <div class="converter-footer">
-                            <p class="update-info" id="rate-update-info" aria-live="polite">
-                                ⏳ Carregando taxas...
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- PAINEL: CALCULADORA DE JUROS -->
-                <section class="calc-panel" id="panel-interest" role="tabpanel" aria-labelledby="tab-interest">
-                    <div class="panel-content interest-panel">
-                        <div class="interest-wrapper">
-                            <div class="interest-form-section">
-                                <h2 class="sr-only">Calculadora de Juros</h2>
-                                <form id="calculator-form" class="form">
-                                    <div class="interest-type-selector">
-                                        <label class="type-label" data-i18n="interest_type">Tipo de Juros</label>
-                                        <div class="type-toggle" role="radiogroup" aria-label="Tipo de juros">
-                                            <button type="button" class="type-btn active" id="type-compound"
-                                                role="radio" aria-checked="true">
-                                                <span class="type-icon" aria-hidden="true">📈</span>
-                                                <span class="type-name">Compostos</span>
-                                                <span class="type-desc">Juros sobre juros</span>
-                                            </button>
-                                            <button type="button" class="type-btn" id="type-simple" role="radio"
-                                                aria-checked="false">
-                                                <span class="type-icon" aria-hidden="true">📊</span>
-                                                <span class="type-name">Simples</span>
-                                                <span class="type-desc">Juros fixos</span>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <label for="initial-value" data-i18n="initial_value">Capital Inicial</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix" aria-hidden="true">R$</span>
-                                            <input type="text" id="initial-value" placeholder="10.000,00"
-                                                inputmode="decimal" required aria-label="Capital inicial em reais">
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <label for="monthly-contribution" data-i18n="monthly_contribution_label">Aporte
-                                            Mensal</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix" aria-hidden="true">R$</span>
-                                            <input type="text" id="monthly-contribution" placeholder="500,00"
-                                                inputmode="decimal" aria-label="Aporte mensal em reais">
-                                        </div>
-                                    </div>
-
-                                    <div class="input-row">
-                                        <div class="input-group">
-                                            <label for="interest-rate" data-i18n="interest_rate_label">Taxa de
-                                                Juros</label>
-                                            <div class="input-wrapper">
-                                                <input type="text" id="interest-rate" placeholder="1,00"
-                                                    inputmode="decimal" required aria-label="Taxa de juros">
-                                                <span class="input-suffix" aria-hidden="true">%</span>
-                                            </div>
-                                            <div class="toggle-group" role="radiogroup" aria-label="Período da taxa">
-                                                <button type="button" class="toggle-btn active" data-value="monthly"
-                                                    id="rate-monthly" role="radio" aria-checked="true">ao mês</button>
-                                                <button type="button" class="toggle-btn" data-value="yearly"
-                                                    id="rate-yearly" role="radio" aria-checked="false">ao ano</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="input-group">
-                                            <label for="period" data-i18n="period_label">Período</label>
-                                            <div class="input-wrapper">
-                                                <input type="number" id="period" placeholder="24" min="1" max="600"
-                                                    required aria-label="Período de investimento">
-                                            </div>
-                                            <div class="toggle-group" role="radiogroup" aria-label="Unidade do período">
-                                                <button type="button" class="toggle-btn active" data-value="months"
-                                                    id="period-months" role="radio" aria-checked="true">meses</button>
-                                                <button type="button" class="toggle-btn" data-value="years"
-                                                    id="period-years" role="radio" aria-checked="false">anos</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <div class="checkbox-group" style="margin-top: 1rem;">
-                                            <label class="checkbox-container">
-                                                <input type="checkbox" id="include-ir">
-                                                <span class="checkmark"></span>
-                                                <span data-i18n="simulate_ir">Simular Imposto de Renda
-                                                    (Regressivo)</span>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn-calculate" id="btn-calculate">
-                                        <span class="btn-text" data-i18n="calculate">Calcular</span>
-                                        <span class="btn-icon" aria-hidden="true">
-                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                    </button>
-                                </form>
-                            </div>
-
-                            <div class="interest-results-section" id="results-card" aria-live="polite">
-                                <h3 class="results-title" data-i18n="results_title">📊 Resultados</h3>
-
-                                <div class="results-grid">
-                                    <div class="result-item highlight">
-                                        <span class="result-label">Montante Final</span>
-                                        <span class="result-value" id="final-amount">R$ 0,00</span>
-                                    </div>
-                                    <div class="result-item">
-                                        <span class="result-label">Total Investido</span>
-                                        <span class="result-value" id="total-invested">R$ 0,00</span>
-                                    </div>
-                                    <div class="result-item">
-                                        <span class="result-label">Juros Ganhos</span>
-                                        <span class="result-value success" id="interest-earned">R$ 0,00</span>
-                                    </div>
-                                    <div class="result-item">
-                                        <span class="result-label">Rendimento</span>
-                                        <span class="result-value" id="total-return">0,00%</span>
-                                    </div>
-                                </div>
-
-                                <div class="chart-container">
-                                    <h4 class="chart-title">Evolução do Patrimônio</h4>
-                                    <div class="chart-wrapper">
-                                        <canvas id="growth-chart" aria-label="Gráfico de evolução patrimonial"></canvas>
-                                    </div>
-                                    <div class="chart-legend">
-                                        <div class="legend-item">
-                                            <span class="legend-color invested" aria-hidden="true"></span>
-                                            <span>Investido</span>
-                                        </div>
-                                        <div class="legend-item">
-                                            <span class="legend-color total" aria-hidden="true"></span>
-                                            <span>Montante</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <details class="breakdown-details">
-                                    <summary>📋 Extrato Detalhado</summary>
-                                    <div class="table-container">
-                                        <table class="breakdown-table" id="breakdown-table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Mês</th>
-                                                    <th scope="col">Aporte</th>
-                                                    <th scope="col">Juros</th>
-                                                    <th scope="col">Total</th>
-                                                    <th scope="col">Montante</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="breakdown-body">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </details>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- PAINEL: CONVERSOR DE UNIDADES -->
-                <section class="calc-panel" id="panel-units" role="tabpanel" aria-labelledby="tab-units">
-                    <div class="panel-content units-panel">
-                        <div class="units-header">
-                            <select id="unit-category" class="category-select">
-                                <option value="length" data-i18n="length">📏 Comprimento</option>
-                                <option value="mass" data-i18n="mass">⚖️ Peso / Massa</option>
-                                <option value="temperature" data-i18n="temperature">🌡️ Temperatura</option>
-                                <option value="area" data-i18n="area">📐 Área</option>
-                                <option value="volume" data-i18n="volume">🧪 Volume</option>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>De</label>
+                            <select id="currency-from">
+                                <option value="USD" selected>USD (Dólar)</option>
+                                <option value="BRL">BRL (Real)</option>
+                                <option value="EUR">EUR (Euro)</option>
+                                <option value="GBP">GBP (Libra)</option>
+                                <option value="JPY">JPY (Iene)</option>
+                                <option value="BTC">BTC (Bitcoin)</option>
                             </select>
                         </div>
-                        <div class="converter-container">
-                            <div class="currency-input-group">
-                                <label for="unit-from-value" data-i18n="from_label">De</label>
-                                <div class="currency-input-wrapper">
-                                    <input type="number" id="unit-from-value" placeholder="0">
-                                    <select id="unit-from-select" class="currency-select"></select>
-                                </div>
-                            </div>
-                            <div class="unit-swap-icon" aria-hidden="true">➡️</div>
-                            <div class="currency-input-group">
-                                <label for="unit-to-value" data-i18n="to_label">Para</label>
-                                <div class="currency-input-wrapper">
-                                    <input type="number" id="unit-to-value" placeholder="0" readonly>
-                                    <select id="unit-to-select" class="currency-select"></select>
-                                </div>
-                            </div>
+                        <div class="input-group">
+                            <label>Para</label>
+                            <select id="currency-to">
+                                <option value="BRL" selected>BRL (Real)</option>
+                                <option value="USD">USD (Dólar)</option>
+                                <option value="EUR">EUR (Euro)</option>
+                                <option value="GBP">GBP (Libra)</option>
+                            </select>
                         </div>
                     </div>
-                </section>
 
-                <!-- PAINEL: FINANCIAMENTO -->
-                <section class="calc-panel" id="panel-financing" role="tabpanel" aria-labelledby="tab-financing">
-                    <div class="panel-content financing-panel">
-                        <div class="interest-wrapper">
-                            <div class="interest-form-section">
-                                <form id="financing-form" class="form">
-                                    <div class="interest-type-selector">
-                                        <label class="type-label">Sistema de Amortização</label>
-                                        <div class="type-toggle" role="radiogroup">
-                                            <button type="button" class="type-btn active" id="type-sac" role="radio"
-                                                aria-checked="true">
-                                                <span class="type-name">SAC</span>
-                                                <span class="type-desc">Parcelas Decrescentes</span>
-                                            </button>
-                                            <button type="button" class="type-btn" id="type-price" role="radio"
-                                                aria-checked="false">
-                                                <span class="type-name">PRICE</span>
-                                                <span class="type-desc">Parcelas Fixas</span>
-                                            </button>
-                                        </div>
-                                    </div>
+                    <button id="btn-convert" class="action-btn">Converter</button>
 
-                                    <div class="input-group">
-                                        <label for="fin-total-value" data-i18n="property_value">Valor do
-                                            Imóvel/Bem</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
-                                            <input type="text" id="fin-total-value" placeholder="300.000,00">
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <label for="fin-down-payment" data-i18n="down_payment">Entrada</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
-                                            <input type="text" id="fin-down-payment" placeholder="60.000,00">
-                                        </div>
-                                    </div>
-
-                                    <div class="input-row">
-                                        <div class="input-group">
-                                            <label for="fin-interest-rate">Taxa Anual</label>
-                                            <div class="input-wrapper">
-                                                <input type="text" id="fin-interest-rate" placeholder="10,5">
-                                                <span class="input-suffix">%</span>
-                                            </div>
-                                        </div>
-                                        <div class="input-group">
-                                            <label for="fin-period">Prazo (Anos)</label>
-                                            <div class="input-wrapper">
-                                                <input type="number" id="fin-period" placeholder="30">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <div class="checkbox-group" style="margin-top: 0.5rem; margin-bottom: 1rem;">
-                                            <label class="checkbox-container">
-                                                <input type="checkbox" id="compare-systems" checked>
-                                                <span class="checkmark"></span>
-                                                <span data-i18n="compare_sac_price">Comparar SAC vs PRICE no
-                                                    gráfico</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn-calculate">Simular Financiamento</button>
-                                </form>
-                            </div>
-
-                            <div class="interest-results-section" id="fin-results-card">
-                                <h3 class="results-title" data-i18n="financing_summary">🏠 Resumo do Financiamento</h3>
-                                <div class="results-grid">
-                                    <div class="result-item highlight">
-                                        <span class="result-label" id="first-parcel-label">Primeira Parcela</span>
-                                        <span class="result-value" id="fin-first-parcel">R$ 0,00</span>
-                                    </div>
-                                    <div class="result-item">
-                                        <span class="result-label">Última Parcela</span>
-                                        <span class="result-value" id="fin-last-parcel">R$ 0,00</span>
-                                    </div>
-                                    <div class="result-item">
-                                        <span class="result-label">Total de Juros</span>
-                                        <span class="result-value success" id="fin-total-interest">R$ 0,00</span>
-                                    </div>
-                                    <div class="result-item">
-                                        <span class="result-label">Custo Total</span>
-                                        <span class="result-value" id="fin-total-cost">R$ 0,00</span>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn-calculate" id="export-financing-csv"
-                                    style="margin-top: 1.5rem; background: var(--bg-card-hover);">
-                                    <span data-i18n="export_csv">📥 Exportar Resumo para CSV</span>
-                                </button>
-
-                                <!-- Container para o Gráfico de Amortização -->
-                                <div class="chart-container fin-chart" style="margin-top: 1.5rem; height: 250px;">
-                                    <canvas id="amortization-chart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- PAINEL: CALCULADORA DE DATAS -->
-                <section class="calc-panel" id="panel-dates" role="tabpanel" aria-labelledby="tab-dates">
-                    <div class="panel-content dates-panel">
-                        <div class="interest-type-selector">
-                            <div class="type-toggle">
-                                <button type="button" class="type-btn active" id="date-mode-diff">
-                                    <span class="type-name" data-i18n="diff">Diferença</span>
-                                </button>
-                                <button type="button" class="type-btn" id="date-mode-add">
-                                    <span class="type-name" data-i18n="add_subtract">Adicionar/Subtrair</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div id="date-diff-container">
-                            <div class="input-row">
-                                <div class="input-group">
-                                    <label for="date-start">Data Inicial</label>
-                                    <div class="input-wrapper">
-                                        <input type="date" id="date-start">
-                                    </div>
-                                </div>
-                                <div class="input-group">
-                                    <label for="date-end">Data Final</label>
-                                    <div class="input-wrapper">
-                                        <input type="date" id="date-end">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="date-add-container" style="display: none;">
-                            <div class="input-group">
-                                <label for="date-base">Data Base</label>
-                                <div class="input-wrapper">
-                                    <input type="date" id="date-base">
-                                </div>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-group">
-                                    <label for="date-add-days">Dias</label>
-                                    <div class="input-wrapper">
-                                        <input type="number" id="date-add-days" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="input-group">
-                                    <label for="date-add-months">Meses</label>
-                                    <div class="input-wrapper">
-                                        <input type="number" id="date-add-months" placeholder="0">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="results-grid" style="margin-top: 1.5rem;">
-                            <div class="result-item highlight">
-                                <span class="result-label" id="date-res-label" data-i18n="diff">Diferença</span>
-                                <span class="result-value" id="date-res-value">---</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- PAINEL: FIRE (INDEPENDÊNCIA FINANCEIRA) -->
-                <section class="calc-panel" id="panel-fire" role="tabpanel" aria-labelledby="tab-fire">
-                    <div class="panel-content fire-panel">
-                        <div class="interest-wrapper">
-                            <div class="interest-form-section">
-                                <h2 class="sr-only">Calculadora FIRE</h2>
-                                <form id="fire-form" class="form">
-                                    <div class="input-group">
-                                        <label for="fire-monthly-spend" data-i18n="monthly_spend">Gasto Mensal
-                                            Desejado</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
-                                            <input type="text" id="fire-monthly-spend" placeholder="5.000,00"
-                                                class="money-input">
-                                        </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="fire-current-wealth" data-i18n="current_wealth">Patrimônio
-                                            Atual</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
-                                            <input type="text" id="fire-current-wealth" placeholder="10.000,00"
-                                                class="money-input">
-                                        </div>
-                                    </div>
-                                    <div class="input-row">
-                                        <div class="input-group">
-                                            <label for="fire-monthly-invest" data-i18n="monthly_invest">Aporte
-                                                Mensal</label>
-                                            <div class="input-wrapper">
-                                                <span class="input-prefix">R$</span>
-                                                <input type="text" id="fire-monthly-invest" placeholder="1.000,00"
-                                                    class="money-input">
-                                            </div>
-                                        </div>
-                                        <div class="input-group">
-                                            <label for="fire-real-return" data-i18n="real_return">Rentabilidade Real
-                                                Anual (%)</label>
-                                            <div class="input-wrapper">
-                                                <input type="text" id="fire-real-return" placeholder="6,0"
-                                                    inputmode="decimal">
-                                                <span class="input-suffix">%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn-calculate" data-i18n="calculate">Calcular</button>
-                                </form>
-                            </div>
-                            <div class="interest-results-section" id="fire-results-card">
-                                <h3 class="results-title">🔥 Rumo à Liberdade</h3>
-                                <div class="results-grid">
-                                    <div class="result-item highlight">
-                                        <span class="result-label" data-i18n="fire_target_amount">Montante Alvo</span>
-                                        <span class="result-value" id="fire-target-amount">R$ 0,00</span>
-                                    </div>
-                                    <div class="result-item">
-                                        <span class="result-label" data-i18n="time_to_fire">Tempo Restante</span>
-                                        <span class="result-value" id="time-to-fire">---</span>
-                                    </div>
-                                </div>
-                                <div class="chart-container" style="margin-top: 1.5rem; height: 200px;">
-                                    <canvas id="fire-chart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- PAINEL: SALÁRIO (CLT vs PJ) -->
-                <section class="calc-panel" id="panel-salary" role="tabpanel" aria-labelledby="tab-salary">
-                    <div class="panel-content salary-panel">
-                        <div class="interest-wrapper">
-                            <div class="interest-form-section">
-                                <h2 class="sr-only">Comparativo de Salários</h2>
-                                <div class="interest-type-selector">
-                                    <label class="type-label" data-i18n="contract_type">Tipo de Contrato</label>
-                                    <div class="type-toggle">
-                                        <button type="button" class="type-btn active" id="salary-type-clt">CLT</button>
-                                        <button type="button" class="type-btn" id="salary-type-pj">PJ</button>
-                                    </div>
-                                </div>
-                                <!-- CLT Inputs -->
-                                <div id="clt-container">
-                                    <div class="input-group">
-                                        <label for="clt-gross" data-i18n="gross_salary">Salário Bruto</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
-                                            <input type="text" id="clt-gross" placeholder="5.000,00"
-                                                class="money-input">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- PJ Inputs -->
-                                <div id="pj-container" style="display: none;">
-                                    <div class="input-group">
-                                        <label for="pj-gross" data-i18n="pj_revenue">Faturamento Mensal</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
-                                            <input type="text" id="pj-gross" placeholder="10.000,00"
-                                                class="money-input">
-                                        </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="pj-expenses" data-i18n="business_expenses">Despesas
-                                            (Contador/Impostos)</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
-                                            <input type="text" id="pj-expenses" placeholder="600,00"
-                                                class="money-input">
-                                        </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="pj-benefit-loss" data-i18n="loss_benefits">Perda de
-                                            Benefícios (Saúde/VR)</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
-                                            <input type="text" id="pj-benefit-loss" placeholder="1.200,00"
-                                                class="money-input">
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn-calculate" data-i18n="compare_salaries">Comparar
-                                    Salários</button>
-                            </div>
-                            <div class="interest-results-section" id="salary-results-card">
-                                <h3 class="results-title" data-i18n="salary_comparison">💼 Comparativo Líquido
-                                </h3>
-                                <div class="results-grid">
-                                    <div class="result-item highlight" id="clt-result-box">
-                                        <span class="result-label" data-i18n="clt_net">CLT Líquido</span>
-                                        <span class="result-value" id="clt-net-result">R$ 0,00</span>
-                                    </div>
-                                    <div class="result-item highlight" id="pj-result-box">
-                                        <span class="result-label" data-i18n="pj_net">PJ Líquido</span>
-                                        <span class="result-value" id="pj-net-result">R$ 0,00</span>
-                                    </div>
-                                </div>
-                                <div class="result-breakdown" id="salary-verdict"
-                                    style="margin-top: 1rem; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px; text-align: center;">
-                                    ---
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- PAINEL: INFLAÇÃO -->
-                <section class="calc-panel" id="panel-inflation" role="tabpanel" aria-labelledby="tab-inflation">
-                    <!-- Placeholder content for inflation panel, if it was truncated, assuming standard structure or leaving empty for now as I only saw up to line 800.
-                         Wait, I need to append the video panel.
-                         I will just append it after the salary panel which seems to be the last one fully visible or at least safe to append after.
-                         Actually, I should check the end of the file. The view_file was truncated at line 800.
-                         I should use replace_file_content if I can target a unique string, or read the end of the file first.
-                         Let me read the end of the file first to be safe.
-                    -->
-
-            </div>
-            </div>
-            </div>
-            <button type="button" class="btn-calculate" id="btn-calc-salary" data-i18n="calculate">Calcular</button>
-            </div>
-            <div class="interest-results-section" id="salary-results-card">
-                <h3 class="results-title">💼 Salário Líquido</h3>
-                <div class="results-grid">
-                    <div class="result-item highlight">
-                        <span class="result-label" data-i18n="net_salary">Líquido Real</span>
-                        <span class="result-value" id="salary-net-value">R$ 0,00</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label" data-i18n="total_discounts">Total Descontos</span>
-                        <span class="result-value danger" id="salary-discounts">R$ 0,00</span>
+                    <div class="result-display">
+                        <span id="currency-result">R$ 5,00</span>
                     </div>
                 </div>
-            </div>
-            </div>
-            </div>
-            </section>
+            </article>
 
-            <!-- PAINEL: FERRAMENTAS ÚTEIS -->
-            <section class="calc-panel" id="panel-tools" role="tabpanel" aria-labelledby="tab-tools">
-                <div class="panel-content tools-panel">
-                    <div class="tools-grid">
-                        <!-- Calculadora de Desconto -->
-                        <div class="tool-card">
-                            <h3 data-i18n="discount">🏷️ Desconto</h3>
-                            <div class="input-group">
-                                <label>Preço Original</label>
-                                <div class="input-wrapper">
-                                    <input type="text" id="discount-price" placeholder="0,00" class="money-input">
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label>Desconto (%)</label>
-                                <div class="input-wrapper">
-                                    <input type="number" id="discount-perc" placeholder="0">
-                                </div>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-label">Preço Final</span>
-                                <span class="result-value" id="discount-res">R$ 0,00</span>
-                            </div>
+            <!-- Interest Calculator -->
+            <article id="tab-interest" class="tool-view">
+                <h2>Calculadora de Juros</h2>
+                <div class="converter-box">
+                    <div class="input-group">
+                        <label>Valor Principal (R$)</label>
+                        <input type="number" id="interest-principal" value="1000">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Taxa (%)</label>
+                            <input type="number" id="interest-rate" value="10">
                         </div>
-
-                        <!-- Calculadora de Gorjeta -->
-                        <div class="tool-card">
-                            <h3 data-i18n="tip_split">🍕 Gorjeta / Divisão</h3>
-                            <div class="input-group">
-                                <label>Valor da Conta</label>
-                                <div class="input-wrapper">
-                                    <input type="text" id="tip-total" placeholder="0,00" class="money-input">
-                                </div>
-                            </div>
-                            <div class="input-row">
-                                <div class="input-group">
-                                    <label>Gorjeta (%)</label>
-                                    <input type="number" id="tip-perc" value="10">
-                                </div>
-                                <div class="input-group">
-                                    <label>Pessoas</label>
-                                    <input type="number" id="tip-people" value="1">
-                                </div>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-label">Por Pessoa</span>
-                                <span class="result-value" id="tip-res">R$ 0,00</span>
-                            </div>
+                        <div class="input-group">
+                            <label>Tempo (Anos)</label>
+                            <input type="number" id="interest-time" value="1">
                         </div>
                     </div>
-                </div>
-            </section>
-            <!-- PAINEL: INFLAÇÃO (PODER DE COMPRA) -->
-            <section class="calc-panel" id="panel-inflation" role="tabpanel" aria-labelledby="tab-inflation">
-                <div class="panel-content inflation-panel">
-                    <div class="interest-wrapper">
-                        <div class="interest-form-section">
-                            <h2 class="sr-only">Calculadora de Inflação</h2>
-                            <form id="inflation-form" class="form">
-                                <div class="input-group">
-                                    <label for="inflation-value" data-i18n="original_amount">Valor Original</label>
-                                    <div class="input-wrapper">
-                                        <span class="input-prefix">R$</span>
-                                        <input type="text" id="inflation-value" placeholder="100,00"
-                                            class="money-input">
-                                    </div>
-                                </div>
-                                <div class="input-row">
-                                    <div class="input-group">
-                                        <label for="inflation-rate" data-i18n="annual_inflation">Inflação Anual
-                                            Média (%)</label>
-                                        <div class="input-wrapper">
-                                            <input type="text" id="inflation-rate" placeholder="5,0"
-                                                inputmode="decimal">
-                                            <span class="input-suffix">%</span>
-                                        </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="inflation-period" data-i18n="period_years">Período
-                                            (Anos)</label>
-                                        <div class="input-wrapper">
-                                            <input type="number" id="inflation-period" placeholder="10">
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn-calculate" data-i18n="calculate">Calcular</button>
-                            </form>
-                        </div>
-                        <div class="interest-results-section" id="inflation-results-card">
-                            <h3 class="results-title" data-i18n="purchasing_power">📉 Poder de Compra</h3>
-                            <div class="results-grid">
-                                <div class="result-item highlight">
-                                    <span class="result-label" data-i18n="adjusted_value">Valor Corrigido</span>
-                                    <span class="result-value" id="inflation-adjusted-value">R$ 0,00</span>
-                                </div>
-                                <div class="result-item">
-                                    <span class="result-label" data-i18n="power_loss">Perda de Poder</span>
-                                    <span class="result-value danger" id="inflation-loss-perc">0%</span>
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="input-group">
+                        <label>Tipo</label>
+                        <select id="interest-type">
+                            <option value="compound">Juros Compostos</option>
+                            <option value="simple">Juros Simples</option>
+                        </select>
+                    </div>
+
+                    <button id="btn-calc-interest" class="action-btn">Calcular</button>
+
+                    <div class="result-display">
+                        <span id="interest-result">R$ 0,00</span>
                     </div>
                 </div>
-            </section>
+            </article>
 
-            <!-- PAINEL: ANTECIPAÇÃO DE PARCELAS -->
-            <section class="calc-panel" id="panel-prepayment" role="tabpanel" aria-labelledby="tab-prepayment">
-                <div class="panel-content prepayment-panel">
-                    <div class="interest-wrapper">
-                        <div class="interest-form-section">
-                            <h2 class="sr-only">Calculadora de Antecipação</h2>
-                            <form id="prepayment-form" class="form">
-                                <div class="input-group">
-                                    <label for="prep-balance" data-i18n="current_balance">Saldo Devedor
-                                        Atual</label>
-                                    <div class="input-wrapper">
-                                        <span class="input-prefix">R$</span>
-                                        <input type="text" id="prep-balance" placeholder="200.000,00"
-                                            class="money-input">
-                                    </div>
-                                </div>
-                                <div class="input-row">
-                                    <div class="input-group">
-                                        <label for="prep-rate" data-i18n="monthly_rate">Taxa Mensal (%)</label>
-                                        <div class="input-wrapper">
-                                            <input type="text" id="prep-rate" placeholder="0,9" inputmode="decimal">
-                                            <span class="input-suffix">%</span>
-                                        </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="prep-extra" data-i18n="extra_payment">Aporte Extra</label>
-                                        <div class="input-wrapper">
-                                            <span class="input-prefix">R$</span>
-                                            <input type="text" id="prep-extra" placeholder="1.000,00"
-                                                class="money-input">
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn-calculate" data-i18n="calculate">Simular
-                                    Economia</button>
-                            </form>
+            <!-- Financing Calculator -->
+            <article id="tab-financing" class="tool-view">
+                <h2>Simulador de Financiamento (Price)</h2>
+                <div class="converter-box">
+                    <div class="input-group">
+                        <label>Valor Financiado (R$)</label>
+                        <input type="number" id="finance-amount" value="50000">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Taxa Mensal (%)</label>
+                            <input type="number" id="finance-rate" value="1.5" step="0.1">
                         </div>
-                        <div class="interest-results-section" id="prepayment-results-card">
-                            <h3 class="results-title" data-i18n="prepayment_summary">💰 Resumo da Antecipação</h3>
-                            <div class="results-grid">
-                                <div class="result-item highlight">
-                                    <span class="result-label" data-i18n="interest_saved">Juros Economizados</span>
-                                    <span class="result-value success" id="prep-saved-value">R$ 0,00</span>
-                                </div>
-                                <div class="result-item">
-                                    <span class="result-label" data-i18n="months_reduced">Meses Reduzidos</span>
-                                    <span class="result-value" id="prep-reduced-months">0</span>
-                                </div>
-                            </div>
+                        <div class="input-group">
+                            <label>Prazo (Meses)</label>
+                            <input type="number" id="finance-months" value="48">
                         </div>
                     </div>
-                </div>
-            </section>
 
-            <!-- PAINEL: VÍDEO -->
-            <section class="calc-panel" id="panel-video" role="tabpanel" aria-labelledby="tab-video">
-                <div class="panel-content video-panel" style="padding: 20px;">
-                    <article id="video-container" class="player-container" aria-label="Video Player">
-                        <iframe width="100%" height="100%"
-                            src="https://www.youtube.com/embed/videoseries?list=UUipaetWc3-bmoUmzag5a5pA"
-                            title="Últimos Vídeos - 0 Mortes" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen style="border-radius: 20px;">
-                        </iframe>
-                    </article>
-                </div>
-            </section>
-            </div>
-        </article>
+                    <button id="btn-calc-finance" class="action-btn">Simular</button>
 
-        <footer class="footer">
-            <p class="footer-main">
-                <span data-i18n="footer_proof">🧪 Esta calculadora é uma <strong>prova de conceito</strong> gerada por
-                    <strong>Inteligência Artificial</strong></span>
-            </p>
-            <p class="footer-dev">
-                💻 Desenvolvido por <strong>DragonBlackOne</strong>
-            </p>
-            <p class="footer-link">
-                <a href="https://www.youtube.com/@0mortes" target="_blank" rel="noopener noreferrer">
-                    📺 Canal do Desenvolvedor
-                </a>
-            </p>
-        </footer>
+                    <div id="finance-result" class="result-display" style="font-size: 1rem; text-align: left;"></div>
+                </div>
+
+                <div class="finance-table-container">
+                    <h3>Tabela de Amortização</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mês</th>
+                                    <th>Parcela</th>
+                                    <th>Juros</th>
+                                    <th>Amortização</th>
+                                    <th>Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="finance-table-body">
+                                <!-- Generated Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </article>
+
+            <!-- FIRE Calculator -->
+            <article id="tab-fire" class="tool-view">
+                <h2>Calculadora FIRE (Independência Financeira)</h2>
+                <div class="converter-box">
+                    <div class="input-group">
+                        <label>Patrimônio Atual (R$)</label>
+                        <input type="number" id="fire-current" value="10000">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Aporte Mensal (R$)</label>
+                            <input type="number" id="fire-monthly" value="2000">
+                        </div>
+                        <div class="input-group">
+                            <label>Rentabilidade Anual (%)</label>
+                            <input type="number" id="fire-rate" value="10">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Gasto Mensal na Aposentadoria (R$)</label>
+                        <input type="number" id="fire-expense" value="5000">
+                    </div>
+
+                    <button id="btn-calc-fire" class="action-btn">Calcular Independência</button>
+
+                    <div id="fire-result" class="result-display" style="font-size: 1rem; text-align: left;"></div>
+                </div>
+            </article>
+
+            <!-- Salary Calculator -->
+            <article id="tab-salary" class="tool-view">
+                <h2>Calculadora Salário Líquido & Inflação</h2>
+                <div class="converter-box">
+                    <div class="input-group">
+                        <label>Salário Bruto (R$)</label>
+                        <input type="number" id="salary-gross" value="3000">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Inflação Projetada a.a (%)</label>
+                        <input type="number" id="inflation-rate" value="4.5">
+                    </div>
+
+                    <button id="btn-calc-salary" class="action-btn">Calcular Líquido</button>
+
+                    <div id="salary-result" class="result-display" style="font-size: 1rem; text-align: left;"></div>
+                </div>
+            </article>
+
+            <!-- Video Player -->
+            <article id="tab-video" class="tool-view">
+                <h2>Canal @0mortes</h2>
+                <div class="player-container">
+                    <iframe width="100%" height="100%"
+                        src="https://www.youtube.com/embed/videoseries?list=UUipaetWc3-bmoUmzag5a5pA"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </article>
+
+        </section>
     </main>
 
-    <!-- Alertas de acessibilidade (leitor de tela) -->
-    <div id="aria-announce" class="sr-only" aria-live="polite"></div>
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <p>&copy; 2025 Super Calculadora. Desenvolvido por <strong>DragonBlackOne</strong>.</p>
+        </div>
+    </footer>
 
-    <script type="module" src="js/main.js"></script>
+    <!-- Scripts -->
+    <script type="module" src="js/app.js"></script>
+
 </body>
 
 </html>

@@ -1,16 +1,21 @@
 {
-    "name": "Super Calculadora Online",
-    "short_name": "Super Calc",
-    "description": "Calculadora, Conversor de Moedas e Juros em uma única ferramenta.",
-    "start_url": "/index.html",
+    "name": "Super Calculadora 2.0",
+    "short_name": "SuperCalc",
+    "start_url": "./index.html",
     "display": "standalone",
-    "background_color": "#0b0e14",
+    "background_color": "#0f172a",
     "theme_color": "#6366f1",
+    "description": "Uma suíte completa de ferramentas financeiras e utilitários modernos.",
     "icons": [
         {
-            "src": "favicon.ico",
-            "sizes": "64x64 32x32 24x24 16x16",
-            "type": "image/x-icon"
+            "src": "https://cdn-icons-png.flaticon.com/512/4341/4341025.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://cdn-icons-png.flaticon.com/512/4341/4341025.png",
+            "sizes": "512x512",
+            "type": "image/png"
         }
     ]
 }
