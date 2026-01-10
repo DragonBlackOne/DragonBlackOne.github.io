@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description"
+        content="Calcule juros compostos online gratuitamente. Simule investimentos mensais, taxas anuais e veja a evolução do seu patrimônio com gráficos e tabelas detalhadas.">
+    <meta name="keywords"
+        content="calculadora juros compostos, simulador investimento, juros sobre juros, calculadora financeira, investimentos, liberdade financeira">
     <title>Calculadora de Juros Compostos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,14 +16,14 @@
     <link rel="stylesheet" href="css/style.css">
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4XDCJFVJL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4XDCJFVJL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-Q4XDCJFVJL');
-</script>
+        gtag('config', 'G-Q4XDCJFVJL');
+    </script>
 </head>
 
 <body>
@@ -32,6 +36,11 @@
             </div>
             <p>Simule o poder dos juros sobre o seu dinheiro</p>
         </header>
+
+        <!-- Ad Slot 1: Top Banner -->
+        <div class="ad-slot" id="ad-top">
+            <!-- Cole seu código AdSense aqui -->
+        </div>
 
         <main class="calculator-card">
             <div class="input-grid">
@@ -96,6 +105,46 @@
             </div>
         </main>
 
+
+
+        <!-- Ad Slot 2: Middle Banner -->
+        <div class="ad-slot" id="ad-middle">
+            <!-- Cole seu código AdSense aqui -->
+        </div>
+
+        <!-- SEO Content Section -->
+        <section class="info-section">
+            <article>
+                <h2>Entendendo os Juros Compostos</h2>
+                <p>Os <strong>juros compostos</strong> são frequentemente chamados de "a oitava maravilha do mundo".
+                    Diferente dos juros simples, onde o rendimento é calculado apenas sobre o valor principal, nos juros
+                    compostos o rendimento é calculado sobre o principal mais os juros acumulados nos períodos
+                    anteriores. É o famoso "juros sobre juros".</p>
+
+                <h3>Como funciona a fórmula?</h3>
+                <p>A fórmula matemática básica para o cálculo de montante em juros compostos é:</p>
+                <code class="formula">M = C (1 + i)<sup>t</sup></code>
+                <ul>
+                    <li><strong>M</strong>: Montante final (quanto você terá).</li>
+                    <li><strong>C</strong>: Capital inicial (quanto você investiu primeiro).</li>
+                    <li><strong>i</strong>: Taxa de juros (por período).</li>
+                    <li><strong>t</strong>: Tempo (número de períodos).</li>
+                </ul>
+                <p>Nesta calculadora, utilizamos uma fórmula mais avançada que considera também os aportes mensais
+                    recorrentes, ajustando a taxa anual para uma taxa mensal equivalente para garantir precisão máxima.
+                </p>
+
+                <h3>Por que começar a investir cedo?</h3>
+                <p>O fator <strong>tempo</strong> é exponencial na fórmula. Isso significa que começar a investir 5 anos
+                    mais cedo pode ter um impacto muito maior no seu patrimônio final do que simplesmente aumentar o
+                    valor investido. O tempo trabalha a favor do investidor disciplinado.</p>
+            </article>
+        </section>
+
+        <!-- Ad Slot 3: In-Content -->
+        <div class="ad-slot" id="ad-content">
+            <!-- Cole seu código AdSense aqui -->
+        </div>
         <footer>
             <div class="video-container">
                 <p>Vídeo mais recente:</p>
@@ -106,10 +155,24 @@
 
             <p>&copy; 2025 Projeto Calculadora. Site gerado por IA e desenvolvido por DragonBlackOne. Todos os direitos
                 reservados.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; font-style: italic; opacity: 0.8;">Este é um projeto Open
+                Source feito por IA como teste de conceito.</p>
+
             <div class="footer-links">
                 <a href="https://www.youtube.com/@0mortes/featured" target="_blank">📺 Canal do Desenvolvedor</a>
+                <span class="separator">|</span>
+                <a href="privacy.html">Privacidade</a>
+                <span class="separator">|</span>
+                <a href="terms.html">Termos de Uso</a>
             </div>
         </footer>
+    </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <p>🍪 Este site usa cookies para melhorar sua experiência e exibir anúncios personalizados. Ao continuar, você
+            concorda com nossa <a href="privacy.html">Política de Privacidade</a>.</p>
+        <button id="accept-cookies">Aceitar e Continuar</button>
     </div>
 
     <!-- Script -->
