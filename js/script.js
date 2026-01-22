@@ -143,52 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // YouTube Latest Video Logic
-    // Channel ID: UCd1fYytCxQCd1fptKWH6wCM (@0mortes)
-    // Playlist ID for Uploads: UU + ID without UC = UUd1fYytCxQCd1fptKWH6wCM
 
-    const playlistID = 'UUd1fYytCxQCd1fptKWH6wCM';
-    const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistID}`;
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
-    const container = document.getElementById('youtube-embed');
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (data.items && data.items.length > 0) {
-                const latestVideo = data.items[0];
-                const videoId = latestVideo.guid.split(':')[2];
-
-                const embedHtml = `
-                    <iframe 
-                        width="100%" 
-                        height="315" 
-                        src="https://www.youtube.com/embed/${videoId}" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                `;
-                container.innerHTML = embedHtml;
-            } else {
-                throw new Error("No items found");
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao carregar vídeo:', error);
-            // Fallback Button
-            container.innerHTML = `
-                <div style="padding: 2rem; text-align: center;">
-                    <p>Não foi possível carregar o vídeo automaticamente.</p>
-                    <a href="https://www.youtube.com/@0mortes/featured" target="_blank" 
-                       style="background-color: #ef4444; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-weight: bold;">
-                       Ver Último Vídeo no YouTube
-                    </a>
-                </div>
-            `;
-        });
 
     // Cookie Consent Logic
     const cookieBanner = document.getElementById('cookie-banner');
